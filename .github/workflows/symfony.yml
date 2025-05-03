@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:8
+        image: mysql:8.0.30
         env:
-          MYSQL_ROOT_PASSWORD:
+          MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: e-pkk
         ports:
           - 3306:3306

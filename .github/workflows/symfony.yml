@@ -17,33 +17,34 @@ permissions:
 jobs:
   symfony-tests:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_DATABASE: e-pkk
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-start-period=30s
+          --health-timeout=5s
+          --health-retries=3
     steps:
-      - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3.13'
-      - uses: actions/checkout@v4
-      - name: Copy .env.test.local
-        run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-      - name: Update Composer dependencies
-        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Set up MySQL connection
+        run: |
+          # Tunggu MySQL berjalan
+          sleep 30
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Create Database
-        run: |
-          mkdir -p data
-          touch data/database.sql
-      - name: Execute tests (Unit and Feature tests) via Pest
-        env:
-          DATABASE_URL: sql:///%kernel.project_dir%/data/database.sql
-        run: vendor/bin/pest
+      - name: Run Migrations
+        run: php artisan migrate --force
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: vendor/bin/phpunit
       - name: Copy .env.test.local
         run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
 

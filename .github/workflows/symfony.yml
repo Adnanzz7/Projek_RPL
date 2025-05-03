@@ -39,10 +39,10 @@ jobs:
       - name: Create Database
         run: |
           mkdir -p data
-          touch data/database.sqlite
+          touch data/database.sql
       - name: Execute tests (Unit and Feature tests) via Pest
         env:
-          DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
+          DATABASE_URL: sql:///%kernel.project_dir%/data/database.sql
         run: vendor/bin/pest
       - name: Copy .env.test.local
         run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"

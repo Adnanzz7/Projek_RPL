@@ -9,21 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to User
-            $table->string('product_name')->nullable(); // Menambahkan kolom product_name
-            $table->decimal('price', 10, 2)->nullable(); // Mengubah kolom price menjadi decimal
-            $table->integer('total_amount'); // Mengubah total_amount menjadi integer
-            $table->enum('status', ['pending', 'completed', 'cancelled']); // Purchase status
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
+            $table->integer('jumlah');
+            $table->decimal('price', 10, 2);
+            $table->decimal('total_amount', 15, 2);
+            $table->string('status')->default('completed');
             $table->timestamps();
-        });
+        });        
     }
-    
-    public function down()
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('purchases');
-    }    
+    }
 };

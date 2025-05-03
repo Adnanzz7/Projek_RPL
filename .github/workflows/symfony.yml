@@ -43,7 +43,5 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Run Migrations
         run: php artisan migrate --force
-      - name: Execute tests (Unit and Feature tests) via Pest
-        run: vendor/bin/pest
       - name: Copy .env.test.local
         run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"

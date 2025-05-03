@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2025 at 02:57 PM
+-- Generation Time: May 03, 2025 at 07:25 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.13
 
@@ -55,10 +55,10 @@ CREATE TABLE `barangs` (
 INSERT INTO `barangs` (`id`, `user_id`, `nama_barang`, `kategori_barang`, `harga_barang`, `jumlah_barang`, `foto_barang`, `total`, `keterangan_barang`, `created_at`, `updated_at`, `harga_pokok`, `keuntungan_per_unit`, `jumlah_barang_awal`, `jumlah_terjual`, `total_harga_terjual`, `keuntungan`, `stok_tersisa`) VALUES
 (5, 2, 'Toples Rajut', 'kerajinan', 34500, 16, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-01 18:07:22', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
 (8, 4, 'Rajut Bunga Tulip', 'kerajinan', 26500, 2, 'images/Ow20D0M4OFBU04ZywGzPghxIlficKmkSMWLtlBCs.jpg', NULL, 'Tersedia dalam berbagai warna', '2024-12-07 05:58:01', '2025-05-01 18:07:01', 25000.00, 0.00, 2, 0, 0.00, 0.00, 0),
-(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9867, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-01 18:07:13', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
+(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9857, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-03 11:39:37', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
 (13, 2, 'Dimsum', 'makanan', 9000, 20, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2024-12-18 18:28:21', 8000.00, 0.00, 20, 0, 0.00, 0.00, 0),
-(18, 15, 'Mie Ayam', 'makanan', 9000, 199, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2024-12-13 22:31:37', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
-(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2024-12-18 20:09:31', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
+(18, 15, 'Mie Ayam', 'makanan', 9000, 195, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-05-03 12:14:17', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
+(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-03 11:58:41', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
 
 -- --------------------------------------------------------
 
@@ -221,10 +221,11 @@ CREATE TABLE `password_reset_tokens` (
 CREATE TABLE `purchases` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
-  `product_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  `total_amount` int DEFAULT NULL,
-  `status` enum('pending','completed','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barang_id` bigint UNSIGNED NOT NULL,
+  `jumlah` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `total_amount` decimal(15,2) NOT NULL,
+  `status` enum('pending','completed','cancelled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -233,9 +234,10 @@ CREATE TABLE `purchases` (
 -- Dumping data for table `purchases`
 --
 
-INSERT INTO `purchases` (`id`, `user_id`, `product_name`, `price`, `total_amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 6, 'Test Product', NULL, 100, 'pending', '2024-12-11 06:48:36', '2024-12-11 06:48:36'),
-(2, 1, 'Test Product', 100000, 100000, 'completed', '2024-12-11 07:26:08', '2024-12-11 07:26:08');
+INSERT INTO `purchases` (`id`, `user_id`, `barang_id`, `jumlah`, `price`, `total_amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:35:22', '2025-05-03 11:35:22'),
+(2, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:39:37', '2025-05-03 11:39:37'),
+(3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-03 12:14:17');
 
 -- --------------------------------------------------------
 
@@ -257,7 +259,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2DA3r1MLQmVyiXZgA6JNda2zTw7QO9yFF0LYo6PW', 13, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibk1RYzkzY25paUpVb2Zqd1A1N21VYURCbHlxTVk0cUF2VnllT2x6YSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYmFyYW5ncyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEzO30=', 1746284124);
+('6KQr3sejzAsKzHpee8Sov2VVTXsCizWAJM0m5ImV', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieXBlY2JCMDBhS3JEYjR3NUpHYVdZV3FIQkF4c1AxYTJCUTJXNTA2ciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1746300300);
 
 -- --------------------------------------------------------
 
@@ -396,7 +398,8 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `purchases_user_id_foreign` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `barang_id` (`barang_id`);
 
 --
 -- Indexes for table `sessions`
@@ -466,7 +469,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transaksis`
@@ -506,7 +509,8 @@ ALTER TABLE `order_items`
 -- Constraints for table `purchases`
 --
 ALTER TABLE `purchases`
-  ADD CONSTRAINT `purchases_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `transaksis`

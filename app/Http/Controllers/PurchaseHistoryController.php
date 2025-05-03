@@ -18,43 +18,52 @@ class PurchaseHistoryController extends Controller
             return redirect()->route('login');
         }
 
-        // Mengambil data pembelian milik pengguna yang sedang login
-        $purchases = Auth::user()->purchases;
+        $user = Auth::user();
 
-        // Mengembalikan view dengan data pembelian
-        return view('history.index', compact('purchases'));
+        if ($user->role === 'admin') {
+            // Admin sees all purchases
+            $allPurchases = \App\Models\Purchase::with(['user', 'barang.supplier'])->get();
+            return view('history.index', compact('allPurchases'));
+        } elseif ($user->role === 'supplier') {
+            // Supplier sees purchases related to their barangs using whereHas with eager loading
+            $supplierPurchases = \App\Models\Purchase::with(['user', 'barang'])
+                ->whereHas('barang', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                })
+                ->get();
+            return view('history.index', compact('supplierPurchases'));
+        } else {
+            // Normal user sees their own purchases
+            $purchases = $user->purchases;
+            return view('history.index', compact('purchases'));
+        }
     }
     
     public function store(Request $request)
     {
-        $purchase = new Purchase();
+        $purchase = new \App\Models\Purchase();
         
-        // Pastikan user_id diisi dengan ID pengguna yang sedang login
-        $purchase->user_id = Auth::id(); // Menyimpan ID pengguna yang sedang login
+        $purchase->user_id = Auth::id();
         $purchase->product_name = $request->product_name;
         $purchase->price = $request->price;
-        $purchase->total_amount = $request->price; // Atau sesuai dengan perhitungan total yang benar
-        $purchase->status = 'completed'; // Status pembelian, bisa disesuaikan
+        $purchase->total_amount = $request->price;
+        $purchase->status = 'completed';
         $purchase->save();
     
-        // Redirect ke halaman riwayat pembelian
         return redirect()->route('history.index');
     }
     
 
-    // Controller untuk menyimpan pembelian setelah berhasil transaksi
     public function storeTransaction(Request $request)
     {
-        // Proses pembayaran atau transaksi, kemudian simpan pembelian ke dalam database
-        $purchase = new Purchase();
+        $purchase = new \App\Models\Purchase();
         $purchase->user_id = Auth::id();
-        $purchase->product_name = $request->input('product_name'); // Nama produk
-        $purchase->price = $request->input('price'); // Harga produk
-        $purchase->total_amount = $request->input('total_amount'); // Total harga
-        $purchase->status = 'completed'; // Status selesai
+        $purchase->product_name = $request->input('product_name');
+        $purchase->price = $request->input('price');
+        $purchase->total_amount = $request->input('total_amount');
+        $purchase->status = 'completed';
         $purchase->save();
 
-        // Redirect ke halaman success setelah berhasil menyimpan data
         return redirect()->route('history.index');
     }
 
@@ -64,16 +73,8 @@ class PurchaseHistoryController extends Controller
             return redirect()->route('login');
         }
     
-        // Ambil data pembelian pengguna yang sedang login
-        $purchases = Auth::user()->purchases; // Mengambil pembelian dari relasi User-Purchase
+        $purchases = Auth::user()->purchases;
     
-        // Kirimkan data ke view
         return view('purchase.success', compact('purchases'));
-    }
-     
-
-    public function purchases()
-    {
-        return $this->hasMany(Purchase::class); // Replace with your actual relationship
     }
 }

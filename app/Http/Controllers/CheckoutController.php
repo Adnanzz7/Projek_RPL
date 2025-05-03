@@ -46,10 +46,37 @@ class CheckoutController extends Controller
         return redirect()->route('checkout.success');
     }
 
-
     // Metode untuk menampilkan halaman sukses
     public function success()
     {
         return view('checkout.success');  // Pastikan Anda punya view 'checkout.success'
+    }
+
+    public function store(Request $request)
+    {
+        $cartItems = session('cart', []);
+
+        foreach ($cartItems as $item) {
+            $barang = Barang::findOrFail($item['id']);
+            $jumlah = $item['jumlah'];
+
+            Purchase::create([
+                'user_id' => auth()->id(),
+                'barang_id' => $barang->id,
+                'jumlah' => $jumlah,
+                'price' => $barang->harga_barang,
+                'total_amount' => $barang->harga_barang * $jumlah,
+                'status' => 'completed',
+            ]);
+
+            // Update jumlah_terjual dan stok_tersisa
+            $barang->jumlah_terjual += $jumlah;
+            $barang->stok_tersisa -= $jumlah;
+            $barang->save();
+        }
+
+        session()->forget('cart'); // Hapus cart setelah checkout
+
+        return redirect()->route('history.index')->with('success', 'Pembelian berhasil!');
     }
 }

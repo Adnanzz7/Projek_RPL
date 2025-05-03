@@ -6,6 +6,7 @@ use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Purchase;
 use Mpdf;
 
 class CartController extends Controller
@@ -284,31 +285,36 @@ class CartController extends Controller
     {
         $cartItems = session()->get('cart', []);
         
-        // Pastikan ada item dalam keranjang
         if (empty($cartItems)) {
             return redirect()->route('cart.index')->with('error', 'Keranjang kosong.');
         }
-        
-        // Proses setiap item dalam keranjang
+
         foreach ($cartItems as $id => $item) {
             $barang = Barang::find($id);
-            
-            // Periksa apakah stok cukup
+
             if ($barang && $barang->jumlah_barang >= $item['quantity']) {
                 // Kurangi stok barang
                 $barang->jumlah_barang -= $item['quantity'];
                 $barang->save();
+
+                // Simpan ke tabel purchases
+                Purchase::create([
+                    'user_id' => auth()->id(),
+                    'barang_id' => $barang->id,
+                    'jumlah' => $item['quantity'],
+                    'price' => $item['price'],
+                    'total_amount' => $item['price'] * $item['quantity'],
+                    'status' => 'completed',
+                ]);
             } else {
-                // Jika stok tidak mencukupi, beri pesan error
                 return redirect()->route('cart.index')->with('error', 'Stok tidak mencukupi untuk barang ' . $item['name']);
             }
         }
-    
-        // Setelah checkout, kosongkan keranjang
+
+        // Hapus keranjang
         session()->forget('cart');
-    
-        // Redirect ke halaman barangs.index dengan pesan sukses
-        return redirect()->route('barangs.index')->with('success', 'Pembelian berhasil!');
+
+        return redirect()->route('checkout.success')->with('success', 'Pembelian berhasil!');
     }
     
     public function pembayaranBerhasil()

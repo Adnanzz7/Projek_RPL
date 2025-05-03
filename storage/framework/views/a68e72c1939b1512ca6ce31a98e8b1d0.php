@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('title', 'Checkout')
 
-@section('content')
+<?php $__env->startSection('title', 'Checkout'); ?>
+
+<?php $__env->startSection('content'); ?>
 <div class="min-h-screen bg-cover bg-center">
     <div class="container mx-auto py-12 px-6">
         <div class="max-w-4xl mx-auto bg-white bg-opacity-90 shadow-lg rounded-lg p-8">
@@ -13,9 +13,9 @@
             <!-- Detail Pembelian -->
             <div class="mb-6 space-y-2">
                 <h5 class="text-xl font-semibold text-gray-700">Detail Pembelian</h5>
-                <p>Atas Nama: <span class="font-bold">{{ Auth::user()->name }}</span></p>
-                <p>ID Pelanggan: <span class="font-bold">{{ Auth::user()->id }}</span></p>
-                <p>ID Pesanan: <span class="font-bold">{{ $order['id'] ?? 'N/A' }}</span></p>
+                <p>Atas Nama: <span class="font-bold"><?php echo e(Auth::user()->name); ?></span></p>
+                <p>ID Pelanggan: <span class="font-bold"><?php echo e(Auth::user()->id); ?></span></p>
+                <p>ID Pesanan: <span class="font-bold"><?php echo e($order['id'] ?? 'N/A'); ?></span></p>
             </div>
 
             <!-- Tabel Belanja -->
@@ -29,20 +29,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($cartItems as $item)
+                    <?php $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="border-b">
-                        <td class="px-4 py-2">{{ $item['name'] }}</td>
-                        <td class="px-4 py-2">Rp. {{ number_format($item['price'], 2, ',', '.') }}</td>
-                        <td class="px-4 py-2">{{ $item['quantity'] }}</td>
-                        <td class="px-4 py-2">Rp. {{ number_format($item['price'] * $item['quantity'], 2, ',', '.') }}</td>
+                        <td class="px-4 py-2"><?php echo e($item['name']); ?></td>
+                        <td class="px-4 py-2">Rp. <?php echo e(number_format($item['price'], 2, ',', '.')); ?></td>
+                        <td class="px-4 py-2"><?php echo e($item['quantity']); ?></td>
+                        <td class="px-4 py-2">Rp. <?php echo e(number_format($item['price'] * $item['quantity'], 2, ',', '.')); ?></td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
 
             <div class="text-right mb-8">
                 <h6 class="text-xl font-semibold text-gray-700">
-                    Total Semua: <span class="text-green-500 font-bold">Rp. {{ number_format($totalHarga, 2, ',', '.') }}</span>
+                    Total Semua: <span class="text-green-500 font-bold">Rp. <?php echo e(number_format($totalHarga, 2, ',', '.')); ?></span>
                 </h6>
             </div>
 
@@ -66,30 +66,30 @@
                     <!-- QR Codes -->
                     <div id="qrisOpsi1Details" class="qr-container hidden mt-6">
                         <h6 class="text-lg font-bold text-gray-700">QR Code Gopay</h6>
-                        <img src="{{ asset('storage/QR2.jpeg') }}" alt="QR Gopay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
+                        <img src="<?php echo e(asset('storage/QR2.jpeg')); ?>" alt="QR Gopay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
                     </div>
 
                     <div id="qrisOpsi2Details" class="qr-container hidden mt-6">
                         <h6 class="text-lg font-bold text-gray-700">QR Code ShopeePay</h6>
-                        <img src="{{ asset('storage/QR3.jpg') }}" alt="QR ShopeePay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
+                        <img src="<?php echo e(asset('storage/QR3.jpg')); ?>" alt="QR ShopeePay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
                     </div>
 
                     <div id="qrisOpsi3Details" class="qr-container hidden mt-6">
                         <h6 class="text-lg font-bold text-gray-700">QR Code Dana</h6>
-                        <img src="{{ asset('storage/QR4.jpg') }}" alt="QR Dana" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
+                        <img src="<?php echo e(asset('storage/QR4.jpg')); ?>" alt="QR Dana" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
                     </div>
                 </div>
             </div>
 
             <!-- Tombol -->
             <div class="mt-8 flex justify-between">
-                <form action="{{ route('cart.cancel') }}" method="POST">
-                    @csrf
+                <form action="<?php echo e(route('cart.cancel')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <button type="submit" class="btn-danger bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none" onclick="return confirm('Batalkan pesanan ini?')">Batal</button>
                 </form>
 
-                <form action="{{ route('cart.completeCheckout') }}" method="POST">
-                    @csrf
+                <form action="<?php echo e(route('cart.completeCheckout')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <button type="submit" class="btn-success bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none" onclick="validatePaymentForm(event) && confirm('Apakah pembayaran sudah dilakukan?')">Selesai</button>
                 </form>
             </div>
@@ -167,4 +167,5 @@
         }
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\HP\laravel\Projek_RPL\resources\views/cart/checkout.blade.php ENDPATH**/ ?>

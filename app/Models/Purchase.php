@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model; // Tambahkan import ini
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Purchase;
 
@@ -11,14 +11,16 @@ class Purchase extends Model
 {
     use HasFactory;
 
-    /**
-     * Get the user that owns the purchase.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+    
     // Fungsi index ini seharusnya berada di controller, bukan di model
     public function index()
     {
@@ -32,6 +34,8 @@ class Purchase extends Model
         return view('history.index', compact('purchases'));
     }
 
-    protected $fillable = ['user_id', 'product_name', 'price']; // Pastikan kolom yang diizinkan untuk diisi ada di sini
+    protected $fillable = [
+        'user_id', 'barang_id', 'jumlah', 'price', 'total_amount', 'status'
+    ];    
     protected $guarded = []; // Artinya, semua kolom dapat diisi
 }

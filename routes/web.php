@@ -73,6 +73,7 @@ Route::post('/cart/checkout', [CartController::class, 'processCheckout'])->name(
 Route::post('/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/cart/selesai', [CartController::class, 'selesai'])->name('cart.selesai');
+Route::post('/cart/complete-checkout', [CartController::class, 'completeCheckout'])->name('cart.completeCheckout');
 Route::get('/cart/download-pdf', [CartController::class, 'downloadPdf'])->name('cart.downloadPdf');
 
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');

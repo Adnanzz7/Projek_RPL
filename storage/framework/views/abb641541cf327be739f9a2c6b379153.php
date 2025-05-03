@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('title', 'Daftar Barang')
 
-@section('content')
+<?php $__env->startSection('title', 'Daftar Barang'); ?>
+
+<?php $__env->startSection('content'); ?>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
@@ -11,7 +11,7 @@
     
     <!-- Logo -->
     <div class="absolute top-6 left-6 flex items-center space-x-3">
-        <img src="{{ asset('storage/logo.png') }}" alt="PKK Market Logo" class="h-12 w-12 object-contain">
+        <img src="<?php echo e(asset('storage/logo.png')); ?>" alt="PKK Market Logo" class="h-12 w-12 object-contain">
         <span class="text-xl font-bold text-orange-600">PKK Market</span>
     </div>
 
@@ -31,26 +31,26 @@
         </p>
 
         <div class="flex justify-center items-center gap-8 mt-6">
-            <img src="{{ asset('storage/SMKN_8_Jakarta.png') }}" alt="Logo Tambahan 1" class="h-20 w-20 object-contain hover:scale-110 transition-transform duration-300">
-            <img src="{{ asset('storage/logo-adiwiyata.png') }}" alt="Logo Tambahan 2" class="h-20 w-20 object-contain hover:scale-110 transition-transform duration-300">
+            <img src="<?php echo e(asset('storage/SMKN_8_Jakarta.png')); ?>" alt="Logo Tambahan 1" class="h-20 w-20 object-contain hover:scale-110 transition-transform duration-300">
+            <img src="<?php echo e(asset('storage/logo-adiwiyata.png')); ?>" alt="Logo Tambahan 2" class="h-20 w-20 object-contain hover:scale-110 transition-transform duration-300">
         </div>
 
-        @guest
+        <?php if(auth()->guard()->guest()): ?>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
-                <a href="{{ route('login') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
+                <a href="<?php echo e(route('login')); ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
                     <i class="fas fa-sign-in-alt mr-2"></i> Masuk
                 </a>
-                <a href="{{ route('register') }}" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
+                <a href="<?php echo e(route('register')); ?>" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
                     <i class="fas fa-user-plus mr-2"></i> Daftar
                 </a>
             </div>
-        @else
+        <?php else: ?>
             <div class="mt-6">
                 <a href="#daftar-produk" id="btnLihatProduk" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition duration-300">
                     Lihat Produk
                 </a>
             </div>
-        @endguest
+        <?php endif; ?>
     </div>
 </header>
 
@@ -61,71 +61,72 @@
 
 <h1 id="daftar-produk" class="text-3xl font-semibold text-center text-gray-900 mt-8 mb-8">Daftar Produk Kreatif dan Kewirausahaan</h1>
 
-@if (session('status'))
-    <div class="bg-green-100 text-green-800 p-4 rounded-md mb-4">{{ session('status') }}</div>
-@endif
+<?php if(session('status')): ?>
+    <div class="bg-green-100 text-green-800 p-4 rounded-md mb-4"><?php echo e(session('status')); ?></div>
+<?php endif; ?>
 
 <!-- Produk Grid -->
-@php
+<?php
     $categories = [
         'makanan' => 'Makanan dan Minuman',
         'kerajinan' => 'Seni dan Kerajinan',
     ];
-@endphp
+?>
 
-@foreach ($categories as $key => $categoryName)
+<?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $categoryName): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg">{{ $categoryName }}</h2>
+        <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg"><?php echo e($categoryName); ?></h2>
         <div class="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 mt-4 mb-12">
-        @foreach ($barangs->where('kategori_barang', $key) as $barang)
+        <?php $__currentLoopData = $barangs->where('kategori_barang', $key); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $barang): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all">
                 <div class="relative">
-                    @if ($barang->foto_barang)
-                        <img src="{{ Storage::url('public/' . $barang->foto_barang) }}" class="w-full h-48 object-cover" alt="{{ $barang->nama_barang }}"/>
-                        <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm {{ $barang->jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500' }}">
-                            {{ $barang->jumlah_barang == 0 ? 'Habis' : 'Tersedia' }}
+                    <?php if($barang->foto_barang): ?>
+                        <img src="<?php echo e(Storage::url('public/' . $barang->foto_barang)); ?>" class="w-full h-48 object-cover" alt="<?php echo e($barang->nama_barang); ?>"/>
+                        <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm <?php echo e($barang->jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500'); ?>">
+                            <?php echo e($barang->jumlah_barang == 0 ? 'Habis' : 'Tersedia'); ?>
+
                         </div>
-                    @else
+                    <?php else: ?>
                         <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic">Tidak ada gambar</div>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-800">{{ $barang->nama_barang }}</h3>
-                    <p class="text-pink-600 font-semibold">Rp {{ number_format($barang->harga_barang, 2, ',', '.') }}</p>
-                    <p class="text-gray-500 text-sm">Sisa: {{ $barang->jumlah_barang }}</p>
-                    <p class="text-gray-400 text-sm">Pengirim: {{ $barang->user->name }}</p>
+                    <h3 class="text-lg font-bold text-gray-800"><?php echo e($barang->nama_barang); ?></h3>
+                    <p class="text-pink-600 font-semibold">Rp <?php echo e(number_format($barang->harga_barang, 2, ',', '.')); ?></p>
+                    <p class="text-gray-500 text-sm">Sisa: <?php echo e($barang->jumlah_barang); ?></p>
+                    <p class="text-gray-400 text-sm">Pengirim: <?php echo e($barang->user->name); ?></p>
 
-                    @auth
-                        @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id))
+                    <?php if(auth()->guard()->check()): ?>
+                        <?php if(Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id)): ?>
                             <div class="flex justify-between items-center mt-4">
-                                <a href="{{ route('barangs.edit', $barang->id) }}" 
+                                <a href="<?php echo e(route('barangs.edit', $barang->id)); ?>" 
                                     class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-105">
                                     <i class="bi bi-pencil-square"></i>⠀Edit
                                 </a>
                                 
-                                @if (Auth::user()->role === 'admin')
-                                    <a href="{{ route('barangs.show', $barang->id) }}" 
+                                <?php if(Auth::user()->role === 'admin'): ?>
+                                    <a href="<?php echo e(route('barangs.show', $barang->id)); ?>" 
                                         class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-[#138496] text-[#17a2b8]">
                                         <i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail
                                     </a>
-                                @endif
+                                <?php endif; ?>
                                 
-                                <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
-                                    @csrf
-                                    @method('DELETE')
+                                <form action="<?php echo e(route('barangs.destroy', $barang->id)); ?>" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
                                     <button type="submit" 
                                         class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-105">
                                         <i class="bi bi-trash"></i>⠀Delete
                                     </button>
                                 </form>                                
                             </div>
-                        @endif
-                    @endauth            
+                        <?php endif; ?>
+                    <?php endif; ?>            
 
-                    @auth
-                        @if (Auth::user()->role === 'user')
-                            @php
+                    <?php if(auth()->guard()->check()): ?>
+                        <?php if(Auth::user()->role === 'user'): ?>
+                            <?php
                                 $currentTime = \Carbon\Carbon::now('Asia/Jakarta');
                                 $isTimeAllowed = ($currentTime->between(
                                     \Carbon\Carbon::createFromTime(9, 40, 0, 'Asia/Jakarta'),
@@ -134,15 +135,15 @@
                                     \Carbon\Carbon::createFromTime(00,30, 0, 'Asia/Jakarta'),
                                     \Carbon\Carbon::createFromTime(3, 0, 0, 'Asia/Jakarta')
                                 ));
-                            @endphp
+                            ?>
                             
-                            @if ($isTimeAllowed)
-                                <form action="{{ route('cart.add.form', $barang->id) }}" method="GET">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $barang->id }}">
-                                    <input type="hidden" name="name" value="{{ $barang->nama_barang }}">
-                                    <input type="hidden" name="price" value="{{ $barang->harga_barang }}">
-                                    <input type="hidden" name="jumlah_barang" value="{{ $barang->jumlah_barang }}">
+                            <?php if($isTimeAllowed): ?>
+                                <form action="<?php echo e(route('cart.add.form', $barang->id)); ?>" method="GET">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="id" value="<?php echo e($barang->id); ?>">
+                                    <input type="hidden" name="name" value="<?php echo e($barang->nama_barang); ?>">
+                                    <input type="hidden" name="price" value="<?php echo e($barang->harga_barang); ?>">
+                                    <input type="hidden" name="jumlah_barang" value="<?php echo e($barang->jumlah_barang); ?>">
 
                                     <div class="flex justify-center mt-4">
                                         <button type="submit" 
@@ -151,18 +152,18 @@
                                         </button>
                                     </div>                        
                                 </form>                        
-                            @else
+                            <?php else: ?>
                                 <button type="button" class="btn flex items-center justify-center px-4 py-2 text-base rounded-lg cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-white btn-disable" disabled>
                                     <p class="text-red-500 text-sm font-bold text-center mt-2 bg-red-100 border border-red-500 rounded-md px-4 py-2">Hanya tersedia pada pukul 09:40-10:00 dan 12:30-13:00 WIB.</p>
                                 </button>
-                            @endif
-                        @endif
-                    @endauth
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 <!-- Tutorial Button -->
 <div class="tutorial-btn absolute top-24 mt-3 right-5">
@@ -181,29 +182,29 @@
             </div>
             <div class="modal-body text-gray-700 text-base leading-7 text-justify my-4">
                 <ol class="list-decimal pl-5">
-                    @guest
+                    <?php if(auth()->guard()->guest()): ?>
                         <li><strong>Register:</strong> Klik tombol <b><i class="fas fa-user-plus"></i>⠀Register</b> untuk membuat akun, lalu pilih role <b>Admin</b>, <b>Suplier</b>, Atau, <b>User</b>.</li>
                         <li><strong>Login:</strong> Klik tombol <b><i class="fas fa-sign-in-alt"></i>⠀Login</b> untuk masuk menggunakan akun yang telah didaftarkan</li>
                         <li><strong>Info:</strong> Anda harus <b><i class="fas fa-sign-in-alt"></i>⠀Login</a></b> atau <b><i class="fas fa-user-plus"></i>⠀Register</b> untuk memulai.</li>
-                    @endguest
+                    <?php endif; ?>
 
-                    @if(Auth::check())
-                        @if(Auth::user()->role === 'admin')
+                    <?php if(Auth::check()): ?>
+                        <?php if(Auth::user()->role === 'admin'): ?>
                             <li><strong>Detail:</strong> Cari barang yang ingin Anda lihat, lalu klik tombol <b><i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail</b>.</li>
                             <li><strong>Tambah Barang:</strong> Klik tombol <b><i class="fas fa-plus-circle"></i></b> di atas untuk menambahkan barang yang Anda inginkan.</li>
                             <li><strong>Edit Barang:</strong> Cari barang yang ingin Anda ubah, lalu klik tombol <b><i class="bi bi-pencil-square"></i>⠀Edit</b>.</li>
                             <li><strong>Hapus Barang:</strong> Cari barang yang ingin Anda hapus, klik tombol <b><i class="bi bi-trash"></i>⠀Delete</b>, lalu konfirmasi penghapusan.</li>
-                        @elseif(Auth::user()->role === 'supplier')
+                        <?php elseif(Auth::user()->role === 'supplier'): ?>
                             <li><strong>Tambah Barang:</strong> Klik tombol <b>Tambah Barang</b> di atas untuk menambahkan barang yang Anda inginkan.</li>
                             <li><strong>Edit Barang:</strong> Cari barang yang telah Anda buat sebelumnya, lalu klik tombol <b><i class="bi bi-pencil-square"></i>⠀Edit</b>.</li>
                             <li><strong>Hapus Barang:</strong> Cari barang yang telah Anda buat sebelumnya, klik tombol <b><i class="bi bi-trash"></i>⠀Delete</b>, lalu konfirmasi penghapusan.</li>
-                        @elseif(Auth::user()->role === 'user')
+                        <?php elseif(Auth::user()->role === 'user'): ?>
                             <li><strong>Pilih Barang:</strong> Cari barang yang ingin Anda beli, isi jumlahnya, lalu klik tombol <b><i class="fas fa-plus"></i></b>.</li>
                             <li><strong>Keranjang:</strong> Klik tombol <b><i class="fas fa-shopping-cart"></i></b> di posisi atas untuk melihat barang yang telah Anda pilih.</li>
                             <li><strong>Checkout:</strong> Setelah memeriksa barang di keranjang, lanjutkan ke proses <b>Checkout</b>.</li>
                             <li><strong>Pembayaran:</strong> Pilih metode <b>QRIS</b> atau <b>Cash</b> untuk menyelesaikan pembayaran.</li>
-                        @endif
-                    @endif
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </ol>
             </div>
             <div class="modal-footer flex justify-between items-center px-5 py-2 border-t border-gray-300 bg-gray-50">
@@ -314,4 +315,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\HP\laravel\Projek_RPL\resources\views/barangs/index.blade.php ENDPATH**/ ?>

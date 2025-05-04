@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2025 at 07:25 PM
+-- Generation Time: May 04, 2025 at 04:48 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.13
 
@@ -53,12 +53,12 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`id`, `user_id`, `nama_barang`, `kategori_barang`, `harga_barang`, `jumlah_barang`, `foto_barang`, `total`, `keterangan_barang`, `created_at`, `updated_at`, `harga_pokok`, `keuntungan_per_unit`, `jumlah_barang_awal`, `jumlah_terjual`, `total_harga_terjual`, `keuntungan`, `stok_tersisa`) VALUES
-(5, 2, 'Toples Rajut', 'kerajinan', 34500, 16, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-01 18:07:22', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
+(5, 2, 'Toples Rajut', 'kerajinan', 34500, 14, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-04 00:43:59', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
 (8, 4, 'Rajut Bunga Tulip', 'kerajinan', 26500, 2, 'images/Ow20D0M4OFBU04ZywGzPghxIlficKmkSMWLtlBCs.jpg', NULL, 'Tersedia dalam berbagai warna', '2024-12-07 05:58:01', '2025-05-01 18:07:01', 25000.00, 0.00, 2, 0, 0.00, 0.00, 0),
-(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9857, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-03 11:39:37', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
+(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9855, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-04 00:12:28', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
 (13, 2, 'Dimsum', 'makanan', 9000, 20, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2024-12-18 18:28:21', 8000.00, 0.00, 20, 0, 0.00, 0.00, 0),
 (18, 15, 'Mie Ayam', 'makanan', 9000, 195, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-05-03 12:14:17', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
-(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-03 11:58:41', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
+(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-04 00:10:48', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
 
 -- --------------------------------------------------------
 
@@ -235,9 +235,11 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `user_id`, `barang_id`, `jumlah`, `price`, `total_amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:35:22', '2025-05-03 11:35:22'),
+(1, 8, 11, 1, 31000.00, 31000.00, 'cancelled', '2025-05-03 11:35:22', '2025-05-04 07:35:38'),
 (2, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:39:37', '2025-05-03 11:39:37'),
-(3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-03 12:14:17');
+(3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-03 12:14:17'),
+(4, 8, 11, 1, 31000.00, 31000.00, 'pending', '2025-05-04 00:12:28', '2025-05-04 00:12:28'),
+(5, 16, 5, 1, 36000.00, 36000.00, 'pending', '2025-05-04 00:43:59', '2025-05-04 00:43:59');
 
 -- --------------------------------------------------------
 
@@ -259,7 +261,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6KQr3sejzAsKzHpee8Sov2VVTXsCizWAJM0m5ImV', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieXBlY2JCMDBhS3JEYjR3NUpHYVdZV3FIQkF4c1AxYTJCUTJXNTA2ciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1746300300);
+('QbZ95htwbjnjF7fjxnzLkesCYwP8poe4tX7r9Fmq', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaEZKV1JjODZVZzlsZ2NBWnhYclZvWERUUjdiQ2xVNG9idmlhRW4zVyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wdXJjaGFzZS1oaXN0b3J5Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1746344730);
 
 -- --------------------------------------------------------
 
@@ -469,7 +471,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaksis`

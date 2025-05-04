@@ -6,20 +6,26 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AdminPurchaseController;
 use App\Http\Controllers\PurchaseHistoryController;
 
 Route::get('/', [BarangController::class, 'index'])->name('barangs.index');
 Route::get('/barangs/create', [BarangController::class, 'create'])->name('barangs.create');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/purchase-history', [PurchaseHistoryController::class, 'index'])->name('history.index');
+    Route::get('/purchase/history', [PurchaseHistoryController::class, 'history'])->name('purchases.history');
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('admin/purchases-management', [AdminPurchaseController::class, 'index'])
+        ->name('admin.purchases.management');
+
+    Route::post('admin/purchase/{id}/update-status', [AdminPurchaseController::class, 'updateStatus'])
+        ->name('admin.purchase.updateStatus');
 });
 
 Route::get('/', [BarangController::class, 'index'])->name('barangs.index');
@@ -44,17 +50,17 @@ Route::middleware(['auth', 'check.role:admin,supplier'])->group(function () {
     Route::post('/checkout/payment', [CheckoutController::class, 'processPayment'])->name('checkout.payment');
 });
 
-Route::middleware('auth')->get('/dashboard', function () {
+Route::get('/redirect-after-login', function () {
     $user = auth()->user();
 
     if ($user && $user->role === 'admin') {
-        return redirect()->route('barangs.index')->with('success', 'Selamat datang, Admin!');
+        return redirect()->route('admin.pendit.purchases')->with('success', 'Selamat datang, Admin!');
     } elseif ($user && $user->role === 'supplier') {
         return redirect()->route('barangs.index')->with('success', 'Selamat datang, Supplier!');
     }
 
     return redirect()->route('barangs.index');
-})->name('dashboard');
+})->middleware(['auth']);
 
 Route::post('/barangs/beli/konfirmasi', [BarangController::class, 'beliMassa'])->name('barangs.beli.massa');
 

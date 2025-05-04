@@ -28,6 +28,13 @@
                         </a>
                     </li>
                     <?php if(auth()->guard()->check()): ?>
+                    <?php if(Auth::user()->role === 'admin'): ?>
+                        <li class="nav-item relative right-10">
+                            <a href="<?php echo e(route('admin.purchases.management')); ?>" class="nav-link flex items-center">
+                                <i class="fas fa-tasks text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <?php if(Auth::user()->role === 'admin' || Auth::user()->role === 'supplier'): ?>
                             <li class="nav-item relative right-10">
                                 <a href="<?php echo e(route('barangs.create')); ?>" class="nav-link flex items-center">

@@ -284,7 +284,8 @@ class CartController extends Controller
     public function completeCheckout(Request $request)
     {
         $cartItems = session()->get('cart', []);
-        
+        $paymentMethod = $request->input('payment_method', '');
+
         if (empty($cartItems)) {
             return redirect()->route('cart.index')->with('error', 'Keranjang kosong.');
         }
@@ -304,7 +305,7 @@ class CartController extends Controller
                     'jumlah' => $item['quantity'],
                     'price' => $item['price'],
                     'total_amount' => $item['price'] * $item['quantity'],
-                    'status' => 'completed',
+                    'status' => $paymentMethod === 'cash' ? 'pending' : 'completed',
                 ]);
             } else {
                 return redirect()->route('cart.index')->with('error', 'Stok tidak mencukupi untuk barang ' . $item['name']);
@@ -313,6 +314,10 @@ class CartController extends Controller
 
         // Hapus keranjang
         session()->forget('cart');
+
+        if ($paymentMethod === 'cash') {
+            return redirect()->route('cart.index')->with('success', 'Silahkan melakukan pembayaran di kasir.');
+        }
 
         return redirect()->route('checkout.success')->with('success', 'Pembelian berhasil!');
     }

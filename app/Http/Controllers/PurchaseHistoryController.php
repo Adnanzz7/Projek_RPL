@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Purchase;
+use App\Models\Barang;
 use App\Models\User;
 
 class PurchaseHistoryController extends Controller
@@ -76,5 +78,48 @@ class PurchaseHistoryController extends Controller
         $purchases = Auth::user()->purchases;
     
         return view('purchase.success', compact('purchases'));
+    }
+
+    public function history(Request $request)
+    {
+        $search = $request->input('search');
+        $user = auth()->user();
+
+        if ($user->role === 'user') {
+            $purchases = Purchase::where('user_id', $user->id)
+                ->whereHas('barang', function ($query) use ($search) {
+                    $query->where('nama_barang', 'like', "%{$search}%");
+                })
+                ->orWhere('status', 'like', "%{$search}%")
+                ->latest()->get();
+
+            return view('history.index', compact('purchases'));
+        }
+
+        if ($user->role === 'supplier') {
+            $supplierPurchases = Purchase::whereHas('barang', function ($query) use ($user, $search) {
+                $query->where('supplier_id', $user->id)
+                    ->where('nama_barang', 'like', "%{$search}%");
+            })
+            ->orWhere('status', 'like', "%{$search}%")
+            ->latest()->get();
+
+            return view('history.index', compact('supplierPurchases'));
+        }
+
+        if ($user->role === 'admin') {
+            $allPurchases = Purchase::with(['user', 'barang.supplier'])
+                ->whereHas('barang', function ($query) use ($search) {
+                    $query->where('nama_barang', 'like', "%{$search}%");
+                })
+                ->orWhereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->orWhere('created_at', 'like', "%{$search}%")
+                ->orWhere('status', 'like', "%{$search}%")
+                ->latest()->get();
+
+            return view('history.index', compact('allPurchases'));
+        }
     }
 }

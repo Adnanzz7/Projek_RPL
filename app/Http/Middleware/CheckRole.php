@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth; // Pastikan ini ada
 
 class CheckRole
 {
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         /**
          * Handle an incoming request.
@@ -19,7 +19,7 @@ class CheckRole
          * @return mixed
          */
         
-        if (!Auth::check() || Auth::user()->role !== $role) {
+        if (!Auth::check() || !in_array(Auth::user()->role, $roles)) {
             return redirect('/')->with('error', 'Anda tidak memiliki akses.');
         }
 

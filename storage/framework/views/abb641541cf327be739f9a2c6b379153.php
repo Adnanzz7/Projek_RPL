@@ -12,7 +12,7 @@
     <!-- Logo -->
     <div class="absolute top-6 left-6 flex items-center space-x-3">
         <img src="<?php echo e(asset('storage/logo.png')); ?>" alt="PKK Market Logo" class="h-12 w-12 object-contain">
-        <span class="text-xl font-bold text-orange-600">PKK Market</span>
+        <span class="text-xl font-bold text-red-300">PKK Market</span>
     </div>
 
     <!-- Animasi Latar -->
@@ -23,7 +23,7 @@
     <!-- Konten Utama -->
     <div class="relative z-10">
         <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-4 drop-shadow-md">
-            Selamat Datang di <span class="text-indigo-600">PKK Market</span>!
+            Selamat Datang di <span class="text-red-600">PKK Market</span>!
         </h1>
         <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
             Temukan produk kreatif karya siswa: makanan, minuman, kerajinan tangan, dan lainnya.<br />
@@ -46,7 +46,7 @@
             </div>
         <?php else: ?>
             <div class="mt-6">
-                <a href="#daftar-produk" id="btnLihatProduk" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition duration-300">
+                <a href="#daftar-produk" id="btnLihatProduk" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition duration-300">
                     Lihat Produk
                 </a>
             </div>
@@ -132,8 +132,8 @@
                                     \Carbon\Carbon::createFromTime(9, 40, 0, 'Asia/Jakarta'),
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
-                                    \Carbon\Carbon::createFromTime(00,30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(3, 0, 0, 'Asia/Jakarta')
+                                    \Carbon\Carbon::createFromTime(12,30, 0, 'Asia/Jakarta'),
+                                    \Carbon\Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta')
                                 ));
                             ?>
                             

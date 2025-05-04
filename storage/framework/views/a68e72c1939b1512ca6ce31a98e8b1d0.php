@@ -53,6 +53,7 @@
                     <button id="qrisBtn" type="button" class="btn-payment bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none">QRIS</button>
                     <button id="cashBtn" type="button" class="btn-payment bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none">Cash</button>
                 </div>
+                <p id="cashMessage" class="mt-2 text-red-600 font-semibold hidden">Silahkan melakukan pembayaran di kasir</p>
 
                 <!-- QRIS Opsi -->
                 <div id="paymentDetails" class="hidden mt-6">
@@ -88,9 +89,10 @@
                     <button type="submit" class="btn-danger bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none" onclick="return confirm('Batalkan pesanan ini?')">Batal</button>
                 </form>
 
-                <form action="<?php echo e(route('cart.completeCheckout')); ?>" method="POST">
+                <form id="checkoutForm" action="<?php echo e(route('cart.completeCheckout')); ?>" method="POST">
                     <?php echo csrf_field(); ?>
-                    <button type="submit" class="btn-success bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none" onclick="validatePaymentForm(event) && confirm('Apakah pembayaran sudah dilakukan?')">Selesai</button>
+                    <input type="hidden" name="payment_method" id="paymentMethodInput" value="">
+                    <button type="submit" class="btn-success bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none" onclick="return validatePaymentForm(event) && confirm('Apakah pembayaran sudah dilakukan?')">Selesai</button>
                 </form>
             </div>
         </div>
@@ -140,6 +142,17 @@
         document.getElementById('qrisBtn').classList.toggle('active', method === 'qris');
         document.getElementById('cashBtn').classList.toggle('active', method === 'cash');
         paymentDetails.classList.toggle('hidden', method !== 'qris');
+
+        // Set hidden input value for payment method
+        document.getElementById('paymentMethodInput').value = method;
+
+        // Show or hide cash payment message
+        const cashMessage = document.getElementById('cashMessage');
+        if (method === 'cash') {
+            cashMessage.classList.remove('hidden');
+        } else {
+            cashMessage.classList.add('hidden');
+        }
     }
 
     // Fungsi untuk memilih opsi QRIS

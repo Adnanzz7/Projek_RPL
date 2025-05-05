@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('barangs.index', absolute: false));
         }
 
         return back()->withErrors([

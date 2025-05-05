@@ -92,6 +92,6 @@ class RegisteredUserController extends Controller
         // Login otomatis setelah registrasi
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', "Berhasil mendaftar sebagai {$user->role}!");
+        return redirect()->route('barangs.index')->with('success', "Berhasil mendaftar sebagai {$user->role}!");
     }
 }

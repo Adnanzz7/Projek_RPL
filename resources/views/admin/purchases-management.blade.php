@@ -79,6 +79,7 @@
                                     @csrf
                                     <select name="status" class="border rounded px-2 py-1 text-sm">
                                         <option value="completed" {{ $purchase->status === 'completed' ? 'selected' : '' }}>Completed</option>
+                                        <option value="pending" {{ $purchase->status === 'pending' ? 'selected' : '' }}>Pending</option>
                                         <option value="cancelled" {{ $purchase->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                     </select>
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">Update</button>

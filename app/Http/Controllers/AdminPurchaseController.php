@@ -30,7 +30,7 @@ class AdminPurchaseController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:completed,cancelled',
+            'status' => 'required|in:completed,pending,cancelled',
         ]);
 
         $purchase = Purchase::findOrFail($id);

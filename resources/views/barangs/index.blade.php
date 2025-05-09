@@ -59,7 +59,7 @@
     <span class="inline-block animate-scrollText">Jam Buka: 09.40 - 10.00 dan 12.30 - 13.00</span>
 </div>
 
-<h1 id="daftar-produk" class="text-3xl font-semibold text-center text-gray-900 mt-8 mb-8">Daftar Produk Kreatif dan Kewirausahaan</h1>
+<h1 id="daftar-produk" class="text-4xl font-extrabold text-center text-gray-900 mt-8 mb-8">Daftar Produk Kreatif dan Kewirausahaan</h1>
 
 @if (session('status'))
     <div class="bg-green-100 text-green-800 p-4 rounded-md mb-4">{{ session('status') }}</div>
@@ -131,7 +131,7 @@
                                     \Carbon\Carbon::createFromTime(9, 40, 0, 'Asia/Jakarta'),
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
-                                    \Carbon\Carbon::createFromTime(12,30, 0, 'Asia/Jakarta'),
+                                    \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),
                                     \Carbon\Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta')
                                 ));
                             @endphp

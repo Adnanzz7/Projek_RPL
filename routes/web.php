@@ -6,11 +6,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminPurchaseController;
 use App\Http\Controllers\PurchaseHistoryController;
 
 Route::get('/', [BarangController::class, 'index'])->name('barangs.index');
 Route::get('/barangs/create', [BarangController::class, 'create'])->name('barangs.create');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

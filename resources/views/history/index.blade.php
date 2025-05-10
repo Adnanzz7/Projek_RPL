@@ -128,7 +128,7 @@
 
     <!-- Tombol Kembali -->
     <div class="text-center mt-6">
-        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Back to Home</a>
+        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Kembali Kke Beranda</a>
     </div>
    
     <script>

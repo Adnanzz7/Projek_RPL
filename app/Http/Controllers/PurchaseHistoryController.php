@@ -93,6 +93,10 @@ class PurchaseHistoryController extends Controller
                 ->orWhere('status', 'like', "%{$search}%")
                 ->latest()->get();
 
+            if ($request->ajax()) {
+                return response()->json($purchases);
+            }
+
             return view('history.index', compact('purchases'));
         }
 
@@ -103,6 +107,10 @@ class PurchaseHistoryController extends Controller
             })
             ->orWhere('status', 'like', "%{$search}%")
             ->latest()->get();
+
+            if ($request->ajax()) {
+                return response()->json($supplierPurchases);
+            }
 
             return view('history.index', compact('supplierPurchases'));
         }
@@ -118,6 +126,10 @@ class PurchaseHistoryController extends Controller
                 ->orWhere('created_at', 'like', "%{$search}%")
                 ->orWhere('status', 'like', "%{$search}%")
                 ->latest()->get();
+
+            if ($request->ajax()) {
+                return response()->json($allPurchases);
+            }
 
             return view('history.index', compact('allPurchases'));
         }

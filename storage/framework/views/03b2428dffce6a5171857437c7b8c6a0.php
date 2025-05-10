@@ -1,26 +1,24 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Purchase History'); ?>
 
-@section('title', 'Purchase History')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container mx-auto p-8">
     <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-6">Purchase History</h2>
 
     <!-- Form Pencarian -->
     <div class="max-w-md mx-auto mb-6">
-        <form id="searchForm" method="GET" action="{{ route('purchases.history') }}" class="flex items-center">
-            <input type="text" name="search" id="searchInput" placeholder="Search by product, date, status..." value="{{ request('search') }}"
+        <form id="searchForm" method="GET" action="<?php echo e(route('purchases.history')); ?>" class="flex items-center">
+            <input type="text" name="search" id="searchInput" placeholder="Search by product, date, status..." value="<?php echo e(request('search')); ?>"
                 class="flex-grow px-4 py-2 border rounded-l-md focus:outline-none focus:ring focus:border-blue-300">
             <button type="submit" id="searchBtn"
                 class="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 transition duration-200"><i class="fas fa-search"></i>⠀Search</button>
         </form>
     </div>
 
-    {{-- USER VIEW --}}
-    @if (auth()->user()->role === 'user')
-        @if ($purchases->isEmpty())
+    
+    <?php if(auth()->user()->role === 'user'): ?>
+        <?php if($purchases->isEmpty()): ?>
             <p class="text-center text-lg text-gray-600">You have not made any purchases yet.</p>
-        @else
+        <?php else: ?>
             <div class="overflow-x-auto bg-white bg-opacity-80 shadow-lg rounded-lg border-t-4 border-indigo-500 max-w-6xl mx-auto">
                 <table class="min-w-full table-auto text-sm text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-indigo-100 bg-opacity-80">
@@ -35,27 +33,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($purchases as $purchase)
+                        <?php $__currentLoopData = $purchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b hover:bg-gray-50 bg-opacity-80 transition-colors">
-                                <td class="px-6 py-4 text-center">{{ $purchase->id }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
-                                <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->price, 2, ',', '.') }}</td>
-                                <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->total_amount, 2, ',', '.') }}</td>
-                                <td class="px-6 py-4 text-center capitalize">{{ $purchase->status }}</td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->id); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
+                                <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->price, 2, ',', '.')); ?></td>
+                                <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->total_amount, 2, ',', '.')); ?></td>
+                                <td class="px-6 py-4 text-center capitalize"><?php echo e($purchase->status); ?></td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
-        @endif
+        <?php endif; ?>
 
-    {{-- SUPPLIER VIEW --}}
-    @elseif (auth()->user()->role === 'supplier')
-        @if ($supplierPurchases->isEmpty())
+    
+    <?php elseif(auth()->user()->role === 'supplier'): ?>
+        <?php if($supplierPurchases->isEmpty()): ?>
             <p class="text-center text-lg text-gray-600">No purchases related to your products yet.</p>
-        @else
+        <?php else: ?>
             <div class="overflow-x-auto bg-white bg-opacity-80 shadow-lg rounded-lg border-t-4 border-green-500 max-w-6xl mx-auto">
                 <table class="min-w-full table-auto text-sm text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-green-100 bg-opacity-80">
@@ -70,27 +68,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($supplierPurchases as $purchase)
+                        <?php $__currentLoopData = $supplierPurchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 text-center">{{ $purchase->id }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->user->name ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
-                                <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->total_amount, 2, ',', '.') }}</td>
-                                <td class="px-6 py-4 text-center capitalize">{{ $purchase->status }}</td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->id); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->user->name ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
+                                <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->total_amount, 2, ',', '.')); ?></td>
+                                <td class="px-6 py-4 text-center capitalize"><?php echo e($purchase->status); ?></td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
-        @endif
+        <?php endif; ?>
 
-    {{-- ADMIN VIEW --}}
-    @elseif (auth()->user()->role === 'admin')
-        @if ($allPurchases->isEmpty())
+    
+    <?php elseif(auth()->user()->role === 'admin'): ?>
+        <?php if($allPurchases->isEmpty()): ?>
             <p class="text-center text-lg text-gray-600">No purchase data available.</p>
-        @else
+        <?php else: ?>
             <div class="overflow-x-auto bg-white bg-opacity-80 shadow-lg rounded-lg border-t-4 border-red-500 max-w-6xl mx-auto">
                 <table class="min-w-full table-auto text-sm text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-red-100 bg-opacity-80">
@@ -107,32 +105,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($allPurchases as $purchase)
+                        <?php $__currentLoopData = $allPurchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 text-center">{{ $purchase->id }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->user->name ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->barang->supplier->name ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->price, 2, ',', '.') }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
-                                <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->total_amount, 2, ',', '.') }}</td>
-                                <td class="px-6 py-4 text-center capitalize">{{ $purchase->status }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->id); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->user->name ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->supplier->name ?? 'N/A'); ?></td>
+                                <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->price, 2, ',', '.')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
+                                <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->total_amount, 2, ',', '.')); ?></td>
+                                <td class="px-6 py-4 text-center capitalize"><?php echo e($purchase->status); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
-        @endif
-    @endif
+        <?php endif; ?>
+    <?php endif; ?>
 
     <!-- Tombol Kembali -->
     <div class="text-center mt-6">
-        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Back to Home</a>
+        <a href="<?php echo e(route('barangs.index')); ?>" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Back to Home</a>
     </div>
    
     <script>
-        window.userRole = "{{ auth()->user()->role }}";
+        window.userRole = "<?php echo e(auth()->user()->role); ?>";
         document.getElementById('searchForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             const searchValue = document.getElementById('searchInput').value;
@@ -143,7 +141,7 @@
                 params.delete('search');
             }
             try {
-                const response = await fetch(`{{ route('purchases.history') }}?${params.toString()}`, {
+                const response = await fetch(`<?php echo e(route('purchases.history')); ?>?${params.toString()}`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
                     }
@@ -228,4 +226,6 @@
         }
     </script>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\HP\laravel\Projek_RPL\resources\views/history/index.blade.php ENDPATH**/ ?>

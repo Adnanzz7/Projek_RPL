@@ -23,6 +23,25 @@ class AdminPurchaseController extends Controller
         }
     
         $purchases = $query->get();
+
+        if ($request->ajax()) {
+            // Return JSON data for AJAX requests
+            $data = $purchases->map(function ($purchase) {
+                return [
+                    'id' => $purchase->id,
+                    'buyer' => $purchase->user->name ?? 'N/A',
+                    'product' => $purchase->barang->nama_barang ?? 'N/A',
+                    'supplier' => $purchase->barang->supplier->name ?? 'N/A',
+                    'price' => number_format($purchase->price, 2, ',', '.'),
+                    'quantity' => $purchase->jumlah,
+                    'total' => number_format($purchase->total_amount, 2, ',', '.'),
+                    'status' => $purchase->status,
+                    'status_label' => ucfirst($purchase->status),
+                    'created_at' => $purchase->created_at->format('d-m-Y'),
+                ];
+            });
+            return response()->json($data);
+        }
     
         return view('admin.purchases-management', compact('purchases'));
     }      

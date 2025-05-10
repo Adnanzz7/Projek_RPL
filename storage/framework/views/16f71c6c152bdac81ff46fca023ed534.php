@@ -1,31 +1,32 @@
-@extends('layouts.app')
 
-@section('title', 'Purchases Management')
 
-@section('content')
+<?php $__env->startSection('title', 'Purchases Management'); ?>
+
+<?php $__env->startSection('content'); ?>
 <div class="container mx-auto px-4 py-8 max-w-7xl">
     <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Manajemen Pembelian Pengguna</h2>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <div class="mb-4 px-4 py-2 text-green-800 bg-green-100 rounded text-center">
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
         </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Filter Form -->
     <div class="mb-6 max-w-4xl mx-auto">
-        <form id="filterForm" method="GET" action="{{ route('admin.purchases.management') }}" class="flex flex-wrap items-center justify-center gap-4">
+        <form id="filterForm" method="GET" action="<?php echo e(route('admin.purchases.management')); ?>" class="flex flex-wrap items-center justify-center gap-4">
             <input type="text" name="buyer" id="buyerInput" placeholder="Cari nama pembeli"
-                value="{{ request('buyer') }}"
+                value="<?php echo e(request('buyer')); ?>"
                 class="px-4 py-2 rounded w-40 sm:w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
                 
             <div class="relative">
                 <select name="status" id="statusSelect"
                     class="appearance-none pl-10 pr-6 py-2 rounded-md bg-white border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
                     <option value="">Semua Status</option>
-                    <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                    <option value="completed" <?php echo e(request('status') == 'completed' ? 'selected' : ''); ?>>Completed</option>
+                    <option value="pending" <?php echo e(request('status') == 'pending' ? 'selected' : ''); ?>>Pending</option>
+                    <option value="cancelled" <?php echo e(request('status') == 'cancelled' ? 'selected' : ''); ?>>Cancelled</option>
                 </select>
                 <div class="absolute left-2 top-2.5 text-gray-400">
                     <i class="fas fa-filter"></i>
@@ -44,9 +45,9 @@
         </form>
     </div>  
 
-    @if($purchases->isEmpty())
+    <?php if($purchases->isEmpty()): ?>
         <p class="text-center text-lg text-gray-600">Tidak ada data pembelian untuk ditampilkan.</p>
-    @else
+    <?php else: ?>
         <div class="overflow-x-auto shadow rounded-lg bg-white bg-opacity-80 border">
             <table class="min-w-full table-auto text-sm text-gray-800">
                 <thead class="bg-blue-100 text-xs uppercase font-semibold">
@@ -64,39 +65,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($purchases as $purchase)
+                    <?php $__currentLoopData = $purchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-t hover:bg-gray-50 bg-opacity-80">
-                            <td class="px-4 py-3 text-center">{{ $purchase->id }}</td>
-                            <td class="px-4 py-3 text-center">{{ $purchase->user->name ?? 'N/A' }}</td>
-                            <td class="px-4 py-3 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
-                            <td class="px-4 py-3 text-center">{{ $purchase->barang->supplier->name ?? 'N/A' }}</td>
-                            <td class="px-4 py-3 text-center">Rp {{ number_format($purchase->price, 2, ',', '.') }}</td>
-                            <td class="px-4 py-3 text-center">{{ $purchase->jumlah }}</td>
-                            <td class="px-4 py-3 text-center">Rp {{ number_format($purchase->total_amount, 2, ',', '.') }}</td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->id); ?></td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->user->name ?? 'N/A'); ?></td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->barang->supplier->name ?? 'N/A'); ?></td>
+                            <td class="px-4 py-3 text-center">Rp <?php echo e(number_format($purchase->price, 2, ',', '.')); ?></td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->jumlah); ?></td>
+                            <td class="px-4 py-3 text-center">Rp <?php echo e(number_format($purchase->total_amount, 2, ',', '.')); ?></td>
                             <td class="px-4 py-3 text-center">
                                 <span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium
-                                    {{ $purchase->status === 'completed' ? 'bg-green-100 text-green-800' :
-                                    ($purchase->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
-                                    @if ($purchase->status === 'completed')
+                                    <?php echo e($purchase->status === 'completed' ? 'bg-green-100 text-green-800' :
+                                    ($purchase->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800')); ?>">
+                                    <?php if($purchase->status === 'completed'): ?>
                                         <i class="fas fa-check-circle text-green-600"></i>
-                                    @elseif ($purchase->status === 'pending')
+                                    <?php elseif($purchase->status === 'pending'): ?>
                                         <i class="fas fa-clock text-yellow-600"></i>
-                                    @else
+                                    <?php else: ?>
                                         <i class="fas fa-times-circle text-red-600"></i>
-                                    @endif
-                                    {{ ucfirst($purchase->status) }}
+                                    <?php endif; ?>
+                                    <?php echo e(ucfirst($purchase->status)); ?>
+
                                 </span>
                             </td>
 
-                            <td class="px-4 py-3 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
 
                             <td class="px-4 py-3 text-center">
-                                <form method="POST" action="{{ route('admin.purchase.updateStatus', $purchase->id) }}" class="flex items-center justify-center gap-2">
-                                    @csrf
+                                <form method="POST" action="<?php echo e(route('admin.purchase.updateStatus', $purchase->id)); ?>" class="flex items-center justify-center gap-2">
+                                    <?php echo csrf_field(); ?>
                                     <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer">
-                                        <option value="completed" {{ $purchase->status === 'completed' ? 'selected' : '' }}>Completed</option>
-                                        <option value="pending" {{ $purchase->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                        <option value="cancelled" {{ $purchase->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                        <option value="completed" <?php echo e($purchase->status === 'completed' ? 'selected' : ''); ?>>Completed</option>
+                                        <option value="pending" <?php echo e($purchase->status === 'pending' ? 'selected' : ''); ?>>Pending</option>
+                                        <option value="cancelled" <?php echo e($purchase->status === 'cancelled' ? 'selected' : ''); ?>>Cancelled</option>
                                     </select>
                                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
                                         Update
@@ -104,14 +106,14 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
         </div>
-    @endif
+    <?php endif; ?>
 
     <div class="text-center mt-6">
-        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">
+        <a href="<?php echo e(route('barangs.index')); ?>" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">
             Kembali ke Barang
         </a>
     </div>
@@ -190,7 +192,7 @@
                     <td class="px-4 py-3 text-center">${purchase.created_at}</td>
                     <td class="px-4 py-3 text-center">
                         <form method="POST" action="/admin/purchase/updateStatus/${purchase.id}" class="flex items-center justify-center gap-2">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                             <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer">
                                 <option value="completed" ${purchase.status === 'completed' ? 'selected' : ''}>Completed</option>
                                 <option value="pending" ${purchase.status === 'pending' ? 'selected' : ''}>Pending</option>
@@ -207,4 +209,5 @@
         }
     </script>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\HP\laravel\Projek_RPL\resources\views/admin/purchases-management.blade.php ENDPATH**/ ?>

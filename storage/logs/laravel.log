@@ -19455,3 +19455,324 @@
 #50 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
 #51 {main}
 "} 
+[2025-05-10 03:02:03] local.INFO: User role: admin  
+[2025-05-10 03:02:03] local.INFO: User ID: 2  
+[2025-05-10 03:02:03] local.INFO: Barang user ID: 3  
+[2025-05-10 03:16:42] local.INFO: User role: admin  
+[2025-05-10 03:16:42] local.INFO: User ID: 2  
+[2025-05-10 03:16:42] local.INFO: Barang user ID: 2  
+[2025-05-10 03:17:07] local.INFO: User role: admin  
+[2025-05-10 03:17:07] local.INFO: User ID: 2  
+[2025-05-10 03:17:07] local.INFO: Barang user ID: 2  
+[2025-05-10 03:17:18] local.INFO: User role: admin  
+[2025-05-10 03:17:18] local.INFO: User ID: 2  
+[2025-05-10 03:17:18] local.INFO: Barang user ID: 2  
+[2025-05-10 03:17:18] local.INFO: User role: admin  
+[2025-05-10 03:17:18] local.INFO: User ID: 2  
+[2025-05-10 03:17:18] local.INFO: Barang user ID: 2  
+[2025-05-10 03:18:43] local.INFO: User role: admin  
+[2025-05-10 03:18:43] local.INFO: User ID: 2  
+[2025-05-10 03:18:43] local.INFO: Barang user ID: 15  
+[2025-05-10 03:19:00] local.INFO: User role: admin  
+[2025-05-10 03:19:00] local.INFO: User ID: 2  
+[2025-05-10 03:19:00] local.INFO: Barang user ID: 15  
+[2025-05-10 03:19:08] local.INFO: User role: admin  
+[2025-05-10 03:19:08] local.INFO: User ID: 2  
+[2025-05-10 03:19:08] local.INFO: Barang user ID: 15  
+[2025-05-10 03:19:16] local.INFO: User role: admin  
+[2025-05-10 03:19:16] local.INFO: User ID: 2  
+[2025-05-10 03:19:16] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:14] local.INFO: User role: admin  
+[2025-05-10 03:20:14] local.INFO: User ID: 2  
+[2025-05-10 03:20:14] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:20] local.INFO: User role: admin  
+[2025-05-10 03:20:20] local.INFO: User ID: 2  
+[2025-05-10 03:20:20] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:27] local.INFO: User role: admin  
+[2025-05-10 03:20:27] local.INFO: User ID: 2  
+[2025-05-10 03:20:27] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:27] local.INFO: User role: admin  
+[2025-05-10 03:20:27] local.INFO: User ID: 2  
+[2025-05-10 03:20:27] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:35] local.INFO: User role: admin  
+[2025-05-10 03:20:35] local.INFO: User ID: 2  
+[2025-05-10 03:20:35] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:36] local.INFO: User role: admin  
+[2025-05-10 03:20:36] local.INFO: User ID: 2  
+[2025-05-10 03:20:36] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:51] local.INFO: User role: admin  
+[2025-05-10 03:20:51] local.INFO: User ID: 2  
+[2025-05-10 03:20:51] local.INFO: Barang user ID: 15  
+[2025-05-10 03:20:53] local.INFO: User role: admin  
+[2025-05-10 03:20:53] local.INFO: User ID: 2  
+[2025-05-10 03:20:53] local.INFO: Barang user ID: 15  
+[2025-05-10 03:21:21] local.INFO: User role: admin  
+[2025-05-10 03:21:21] local.INFO: User ID: 2  
+[2025-05-10 03:21:21] local.INFO: Barang user ID: 15  
+[2025-05-10 03:21:28] local.INFO: User role: admin  
+[2025-05-10 03:21:28] local.INFO: User ID: 2  
+[2025-05-10 03:21:28] local.INFO: Barang user ID: 15  
+[2025-05-10 03:21:49] local.INFO: User role: admin  
+[2025-05-10 03:21:49] local.INFO: User ID: 2  
+[2025-05-10 03:21:49] local.INFO: Barang user ID: 15  
+[2025-05-10 03:23:09] local.INFO: User role: admin  
+[2025-05-10 03:23:09] local.INFO: User ID: 2  
+[2025-05-10 03:23:09] local.INFO: Barang user ID: 15  
+[2025-05-10 03:23:15] local.INFO: User role: admin  
+[2025-05-10 03:23:15] local.INFO: User ID: 2  
+[2025-05-10 03:23:15] local.INFO: Barang user ID: 15  
+[2025-05-10 03:27:02] local.INFO: User role: admin  
+[2025-05-10 03:27:02] local.INFO: User ID: 2  
+[2025-05-10 03:27:02] local.INFO: Barang user ID: 15  
+[2025-05-10 03:33:17] local.INFO: User role: admin  
+[2025-05-10 03:33:17] local.INFO: User ID: 2  
+[2025-05-10 03:33:17] local.INFO: Barang user ID: 15  
+[2025-05-10 03:33:28] local.INFO: User role: admin  
+[2025-05-10 03:33:28] local.INFO: User ID: 2  
+[2025-05-10 03:33:28] local.INFO: Barang user ID: 15  
+[2025-05-10 03:33:28] local.INFO: User role: admin  
+[2025-05-10 03:33:28] local.INFO: User ID: 2  
+[2025-05-10 03:33:28] local.INFO: Barang user ID: 15  
+[2025-05-10 03:34:07] local.INFO: User role: admin  
+[2025-05-10 03:34:07] local.INFO: User ID: 2  
+[2025-05-10 03:34:07] local.INFO: Barang user ID: 15  
+[2025-05-10 03:34:08] local.INFO: User role: admin  
+[2025-05-10 03:34:08] local.INFO: User ID: 2  
+[2025-05-10 03:34:08] local.INFO: Barang user ID: 15  
+[2025-05-10 03:34:31] local.INFO: User role: admin  
+[2025-05-10 03:34:31] local.INFO: User ID: 2  
+[2025-05-10 03:34:31] local.INFO: Barang user ID: 15  
+[2025-05-10 03:34:46] local.INFO: User role: admin  
+[2025-05-10 03:34:46] local.INFO: User ID: 2  
+[2025-05-10 03:34:46] local.INFO: Barang user ID: 15  
+[2025-05-10 03:35:04] local.INFO: User role: admin  
+[2025-05-10 03:35:04] local.INFO: User ID: 2  
+[2025-05-10 03:35:04] local.INFO: Barang user ID: 15  
+[2025-05-10 03:35:04] local.INFO: User role: admin  
+[2025-05-10 03:35:04] local.INFO: User ID: 2  
+[2025-05-10 03:35:04] local.INFO: Barang user ID: 15  
+[2025-05-10 03:35:05] local.INFO: User role: admin  
+[2025-05-10 03:35:05] local.INFO: User ID: 2  
+[2025-05-10 03:35:05] local.INFO: Barang user ID: 15  
+[2025-05-10 03:35:06] local.INFO: User role: admin  
+[2025-05-10 03:35:06] local.INFO: User ID: 2  
+[2025-05-10 03:35:06] local.INFO: Barang user ID: 15  
+[2025-05-10 03:35:06] local.INFO: User role: admin  
+[2025-05-10 03:35:06] local.INFO: User ID: 2  
+[2025-05-10 03:35:06] local.INFO: Barang user ID: 15  
+[2025-05-10 03:39:04] local.INFO: User role: admin  
+[2025-05-10 03:39:04] local.INFO: User ID: 2  
+[2025-05-10 03:39:04] local.INFO: Barang user ID: 15  
+[2025-05-10 03:39:12] local.INFO: User role: admin  
+[2025-05-10 03:39:12] local.INFO: User ID: 2  
+[2025-05-10 03:39:12] local.INFO: Barang user ID: 15  
+[2025-05-10 03:39:52] local.INFO: User role: admin  
+[2025-05-10 03:39:52] local.INFO: User ID: 2  
+[2025-05-10 03:39:52] local.INFO: Barang user ID: 15  
+[2025-05-10 03:39:53] local.INFO: User role: admin  
+[2025-05-10 03:39:53] local.INFO: User ID: 2  
+[2025-05-10 03:39:53] local.INFO: Barang user ID: 15  
+[2025-05-10 03:42:28] local.INFO: User role: admin  
+[2025-05-10 03:42:28] local.INFO: User ID: 2  
+[2025-05-10 03:42:28] local.INFO: Barang user ID: 2  
+[2025-05-10 03:42:42] local.INFO: User role: admin  
+[2025-05-10 03:42:42] local.INFO: User ID: 2  
+[2025-05-10 03:42:42] local.INFO: Barang user ID: 2  
+[2025-05-10 03:43:43] local.INFO: User role: admin  
+[2025-05-10 03:43:43] local.INFO: User ID: 2  
+[2025-05-10 03:43:43] local.INFO: Barang user ID: 3  
+[2025-05-10 04:27:34] local.ERROR: syntax error, unexpected variable "$purchases" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected variable \"$purchases\" at C:\\Users\\HP\\laravel\\Projek_RPL\\app\\Http\\Controllers\\PurchaseHistoryController.php:107)
+[stacktrace]
+#0 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\HP\\\\lar...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Http\\\\Contro...')
+#2 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1117): is_a('App\\\\Http\\\\Contro...', 'Illuminate\\\\Rout...', true)
+#3 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1054): Illuminate\\Routing\\Route->controllerMiddleware()
+#4 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(820): Illuminate\\Routing\\Route->gatherMiddleware()
+#5 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#6 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#8 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\HP\\laravel\\Projek_RPL\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
+#35 {main}
+"} 
+[2025-05-10 04:28:16] local.ERROR: syntax error, unexpected variable "$purchases" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected variable \"$purchases\" at C:\\Users\\HP\\laravel\\Projek_RPL\\app\\Http\\Controllers\\PurchaseHistoryController.php:125)
+[stacktrace]
+#0 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\HP\\\\lar...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Http\\\\Contro...')
+#2 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1117): is_a('App\\\\Http\\\\Contro...', 'Illuminate\\\\Rout...', true)
+#3 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1054): Illuminate\\Routing\\Route->controllerMiddleware()
+#4 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(820): Illuminate\\Routing\\Route->gatherMiddleware()
+#5 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#6 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#8 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\HP\\laravel\\Projek_RPL\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
+#35 {main}
+"} 
+[2025-05-10 04:30:22] local.ERROR: Unclosed '[' does not match ')' {"exception":"[object] (ParseError(code: 0): Unclosed '[' does not match ')' at C:\\Users\\HP\\laravel\\Projek_RPL\\app\\Http\\Controllers\\PurchaseHistoryController.php:119)
+[stacktrace]
+#0 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\HP\\\\lar...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Http\\\\Contro...')
+#2 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1117): is_a('App\\\\Http\\\\Contro...', 'Illuminate\\\\Rout...', true)
+#3 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1054): Illuminate\\Routing\\Route->controllerMiddleware()
+#4 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(820): Illuminate\\Routing\\Route->gatherMiddleware()
+#5 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#6 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#8 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\HP\\laravel\\Projek_RPL\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
+#35 {main}
+"} 
+[2025-05-10 04:30:24] local.ERROR: Unclosed '[' does not match ')' {"exception":"[object] (ParseError(code: 0): Unclosed '[' does not match ')' at C:\\Users\\HP\\laravel\\Projek_RPL\\app\\Http\\Controllers\\PurchaseHistoryController.php:119)
+[stacktrace]
+#0 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\HP\\\\lar...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Http\\\\Contro...')
+#2 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1117): is_a('App\\\\Http\\\\Contro...', 'Illuminate\\\\Rout...', true)
+#3 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1054): Illuminate\\Routing\\Route->controllerMiddleware()
+#4 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(820): Illuminate\\Routing\\Route->gatherMiddleware()
+#5 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#6 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#8 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\HP\\laravel\\Projek_RPL\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
+#35 {main}
+"} 
+[2025-05-10 04:30:25] local.ERROR: Unclosed '[' does not match ')' {"exception":"[object] (ParseError(code: 0): Unclosed '[' does not match ')' at C:\\Users\\HP\\laravel\\Projek_RPL\\app\\Http\\Controllers\\PurchaseHistoryController.php:119)
+[stacktrace]
+#0 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\HP\\\\lar...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Http\\\\Contro...')
+#2 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1117): is_a('App\\\\Http\\\\Contro...', 'Illuminate\\\\Rout...', true)
+#3 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(1054): Illuminate\\Routing\\Route->controllerMiddleware()
+#4 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(820): Illuminate\\Routing\\Route->gatherMiddleware()
+#5 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#6 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#8 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php(19): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\HP\\laravel\\Projek_RPL\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\laravel\\Projek_RPL\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\HP\\\\lar...')
+#35 {main}
+"} 

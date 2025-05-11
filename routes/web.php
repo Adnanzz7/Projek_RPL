@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
@@ -12,15 +13,18 @@ use App\Http\Controllers\PurchaseHistoryController;
 
 Route::get('/', [BarangController::class, 'index'])->name('barangs.index');
 Route::get('/barangs/create', [BarangController::class, 'create'])->name('barangs.create');
-Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+# Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+});
+
+Route::resource('wishlist', WishlistController::class)->middleware('auth');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/purchase-history', [PurchaseHistoryController::class, 'index'])->name('history.index');
     Route::get('/purchase/history', [PurchaseHistoryController::class, 'history'])->name('purchases.history');
-});
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/purchases-management', [AdminPurchaseController::class, 'index'])
@@ -97,5 +101,14 @@ Route::middleware(['auth', 'role:admin,supplier'])->group(function () {
     Route::resource('barangs', BarangController::class);
     Route::get('/barangs/create', [BarangController::class, 'create'])->name('barangs.create');
 });
+
+Route::get('/suggestion', [FeedbackController::class, 'create'])->name('suggestion.create');
+Route::post('/suggestion', [FeedbackController::class, 'store'])->name('suggestion.store');
+Route::get('/suggestion-list', [FeedbackController::class, 'showSuggestions'])->name('suggestion-list.index');
+
+Route::resource('wishlist', WishlistController::class)->middleware('auth');
+Route::post('wishlist/add/{barangId}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('wishlist/store', [WishlistController::class, 'store'])->name('wishlist.store');
+Route::post('/wishlist/move-to-cart/{id}', [WishlistController::class, 'moveToCart'])->name('wishlist.moveToCart');
 
 require __DIR__ . '/auth.php';

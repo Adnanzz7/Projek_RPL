@@ -38,7 +38,7 @@
                         @foreach ($purchases as $purchase)
                             <tr class="border-b hover:bg-gray-50 bg-opacity-80 transition-colors">
                                 <td class="px-6 py-4 text-center">{{ $purchase->id }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
+                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d M Y') }}</td>
                                 <td class="px-6 py-4 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
                                 <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->price, 2, ',', '.') }}</td>
@@ -73,7 +73,7 @@
                         @foreach ($supplierPurchases as $purchase)
                             <tr class="border-b hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 text-center">{{ $purchase->id }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
+                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d M Y') }}</td>
                                 <td class="px-6 py-4 text-center">{{ $purchase->user->name ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 text-center">{{ $purchase->barang->nama_barang ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
@@ -117,7 +117,7 @@
                                 <td class="px-6 py-4 text-center">{{ $purchase->jumlah }}</td>
                                 <td class="px-6 py-4 text-center">Rp. {{ number_format($purchase->total_amount, 2, ',', '.') }}</td>
                                 <td class="px-6 py-4 text-center capitalize">{{ $purchase->status }}</td>
-                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d-m-Y') }}</td>
+                                <td class="px-6 py-4 text-center">{{ $purchase->created_at->format('d M Y') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -128,7 +128,7 @@
 
     <!-- Tombol Kembali -->
     <div class="text-center mt-6">
-        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Kembali Kke Beranda</a>
+        <a href="{{ route('barangs.index') }}" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Kembali ke Beranda</a>
     </div>
    
     <script>

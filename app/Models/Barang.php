@@ -35,7 +35,6 @@ class Barang extends Model
         return $hargaDenganJasaWeb; // Mengembalikan harga akhir setelah pajak dan jasa web
     }
     
-    // Di model Barang.php
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -46,7 +45,6 @@ class Barang extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Barang.php
     public function colors()
     {
         return $this->hasMany(Color::class);
@@ -55,5 +53,10 @@ class Barang extends Model
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

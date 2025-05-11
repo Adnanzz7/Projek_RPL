@@ -17,6 +17,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }    
     
+    public function product()
+    {
+        return $this->belongsTo(Barang::class, 'barang_id');
+    }
+
     protected $fillable = [
         'user_id', // tambahkan ini
         'total_amount', // atribut lain yang bisa diisi secara mass

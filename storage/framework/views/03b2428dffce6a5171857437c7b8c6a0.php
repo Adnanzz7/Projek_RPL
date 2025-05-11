@@ -36,7 +36,7 @@
                         <?php $__currentLoopData = $purchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b hover:bg-gray-50 bg-opacity-80 transition-colors">
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->id); ?></td>
-                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d M Y')); ?></td>
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
                                 <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->price, 2, ',', '.')); ?></td>
@@ -71,7 +71,7 @@
                         <?php $__currentLoopData = $supplierPurchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->id); ?></td>
-                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d M Y')); ?></td>
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->user->name ?? 'N/A'); ?></td>
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->barang->nama_barang ?? 'N/A'); ?></td>
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
@@ -115,7 +115,7 @@
                                 <td class="px-6 py-4 text-center"><?php echo e($purchase->jumlah); ?></td>
                                 <td class="px-6 py-4 text-center">Rp. <?php echo e(number_format($purchase->total_amount, 2, ',', '.')); ?></td>
                                 <td class="px-6 py-4 text-center capitalize"><?php echo e($purchase->status); ?></td>
-                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo e($purchase->created_at->format('d M Y')); ?></td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
@@ -126,7 +126,7 @@
 
     <!-- Tombol Kembali -->
     <div class="text-center mt-6">
-        <a href="<?php echo e(route('barangs.index')); ?>" class="inline-block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Back to Home</a>
+        <a href="<?php echo e(route('barangs.index')); ?>" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Kembali ke Beranda</a>
     </div>
    
     <script>

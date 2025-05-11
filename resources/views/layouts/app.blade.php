@@ -12,40 +12,60 @@
 </head>
 <body class="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('storage/bg.jpg') }}');">
     <nav class="bg-gray-800 py-4">
-        <div class="container mx-auto px-6 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <img src="{{ asset('storage/logo.png') }}" alt="PKK Market Logo" class="h-12 w-12 object-contain">
-                <a href="{{ route('barangs.index') }}" class="text-white text-2xl font-bold leading-tight">PKK Market</a>
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center space-x-3">
+                    <img src="{{ asset('storage/logo.png') }}" alt="PKK Market Logo" class="h-12 w-12 object-contain">
+                    <a href="{{ route('barangs.index') }}" class="text-white text-2xl font-bold leading-tight">PKK Market</a>
+                </div>
+            <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
             </div>
-                        
+
+            <form id="searchForm" method="GET" action="{{ route('barangs.index') }}" class="mb-4 md:mb-0 flex w-full md:w-auto">
+                <input type="text" id="searchInput" name="search" value="{{ request('search') }}"
+                    placeholder="Cari nama barang..."
+                    class="border px-4 py-2 rounded-l-md w-full md:w-64 focus:outline-none focus:ring focus:ring-indigo-500">
+                <button type="submit"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
             <!-- Navbar Content -->
-            <div class="flex items-center space-x-8">
+            <div id="navContent" class="hidden md:flex flex-col md:flex-row items-center space-x-0 md:space-x-8 w-full md:w-auto mt-4 md:mt-0">
                 @auth
-                <ul class="flex items-center space-x-8 list-none">
-                    <li class="nav-item relative right-10">
-                        <a href="{{ route('history.index') }}" class="nav-link flex items-center">
+                <ul class="flex flex-col md:flex-row items-center space-x-0 md:space-x-8 list-none w-full md:w-auto">
+                    <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
+                        <a href="{{ route('suggestion.create') }}" class="nav-link flex items-center justify-center md:justify-start">
+                            <i class="fas fa-comment-dots text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
+                        <a href="{{ route('history.index') }}" class="nav-link flex items-center justify-center md:justify-start">
                             <i class="fas fa-history text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
                         </a>
                     </li>
                     @auth
                     @if (Auth::user()->role === 'admin')
-                        <li class="nav-item relative right-10">
-                            <a href="{{ route('admin.purchases.management') }}" class="nav-link flex items-center">
+                        <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
+                            <a href="{{ route('admin.purchases.management') }}" class="nav-link flex items-center justify-center md:justify-start">
                                 <i class="fas fa-tasks text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
                             </a>
                         </li>
                     @endif
                     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supplier')
-                            <li class="nav-item relative right-10">
-                                <a href="{{ route('barangs.create') }}" class="nav-link flex items-center">
+                            <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
+                                <a href="{{ route('barangs.create') }}" class="nav-link flex items-center justify-center md:justify-start">
                                     <i class="fas fa-plus-circle text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
                                 </a>
                             </li>
                         @endif
                     @endauth
                     @if (Auth::user()->role === 'user')
-                    <li class="nav-item relative right-10">
-                        <a href="{{ route('cart.index') }}" class="nav-link flex items-center relative">
+                    <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
+                        <a href="{{ route('cart.index') }}" class="nav-link flex items-center relative justify-center md:justify-start">
                             <i class="fas fa-shopping-cart text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
                             @php
                                 $cartCount = session('cart.count', 0);
@@ -60,7 +80,7 @@
                     </li>                    
                     @endif
                 </ul>
-                <div class="relative right-10 z-60">
+                <div class="relative md:relative right-0 md:right-10 z-60 mt-2 md:mt-0 flex justify-center md:justify-start">
                     <button id="dropdownButton" class="flex items-center space-x-3 text-white hover:text-blue-400 focus:outline-none">
                         @if (Auth::user()->foto)
                         <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Photo"
@@ -70,7 +90,7 @@
                             alt="Default Photo" class="w-12 h-12 rounded-full object-cover">
                         @endif
                     </button>
-                    <ul id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded shadow-lg z-30">
+                    <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-gray-800 text-white rounded shadow-lg z-30">
                         <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
                             <i class="fas fa-user-circle"></i>⠀
                             <span>{{ Auth::user()->name }}: {{ auth()->user()->role }}</span>
@@ -79,6 +99,12 @@
                             <i class="fas fa-user"></i>
                             <a href="{{ route('profile.edit') }}">⠀Profile</a>
                         </li>
+                        @if (Auth::user()->role === 'user')
+                            <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
+                                <i class="fas fa-heart"></i>
+                                <a href="{{ route('wishlist.index') }}">⠀Lihat Wishlist</a>
+                            </li>
+                        @endif
                         <li>
                             <hr class="border-gray-600">
                         </li>
@@ -147,6 +173,62 @@
             if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.add('hidden');
             }
+        });
+        
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value;
+            fetch(`{{ route('barangs.index') }}?search=${encodeURIComponent(query)}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const barangs = data.barangs;
+                const container = document.getElementById('productGridContainer');
+                if (!container) return;
+                let html = '';
+                const categories = {
+                    'makanan': 'Makanan dan Minuman',
+                    'kerajinan': 'Seni dan Kerajinan'
+                };
+                for (const [key, categoryName] of Object.entries(categories)) {
+                    html += `<div class="flex flex-col items-center">
+                                <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg">${categoryName}</h2>
+                                <div class="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 mt-4 mb-12">`;
+                    barangs.filter(b => b.kategori_barang === key).forEach(barang => {
+                        html += `
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all">
+                                <div class="relative">
+                                    ${barang.foto_barang ? `<img src="/storage/${barang.foto_barang}" class="w-full h-48 object-cover" alt="${barang.nama_barang}"/>` : `<div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic">Tidak ada gambar</div>`}
+                                    <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm ${barang.jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500'}">
+                                        ${barang.jumlah_barang == 0 ? 'Habis' : 'Tersedia'}
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="text-lg font-bold text-gray-800">${barang.nama_barang}</h3>
+                                    <p class="text-pink-600 font-semibold">Rp ${Number(barang.harga_barang).toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                                    <p class="text-gray-500 text-sm">Sisa: ${barang.jumlah_barang}</p>
+                                </div>
+                            </div>`;
+                    });
+                    html += `</div></div>`;
+                }
+                container.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+            });
+        });
+    </script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const navContent = document.getElementById('navContent');
+
+        mobileMenuButton.addEventListener('click', () => {
+            navContent.classList.toggle('hidden');
         });
     </script>
 </body>

@@ -57,7 +57,9 @@ class CartController extends Controller
         $totalQuantity = array_sum(array_column($cart, 'quantity')); // Hitung jumlah total barang
         session()->put('cart.count', $totalQuantity);
     
-        return redirect()->back()->with('success', 'Barang berhasil ditambahkan ke keranjang!');
+        $quantity = $cart[$id]['quantity'] ?? 1;
+        $quantity = $cart[$id]['quantity'] ?? 1;
+        return redirect()->route('barangs.index')->with('success', "Barang berhasil ditambahkan ke keranjang. Jumlah: $quantity");
     }
     
     public function index()

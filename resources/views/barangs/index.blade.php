@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
-<header id="showcase" class="fixed top-0 left-0 w-full h-screen bg-gradient-to-br from-green-100 to-blue-200 z-50 flex flex-col justify-center items-center text-center px-4 transition-opacity duration-1000">
-    
+<header id="showcase" class="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-green-100 to-blue-200 z-50 flex flex-col justify-center items-center text-center px-4 transition-opacity duration-1000">   
     <!-- Logo -->
     <div class="absolute top-6 left-6 flex items-center space-x-3">
         <img src="{{ asset('storage/logo.png') }}" alt="PKK Market Logo" class="h-12 w-12 object-contain">
@@ -55,7 +54,7 @@
 </header>
 
 <!-- Running Text -->
-<div class="bg-center running-text text-black px-5 py-8 text-center text-xl font-bold whitespace-nowrap overflow-hidden relative mx-auto w-80">
+<div class="bg-center running-text text-black px-5 py-8 text-center text-xl font-bold whitespace-nowrap overflow-hidden relative mx-auto w-full max-w-xs sm:max-w-md md:max-w-lg">
     <span class="inline-block animate-scrollText">Jam Buka: 09.40 - 10.00 dan 12.30 - 13.00</span>
 </div>
 
@@ -65,6 +64,7 @@
     <div class="bg-green-100 text-green-800 p-4 rounded-md mb-4">{{ session('status') }}</div>
 @endif
 
+<div id="productGridContainer">
 <!-- Produk Grid -->
 @php
     $categories = [
@@ -74,54 +74,66 @@
 @endphp
 
 @foreach ($categories as $key => $categoryName)
-    <div class="flex flex-col items-center">
-        <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg">{{ $categoryName }}</h2>
-        <div class="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 mt-4 mb-12">
-        @foreach ($barangs->where('kategori_barang', $key) as $barang)
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all">
-                <div class="relative">
-                    @if ($barang->foto_barang)
-                        <img src="{{ Storage::url('public/' . $barang->foto_barang) }}" class="w-full h-48 object-cover" alt="{{ $barang->nama_barang }}"/>
-                        <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm {{ $barang->jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500' }}">
-                            {{ $barang->jumlah_barang == 0 ? 'Habis' : 'Tersedia' }}
-                        </div>
-                    @else
-                        <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic">Tidak ada gambar</div>
-                    @endif
-                </div>
-
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-800">{{ $barang->nama_barang }}</h3>
-                    <p class="text-pink-600 font-semibold">Rp {{ number_format($barang->harga_barang, 2, ',', '.') }}</p>
-                    <p class="text-gray-500 text-sm">Sisa: {{ $barang->jumlah_barang }}</p>
-                    <p class="text-gray-400 text-sm">Pengirim: {{ $barang->user->name }}</p>
-
-                    @auth
-                        @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id))
-                            <div class="flex justify-between items-center mt-4">
-                                <a href="{{ route('barangs.edit', $barang->id) }}" 
-                                    class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-105">
-                                    <i class="bi bi-pencil-square"></i>⠀Edit
-                                </a>
-                                
-                                @if (Auth::user()->role === 'admin')
-                                    <a href="{{ route('barangs.show', $barang->id) }}" 
-                                        class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-[#138496] text-[#17a2b8]">
-                                        <i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail
-                                    </a>
-                                @endif
-                                
-                                <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                        class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-105">
-                                        <i class="bi bi-trash"></i>⠀Delete
-                                    </button>
-                                </form>                                
+        <div class="flex flex-col items-center">
+            <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg">{{ $categoryName }}</h2>
+        <div id="productGrid" class="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-2 sm:px-4 mt-4 mb-12 justify-center">
+            @foreach ($barangs->where('kategori_barang', $key) as $barang)
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out cursor-pointer">
+                    <div class="relative">
+                        @if ($barang->foto_barang)
+                            <img src="{{ Storage::url('public/' . $barang->foto_barang) }}" class="w-full h-48 object-cover rounded-t-lg" alt="{{ $barang->nama_barang }}"/>
+                            <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm {{ $barang->jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500' }}">
+                                {{ $barang->jumlah_barang == 0 ? 'Habis' : 'Tersedia' }}
                             </div>
+                        @else
+                            <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic rounded-t-lg">Tidak ada gambar</div>
                         @endif
-                    @endauth            
+                    </div>
+
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $barang->nama_barang }}</h3>
+                        <p class="text-pink-600 font-semibold text-lg mb-1">Rp {{ number_format($barang->harga_barang, 2, ',', '.') }}</p>
+                        <p class="text-gray-600 text-sm mb-1">Sisa: {{ $barang->jumlah_barang }}</p>
+                        <p class="text-gray-500 text-sm italic">Pengirim: {{ $barang->user->name }}</p>
+
+                        @auth
+                            @if (Auth::user()->role === 'user')
+                                <div class="absolute right-2 top-[210px]">
+                                    <form action="{{ route('wishlist.add', $barang->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" 
+                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-110 shadow-none rounded px-3 py-1">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                            
+                            @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id))
+                                <div class="flex flex-col sm:flex-row justify-between items-center mt-4 space-y-2 sm:space-y-0 sm:space-x-4">
+                                    <a href="{{ route('barangs.edit', $barang->id) }}" 
+                                        class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-110 shadow-md rounded px-3 py-1">
+                                        <i class="bi bi-pencil-square"></i>⠀Edit
+                                    </a>
+                                    
+                                    @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('barangs.show', $barang->id) }}" 
+                                            class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-110 hover:text-[#138496] text-[#17a2b8] shadow-md">
+                                            <i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail
+                                        </a>
+                                    @endif
+                                    
+                                    <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" 
+                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-110 shadow-md rounded px-3 py-1">
+                                            <i class="bi bi-trash"></i>⠀Delete
+                                        </button>
+                                    </form>                                 
+                                </div>
+                            @endif
+                        @endauth            
 
                     @auth
                         @if (Auth::user()->role === 'user')
@@ -132,7 +144,7 @@
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
                                     \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta')
+                                    \Carbon\Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta')
                                 ));
                             @endphp
                             
@@ -159,13 +171,51 @@
                         @endif
                     @endauth
                 </div>
-            </div>
-        @endforeach
     </div>
 @endforeach
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productGrid = document.getElementById('productGrid');
+        const items = productGrid.children;
+        const maxItemsPerRow = 5;
+
+        function updateGridAlignment() {
+            // Reset justify-content
+            productGrid.style.justifyContent = 'center';
+
+            // Count items in the first row
+            let firstRowCount = 0;
+            let firstRowTop = null;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const rect = item.getBoundingClientRect();
+                if (firstRowTop === null) {
+                    firstRowTop = rect.top;
+                }
+                if (Math.abs(rect.top - firstRowTop) < 5) {
+                    firstRowCount++;
+                } else {
+                    break;
+                }
+            }
+
+            if (firstRowCount >= maxItemsPerRow) {
+                // Align first row to left
+                productGrid.style.justifyContent = 'flex-start';
+            }
+        }
+
+        updateGridAlignment();
+
+        window.addEventListener('resize', updateGridAlignment);
+    });
+</script>
+@endforeach
+</div>
 
 <!-- Tutorial Button -->
-<div class="tutorial-btn absolute top-24 mt-3 right-5">
+<div class="tutorial-btn absolute top-24 mt-3 right-5 sm:right-10 md:right-16">
     <a href="javascript:void(0)" id="tutorialModalTrigger" class="text-white bg-gradient-to-r from-blue-600 to-blue-400 hover:bg-gradient-to-r hover:from-blue-700 hover:to-blue-500 px-6 py-3 rounded-full shadow-lg text-lg font-bold tracking-wider transition duration-300 transform hover:scale-105">
         <i class="icon-class transition-transform duration-300 mr-2 fas fa-question-circle"></i> Tutorial
     </a>

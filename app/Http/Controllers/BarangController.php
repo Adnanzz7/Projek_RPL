@@ -13,10 +13,24 @@ use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::all();
-        ($barangs); // Untuk memastikan apakah data ada
+        $search = $request->input('search');
+
+        $barangs = Barang::query();
+
+        if ($search) {
+            $barangs->where('nama_barang', 'like', '%' . $search . '%');
+        }
+
+        $barangs = $barangs->get();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'barangs' => $barangs
+            ]);
+        }
+
         return view('barangs.index', compact('barangs'));
     }   
 

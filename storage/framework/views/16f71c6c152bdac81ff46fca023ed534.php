@@ -98,19 +98,16 @@
                                 </span>
                             </td>
 
-                            <td class="px-4 py-3 text-center"><?php echo e($purchase->created_at->format('d-m-Y')); ?></td>
+                            <td class="px-4 py-3 text-center"><?php echo e($purchase->created_at->format('d M Y')); ?></td>
 
                             <td class="px-4 py-3 text-center">
-                                <form method="POST" action="<?php echo e(route('admin.purchase.updateStatus', $purchase->id)); ?>" class="flex items-center justify-center gap-2">
+                                <form method="POST" action="<?php echo e(route('admin.purchase.updateStatus', $purchase->id)); ?>" class="flex items-center justify-center gap-2 status-update-form">
                                     <?php echo csrf_field(); ?>
-                                    <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer">
+                                    <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer custom-select-no-arrow text-center">
                                         <option value="completed" <?php echo e($purchase->status === 'completed' ? 'selected' : ''); ?>>Completed</option>
                                         <option value="pending" <?php echo e($purchase->status === 'pending' ? 'selected' : ''); ?>>Pending</option>
                                         <option value="cancelled" <?php echo e($purchase->status === 'cancelled' ? 'selected' : ''); ?>>Cancelled</option>
                                     </select>
-                                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
-                                        Update
-                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -205,6 +202,15 @@
                 }
             }
 
+            function formatDate(dateString) {
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const date = new Date(dateString);
+                const day = ("0" + date.getDate()).slice(-2);
+                const month = months[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day} ${month} ${year}`;
+            }
+
             function updateTable(purchases) {
                 const tbody = document.querySelector('table tbody');
                 tbody.innerHTML = '';
@@ -242,17 +248,16 @@
                                 ${purchase.status_label}
                             </span>
                         </td>
-                        <td class="px-4 py-3 text-center">${purchase.created_at}</td>
+                        <td class="px-4 py-3 text-center">${formatDate(purchase.created_at)}</td>
                         <td class="px-4 py-3 text-center">
-                                <form method="POST" action="<?php echo e(route('admin.purchase.updateStatus', $purchase->id)); ?>" class="flex items-center justify-center gap-2 status-update-form">
-                                    <?php echo csrf_field(); ?>
-                                    <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer no-arrow">
-                                        <option value="completed" <?php echo e($purchase->status === 'completed' ? 'selected' : ''); ?>>Completed</option>
-                                        <option value="pending" <?php echo e($purchase->status === 'pending' ? 'selected' : ''); ?>>Pending</option>
-                                        <option value="cancelled" <?php echo e($purchase->status === 'cancelled' ? 'selected' : ''); ?>>Cancelled</option>
-                                    </select>
-                                    <!-- Removed update button for automatic update on change -->
-                                </form>
+                            <form method="POST" action="/admin/purchase/${purchase.id}/update-status" class="flex items-center justify-center gap-2 status-update-form">
+                                <?php echo csrf_field(); ?>
+                                <select name="status" class="border rounded px-2 py-1 text-sm appearance-none bg-white cursor-pointer custom-select-no-arrow text-center">
+                                    <option value="completed" ${purchase.status === 'completed' ? 'selected' : ''}>Completed</option>
+                                    <option value="pending" ${purchase.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="cancelled" ${purchase.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                                </select>
+                            </form>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -261,9 +266,9 @@
         });
 
         // Add event listener for automatic status update on dropdown change
-        document.addEventListener('change', async (e) => {
-            if (e.target.matches('.status-update-form select')) {
-                const select = e.target;
+        document.querySelectorAll('.status-update-form select').forEach(select => {
+            select.addEventListener('change', async (e) => {
+                console.log('Status dropdown changed'); // Debug log
                 const form = select.closest('form');
                 const formData = new FormData(form);
                 const action = form.getAttribute('action');
@@ -279,16 +284,62 @@
                         body: formData,
                     });
 
-                    if (!response.ok) throw new Error('Network response was not ok');
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Network response was not ok:', errorText);
+                        throw new Error('Network response was not ok');
+                    }
 
-                    // Optionally, show a success message or update UI accordingly
+                    // Update the status cell UI after successful update
+                    const statusCell = form.closest('tr').querySelector('td:nth-child(8) span');
+                    if (statusCell) {
+                        const newStatus = select.value;
+                        let statusClass = '';
+                        let statusIcon = '';
+                        let statusLabel = '';
+
+                        if (newStatus === 'completed') {
+                            statusClass = 'bg-green-100 text-green-800';
+                            statusIcon = '<i class="fas fa-check-circle text-green-600"></i>';
+                            statusLabel = 'Completed';
+                        } else if (newStatus === 'pending') {
+                            statusClass = 'bg-yellow-100 text-yellow-800';
+                            statusIcon = '<i class="fas fa-clock text-yellow-600"></i>';
+                            statusLabel = 'Pending';
+                        } else if (newStatus === 'cancelled') {
+                            statusClass = 'bg-red-100 text-red-800';
+                            statusIcon = '<i class="fas fa-times-circle text-red-600"></i>';
+                            statusLabel = 'Cancelled';
+                        }
+
+                        statusCell.className = `inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${statusClass}`;
+                        statusCell.innerHTML = `${statusIcon} ${statusLabel}`;
+                    }
+
                     console.log('Status updated successfully');
                 } catch (error) {
                     console.error('Error updating status:', error);
                 }
-            }
+            });
         });
     </script>
+
+    <style>
+        /* Remove default arrow in select for Webkit browsers */
+        select.custom-select-no-arrow::-webkit-appearance {
+            none;
+        }
+        /* Remove default arrow in select for Firefox */
+        select.custom-select-no-arrow::-moz-appearance {
+            none;
+        }
+        /* Remove default arrow in select for IE */
+        select.custom-select-no-arrow {
+            -ms-appearance: none;
+            appearance: none;
+            background-image: none !important;
+        }
+    </style>
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\HP\laravel\Projek_RPL\resources\views/admin/purchases-management.blade.php ENDPATH**/ ?>

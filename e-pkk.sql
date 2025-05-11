@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 04, 2025 at 04:48 PM
+-- Generation Time: May 11, 2025 at 10:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.13
 
@@ -56,9 +56,9 @@ INSERT INTO `barangs` (`id`, `user_id`, `nama_barang`, `kategori_barang`, `harga
 (5, 2, 'Toples Rajut', 'kerajinan', 34500, 14, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-04 00:43:59', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
 (8, 4, 'Rajut Bunga Tulip', 'kerajinan', 26500, 2, 'images/Ow20D0M4OFBU04ZywGzPghxIlficKmkSMWLtlBCs.jpg', NULL, 'Tersedia dalam berbagai warna', '2024-12-07 05:58:01', '2025-05-01 18:07:01', 25000.00, 0.00, 2, 0, 0.00, 0.00, 0),
 (11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9855, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-04 00:12:28', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
-(13, 2, 'Dimsum', 'makanan', 9000, 20, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2024-12-18 18:28:21', 8000.00, 0.00, 20, 0, 0.00, 0.00, 0),
-(18, 15, 'Mie Ayam', 'makanan', 9000, 195, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-05-03 12:14:17', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
-(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-04 00:10:48', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
+(13, 2, 'Dimsum', 'makanan', 9000, 20, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2025-05-11 02:41:22', 8000.00, 0.00, 20, 0, 0.00, 0.00, 0),
+(18, 15, 'Mie Ayam', 'makanan', 9000, 189, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-05-11 02:44:10', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
+(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-11 00:50:16', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,14 @@ CREATE TABLE `cache` (
   `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('laravel_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1746843369),
+('laravel_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1746843369;', 1746843369);
 
 -- --------------------------------------------------------
 
@@ -166,7 +174,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2024_11_30_142634_add_stok_tersisa_to_barangs_table', 1),
 (13, '2024_12_07_063031_add_foto_to_users_table', 1),
 (14, '2024_12_08_062018_add_payment_method_to_orders_table', 2),
-(15, '2024_12_10_162856_create_purchases_table', 3);
+(15, '2024_12_10_162856_create_purchases_table', 3),
+(16, '2025_05_11_003326_create_feedback_table', 4),
+(17, '2025_05_11_177086_create_feedback_table', 5),
+(18, '2025_05_11_177085_create_feedback_table', 6),
+(19, '2025_05_11_020208_create_wishlists_table', 7);
 
 -- --------------------------------------------------------
 
@@ -177,11 +189,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `orders` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
-  `total_amount` decimal(10,2) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL DEFAULT '0.00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `payment_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `total_amount`, `created_at`, `updated_at`, `payment_method`) VALUES
+(1, 8, 10500.00, '2025-05-11 01:02:52', '2025-05-11 01:02:52', NULL),
+(2, 8, 28000.00, '2025-05-11 01:37:53', '2025-05-11 01:37:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -235,11 +255,36 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `user_id`, `barang_id`, `jumlah`, `price`, `total_amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 8, 11, 1, 31000.00, 31000.00, 'cancelled', '2025-05-03 11:35:22', '2025-05-04 07:35:38'),
-(2, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:39:37', '2025-05-03 11:39:37'),
-(3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-03 12:14:17'),
+(1, 8, 11, 1, 31000.00, 31000.00, 'cancelled', '2025-05-03 11:35:22', '2025-05-10 16:27:19'),
+(2, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-03 11:39:37', '2025-05-10 16:26:21'),
+(3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-10 16:34:59'),
 (4, 8, 11, 1, 31000.00, 31000.00, 'pending', '2025-05-04 00:12:28', '2025-05-04 00:12:28'),
-(5, 16, 5, 1, 36000.00, 36000.00, 'pending', '2025-05-04 00:43:59', '2025-05-04 00:43:59');
+(5, 16, 5, 1, 36000.00, 36000.00, 'pending', '2025-05-04 00:43:59', '2025-05-04 00:43:59'),
+(6, 6, 18, 3, 10500.00, 31500.00, 'completed', '2025-05-04 21:53:54', '2025-05-10 16:28:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sarans`
+--
+
+CREATE TABLE `sarans` (
+  `id` bigint UNSIGNED NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pesan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sarans`
+--
+
+INSERT INTO `sarans` (`id`, `nama`, `email`, `pesan`, `created_at`, `updated_at`, `user_id`) VALUES
+(1, 'Sigmas', 'sigma@gmail.com', 'xfhldgdfbgldfglgl;sk', '2025-05-10 18:45:49', '2025-05-10 18:45:49', NULL),
+(2, 'Timothy', 'fokuscrypto@gmail.com', 'Buat agar layout tidak berantakan di HP', '2025-05-11 02:29:43', '2025-05-11 02:29:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -261,7 +306,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('QbZ95htwbjnjF7fjxnzLkesCYwP8poe4tX7r9Fmq', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaEZKV1JjODZVZzlsZ2NBWnhYclZvWERUUjdiQ2xVNG9idmlhRW4zVyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wdXJjaGFzZS1oaXN0b3J5Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1746344730);
+('EKAdn5FBHMCcbiCmVGOqM6P4RaM2weZWMDBmlLu5', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUGVRZEJmODlqT2M1MVNFc3hmS3hZdTBSc0RQalk3ZDdSOGc1TFc2biI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXJ0Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODtzOjQ6ImNhcnQiO2E6MDp7fX0=', 1746956651);
 
 -- --------------------------------------------------------
 
@@ -325,6 +370,20 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `pa
 (14, 'Sigma Boy', 'sigma', 'sigma@gmail.com', NULL, '$2y$12$cM.xjJ2mGRZkQEWS9v22nOfWkFWcE/b3FYSZWXfT5BT7ssFlNxrUu', NULL, '2024-12-11 23:33:52', '2024-12-11 23:35:56', 'supplier', NULL, NULL, 'photos/1733985356_download (1).jpg', NULL),
 (15, 'Fariz', 'farizz', 'farizz@gmail.com', NULL, '$2y$12$1J2/dDEne5cvlrtVJnV6kOZa9lB4lFfWK0rMNvFS3pF9wgwA5bd6W', NULL, '2024-12-12 21:04:40', '2024-12-12 21:04:40', 'supplier', NULL, NULL, NULL, NULL),
 (16, 'userzey', 'userzey', 'userzey@gmail.com', NULL, '$2y$12$9AJJCpPgjUvD.IX3OW333OxgslrakH65pchXVBICiWZTlymxFXPtq', NULL, '2024-12-12 21:41:01', '2024-12-12 21:41:01', 'user', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `barang_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -404,6 +463,13 @@ ALTER TABLE `purchases`
   ADD KEY `barang_id` (`barang_id`);
 
 --
+-- Indexes for table `sarans`
+--
+ALTER TABLE `sarans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sarans_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -426,6 +492,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `wishlists_user_id_barang_id_unique` (`user_id`,`barang_id`),
+  ADD KEY `wishlists_barang_id_foreign` (`barang_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -453,13 +527,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_items`
@@ -471,7 +545,13 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `sarans`
+--
+ALTER TABLE `sarans`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaksis`
@@ -484,6 +564,12 @@ ALTER TABLE `transaksis`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -515,11 +601,24 @@ ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `sarans`
+--
+ALTER TABLE `sarans`
+  ADD CONSTRAINT `sarans_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `transaksis`
 --
 ALTER TABLE `transaksis`
   ADD CONSTRAINT `transaksis_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `transaksis_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD CONSTRAINT `wishlists_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlists_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

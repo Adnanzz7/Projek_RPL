@@ -14,7 +14,7 @@
             <div class="text-lg text-gray-700 mb-4">
                 <p>Atas Nama: <strong>{{ Auth::user()->name }}</strong></p>
                 <p>ID Pelanggan: <strong>{{ Auth::user()->id }}</strong></p>
-                <p>ID Pesanan: <strong>{{ $order['id'] ?? 'N/A' }}</strong></p>
+                <p>ID Pesanan: <strong>{{ $order->id ?? 'N/A' }}</strong></p>
             </div>
 
             <!-- Detail Pesanan -->
@@ -55,12 +55,12 @@
             <!-- Tombol di bagian kanan bawah dengan margin tambahan -->
             <div class="absolute bottom-5 right-5 flex gap-4 mt-8"> <!-- Menambahkan margin top (mt-8) -->
                 <!-- Tombol Download PDF -->
-                <a href="{{ route('cart.downloadPdf', ['id' => $cart->id ?? 0]) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:translate-y-1">
+                <a href="{{ route('cart.downloadPdf', ['id' => $order->id ?? 0]) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:translate-y-1">
                     Download PDF
                 </a>
                 
                 <!-- Tombol Selesai -->
-                <a href="{{ route('checkout.success') }}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:translate-y-1">
+                <a href="{{ route('cart.finish') }}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out hover:translate-y-1">
                     Selesai
                 </a>
             </div>            

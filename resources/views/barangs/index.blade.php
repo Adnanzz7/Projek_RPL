@@ -110,15 +110,15 @@
                             @endif
                             
                             @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id))
-                                <div class="flex flex-col sm:flex-row justify-between items-center mt-4 space-y-2 sm:space-y-0 sm:space-x-4">
+                                <div class="flex justify-between items-center mt-4">
                                     <a href="{{ route('barangs.edit', $barang->id) }}" 
-                                        class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-110 shadow-md rounded px-3 py-1">
+                                        class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-105">
                                         <i class="bi bi-pencil-square"></i>⠀Edit
                                     </a>
                                     
                                     @if (Auth::user()->role === 'admin')
                                         <a href="{{ route('barangs.show', $barang->id) }}" 
-                                            class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-110 hover:text-[#138496] text-[#17a2b8] shadow-md">
+                                            class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-[#138496] text-[#17a2b8]">
                                             <i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail
                                         </a>
                                     @endif
@@ -127,10 +127,10 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
-                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-110 shadow-md rounded px-3 py-1">
+                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-105">
                                             <i class="bi bi-trash"></i>⠀Delete
                                         </button>
-                                    </form>                                 
+                                    </form>                                
                                 </div>
                             @endif
                         @endauth            

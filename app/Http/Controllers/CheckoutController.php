@@ -34,22 +34,17 @@ class CheckoutController extends Controller
                 return redirect()->back()->with('error', 'Pilih metode pembayaran!');
         }
 
-        // Setelah pembayaran berhasil, arahkan ke halaman sukses atau konfirmasi
-        return redirect()->route('checkout.success')->with('success', 'Pembayaran berhasil diproses!');
+        return redirect()->route('cart.finish')->with('success', 'Pembayaran berhasil diproses!');
     }
 
     public function processCheckout(Request $request)
     {
-        // Logic to process the checkout, payment, or other actions.
-
-        // After successful checkout, redirect to success page
-        return redirect()->route('checkout.success');
+        return redirect()->route('cart.finish');
     }
 
-    // Metode untuk menampilkan halaman sukses
     public function success()
     {
-        return view('checkout.success');  // Pastikan Anda punya view 'checkout.success'
+        return view('cart.finish');
     }
 
     public function store(Request $request)

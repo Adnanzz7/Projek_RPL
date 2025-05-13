@@ -23,9 +23,8 @@ class Order extends Model
     }
 
     protected $fillable = [
-        'user_id', // tambahkan ini
-        'total_amount', // atribut lain yang bisa diisi secara mass
-        // tambahkan atribut lain jika perlu
+        'user_id',
+        'total_amount',
     ];
 }
 

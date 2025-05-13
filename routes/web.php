@@ -84,12 +84,14 @@ Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.u
 Route::post('/cart/checkout', [CartController::class, 'processCheckout'])->name('cart.checkout.process');
 Route::post('/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::post('/cart/selesai', [CartController::class, 'selesai'])->name('cart.selesai');
+Route::post('/cart/selesai', [CartController::class, 'selesai'])->name('cart.finish');
+Route::get('/cart/selesai', [CartController::class, 'selesai'])->name('cart.finish.get');
 Route::post('/cart/complete-checkout', [CartController::class, 'completeCheckout'])->name('cart.completeCheckout');
 Route::get('/cart/download-pdf', [CartController::class, 'downloadPdf'])->name('cart.downloadPdf');
 
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-Route::post('/pembayaran-berhasil/{orderId}', [CartController::class, 'pembayaranBerhasil'])->name('cart.success');
+Route::get('/pembayaran-berhasil/{orderId}', [CartController::class, 'success'])->name('cart.success');
+Route::get('/pembayaran-berhasil/{orderId}', [CartController::class, 'success'])->name('cart.success.get');
 Route::post('/cart/add/{id}', [CartController::class, 'showAddForm'])->name('cart.add.form');
 Route::get('/cart/add/{id}', [CartController::class, 'showAddForm'])->name('cart.add.form');
 Route::post('/cart/add', [CartController::class, 'addFromForm'])->name('cart.addFromForm');

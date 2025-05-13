@@ -99,7 +99,6 @@
     </div>
 </div>
 
-
 <style>
     .btn-payment, .btn-option {
         @apply px-6 py-2 text-white font-semibold rounded-lg transition-colors duration-300;

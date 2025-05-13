@@ -25,7 +25,6 @@ class AdminPurchaseController extends Controller
         $purchases = $query->get();
 
         if ($request->ajax()) {
-            // Return JSON data for AJAX requests
             $data = $purchases->map(function ($purchase) {
                 return [
                     'id' => $purchase->id,

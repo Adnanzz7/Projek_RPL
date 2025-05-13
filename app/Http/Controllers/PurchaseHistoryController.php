@@ -23,11 +23,9 @@ class PurchaseHistoryController extends Controller
         $user = Auth::user();
 
         if ($user->role === 'admin') {
-            // Admin sees all purchases
             $allPurchases = \App\Models\Purchase::with(['user', 'barang.supplier'])->get();
             return view('history.index', compact('allPurchases'));
         } elseif ($user->role === 'supplier') {
-            // Supplier sees purchases related to their barangs using whereHas with eager loading
             $supplierPurchases = \App\Models\Purchase::with(['user', 'barang'])
                 ->whereHas('barang', function ($query) use ($user) {
                     $query->where('user_id', $user->id);

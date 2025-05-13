@@ -19,7 +19,7 @@ class WishlistController extends Controller
 
         $barangs = Barang::all();
 
-        return view('wishlist.index', compact('wishlists', 'barangs'));
+        return view('barangs.wishlist', compact('wishlists', 'barangs'));
     }
 
     public function add($barangId)

@@ -86,8 +86,7 @@
                         <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Photo"
                             class="w-12 h-12 rounded-full object-cover">
                         @else
-                        <img src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
-                            alt="Default Photo" class="w-12 h-12 rounded-full object-cover">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=4f46e5&color=fff" alt="{{ Auth::user()->name }}" class="w-12 h-12 rounded-full">
                         @endif
                     </button>
                     <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-gray-800 text-white rounded shadow-lg z-30">

@@ -16,7 +16,11 @@ Route::get('/barangs/create', [BarangController::class, 'create'])->name('barang
 # Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::resource('wishlist', WishlistController::class)->middleware('auth');
@@ -88,7 +92,8 @@ Route::post('/cart/selesai', [CartController::class, 'selesai'])->name('cart.fin
 Route::get('/cart/selesai', [CartController::class, 'selesai'])->name('cart.finish.get');
 Route::post('/cart/complete-checkout', [CartController::class, 'completeCheckout'])->name('cart.completeCheckout');
 Route::get('/cart/download-pdf', [CartController::class, 'downloadPdf'])->name('cart.downloadPdf');
-
+Route::get('/cart/success/{orderId}', [CartController::class, 'success'])
+     ->name('cart.success');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/pembayaran-berhasil/{orderId}', [CartController::class, 'success'])->name('cart.success');
 Route::get('/pembayaran-berhasil/{orderId}', [CartController::class, 'success'])->name('cart.success.get');

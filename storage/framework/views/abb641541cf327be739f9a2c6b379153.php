@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Daftar Barang'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -95,7 +93,7 @@
                         <h3 class="text-lg font-bold text-gray-900 mb-2"><?php echo e($barang->nama_barang); ?></h3>
                         <p class="text-pink-600 font-semibold text-lg mb-1">Rp <?php echo e(number_format($barang->harga_barang, 2, ',', '.')); ?></p>
                         <p class="text-gray-600 text-sm mb-1">Sisa: <?php echo e($barang->jumlah_barang); ?></p>
-                        <p class="text-gray-500 text-sm italic">Pengirim: <?php echo e($barang->user->name); ?></p>
+                        <p class="text-gray-500 text-sm italic">Pengirim: <a href="<?php echo e(route('profile.show', $barang->user->id)); ?>" class="text-gray-500 hover:underline"><?php echo e($barang->user->name); ?></a></p>
 
                         <?php if(auth()->guard()->check()): ?>
                             <?php if(Auth::user()->role === 'user'): ?>
@@ -145,7 +143,7 @@
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
                                     \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta')
+                                    \Carbon\Carbon::createFromTime(22, 0, 0, 'Asia/Jakarta')
                                 ));
                             ?>
                             

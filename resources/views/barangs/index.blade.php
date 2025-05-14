@@ -94,7 +94,7 @@
                         <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $barang->nama_barang }}</h3>
                         <p class="text-pink-600 font-semibold text-lg mb-1">Rp {{ number_format($barang->harga_barang, 2, ',', '.') }}</p>
                         <p class="text-gray-600 text-sm mb-1">Sisa: {{ $barang->jumlah_barang }}</p>
-                        <p class="text-gray-500 text-sm italic">Pengirim: {{ $barang->user->name }}</p>
+                        <p class="text-gray-500 text-sm italic">Pengirim: <a href="{{ route('profile.show', $barang->user->id) }}" class="text-gray-500 hover:underline">{{ $barang->user->name }}</a></p>
 
                         @auth
                             @if (Auth::user()->role === 'user')
@@ -144,7 +144,7 @@
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
                                     \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(17, 0, 0, 'Asia/Jakarta')
+                                    \Carbon\Carbon::createFromTime(22, 0, 0, 'Asia/Jakarta')
                                 ));
                             @endphp
                             

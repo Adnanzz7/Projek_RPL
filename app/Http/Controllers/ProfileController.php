@@ -171,4 +171,33 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Display profile index with different views based on user role.
+     */
+    public function index()
+    {
+        $user = auth()->user();
+
+        if (in_array($user->role, ['admin', 'seller'])) {
+            // For admin or seller, show list of barangs (items)
+            $barangs = \App\Models\Barang::where('user_id', $user->id)->get();
+            return view('profile.index', compact('user', 'barangs'));
+        } else {
+            // For normal user, show simple profile info
+            return view('profile.index', compact('user'));
+        }
+    }
+
+    /**
+     * Display the specified user's profile.
+     */
+    public function show($id)
+    {
+        $user = \App\Models\User::with('barangs')->findOrFail($id);
+        $authUserId = auth()->id();
+        // Paginate barangs instead of loading all
+        $barangs = $user->barangs()->paginate(9);
+        return view('profile.show', compact('user', 'authUserId', 'barangs'));
+    }
 }

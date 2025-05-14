@@ -9,9 +9,12 @@
             <h2 class="text-4xl text-green-600 font-semibold mb-4">Pembayaran Berhasil!</h2>
             <p class="text-xl text-gray-700 mb-6">Terima kasih telah berbelanja dengan kami. Pembayaran Anda telah diproses.</p>
             <div class="text-center">
-                <a href="{{ route('barangs.index') }}" class="bg-green-500 text-white py-2 px-6 rounded-lg text-xl uppercase transition duration-300 ease-in-out transform hover:bg-green-600 hover:scale-105">
-                    Lanjut Belanja
-                </a>
+                <form method="POST" action="{{ route('cart.completeCheckout') }}">
+                    @csrf
+                    <button type="submit" class="bg-green-500 text-white py-2 px-6 rounded-lg text-xl uppercase transition duration-300 ease-in-out transform hover:bg-green-600 hover:scale-105">
+                        Lanjut Belanja
+                    </button>
+                </form>
             </div>
         </div>
     </div>

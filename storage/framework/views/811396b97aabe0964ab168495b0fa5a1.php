@@ -97,7 +97,7 @@
                         </li>
                         <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
                             <i class="fas fa-user"></i>
-                            <a href="<?php echo e(route('profile.edit')); ?>">⠀Profile</a>
+                            <a href="<?php echo e(route('profile.index')); ?>">⠀Profile</a>
                         </li>
                         <?php if(Auth::user()->role === 'user'): ?>
                             <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">

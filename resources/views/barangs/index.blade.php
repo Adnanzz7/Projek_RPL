@@ -82,8 +82,12 @@
                     <div class="relative">
                         @if ($barang->foto_barang)
                             <img src="{{ Storage::url('public/' . $barang->foto_barang) }}" class="w-full h-48 object-cover rounded-t-lg" alt="{{ $barang->nama_barang }}"/>
-                            <div class="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-sm {{ $barang->jumlah_barang == 0 ? 'bg-red-500' : 'bg-green-500' }}">
-                                {{ $barang->jumlah_barang == 0 ? 'Habis' : 'Tersedia' }}
+                            <div class="absolute top-2 left-1 px-2 py-1 rounded-full text-white text-sm">
+                                @if($barang->jumlah_barang > 0)
+                                    <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Tersedia</span>
+                                @else
+                                    <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">Habis</span>
+                                @endif
                             </div>
                         @else
                             <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic rounded-t-lg">Tidak ada gambar</div>
@@ -140,7 +144,7 @@
                             @php
                                 $currentTime = \Carbon\Carbon::now('Asia/Jakarta');
                                 $isTimeAllowed = ($currentTime->between(
-                                    \Carbon\Carbon::createFromTime(9, 40, 0, 'Asia/Jakarta'),
+                                    \Carbon\Carbon::createFromTime(9, 30, 0, 'Asia/Jakarta'),
                                     \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
                                 ) || $currentTime->between(
                                     \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),

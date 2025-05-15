@@ -9,6 +9,12 @@
             <i class="fas fa-shopping-cart text-blue-500"></i> Keranjang Belanja
         </h2>
 
+        <div class="flex justify-end mb-6">
+    <a href="{{ route('barangs.index') }}" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded font-semibold text-sm">
+        <i class="fas fa-plus mr-2"></i> Tambah Barang
+    </a>
+</div>
+
         @if (count($cartItems) > 0)
             <div class="divide-y">
                 @foreach ($cartItems as $id => $item)

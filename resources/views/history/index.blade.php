@@ -14,6 +14,10 @@
             <button type="submit" id="searchBtn"
                 class="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 transition duration-200"><i class="fas fa-search"></i>⠀Search</button>
         </form>
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="{{ route('history.exportPdf') }}" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200">Download PDF</a>
+            <a href="{{ route('history.exportExcel') }}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-200">Download Excel</a>
+        </div>
     </div>
 
     {{-- USER VIEW --}}

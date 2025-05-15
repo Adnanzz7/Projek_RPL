@@ -26,8 +26,11 @@ Route::middleware('auth')->group(function () {
 Route::resource('wishlist', WishlistController::class)->middleware('auth');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/purchase-history', [PurchaseHistoryController::class, 'index'])->name('history.index');
-    Route::get('/purchase/history', [PurchaseHistoryController::class, 'history'])->name('purchases.history');
+Route::get('/purchase-history', [PurchaseHistoryController::class, 'index'])->name('history.index');
+Route::get('/purchase/history', [PurchaseHistoryController::class, 'history'])->name('purchases.history');
+
+Route::get('/purchase-history/export-pdf', [PurchaseHistoryController::class, 'exportPdf'])->name('history.exportPdf');
+Route::get('/purchase-history/export-excel', [PurchaseHistoryController::class, 'exportExcel'])->name('history.exportExcel');
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -117,5 +120,7 @@ Route::resource('wishlist', WishlistController::class)->middleware('auth');
 Route::post('wishlist/add/{barangId}', [WishlistController::class, 'add'])->name('wishlist.add');
 Route::post('wishlist/store', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::post('/wishlist/move-to-cart/{id}', [WishlistController::class, 'moveToCart'])->name('wishlist.moveToCart');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('cart.success');
+
 
 require __DIR__ . '/auth.php';

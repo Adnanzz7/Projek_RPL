@@ -107,7 +107,7 @@
                     <label class="block font-medium text-gray-700">{{ __('Profile Photo') }}</label>
                     
                     <label for="foto" class="block mt-2 relative cursor-pointer w-24 h-24 overflow-hidden">
-                        <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg' }}" 
+                       <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}"
                             class="rounded-full w-full h-full object-cover transition-all duration-300 ease-in-out group-hover:brightness-75" 
                             alt="{{ $user->name }}">
                         

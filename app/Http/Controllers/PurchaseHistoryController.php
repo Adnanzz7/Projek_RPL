@@ -12,6 +12,10 @@ use App\Models\Purchase;
 use App\Models\Barang;
 use App\Models\User;
 
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PurchaseHistoryExport;
+
 class PurchaseHistoryController extends Controller
 {
     public function index()
@@ -37,6 +41,33 @@ class PurchaseHistoryController extends Controller
             $purchases = $user->purchases;
             return view('history.index', compact('purchases'));
         }
+    }
+
+    public function exportPdf()
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $purchases = \App\Models\Purchase::with(['user', 'barang.supplier'])->get();
+        } elseif ($user->role === 'supplier') {
+            $purchases = \App\Models\Purchase::with(['user', 'barang'])
+                ->whereHas('barang', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                })
+                ->get();
+        } else {
+            $purchases = $user->purchases;
+        }
+
+        $pdf = PDF::loadView('history.pdf', compact('purchases', 'user'));
+        return $pdf->download('purchase_history.pdf');
+    }
+
+    public function exportExcel()
+    {
+        $user = Auth::user();
+
+        return Excel::download(new PurchaseHistoryExport($user), 'purchase_history.xlsx');
     }
     
     public function store(Request $request)

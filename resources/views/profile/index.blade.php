@@ -27,8 +27,8 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
                 <div class="flex justify-center">
-                    <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg' }}" 
-                        alt="User Photo" class="w-36 h-36 rounded-full object-cover shadow-xl border-4 border-indigo-500">
+                    <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}" 
+                        alt="{{ $user->name }}" class="w-36 h-36 rounded-full object-cover shadow-xl border-4 border-indigo-500">
                 </div>
 
                 <div class="sm:col-span-2 space-y-6">

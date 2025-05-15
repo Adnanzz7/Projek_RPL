@@ -11,6 +11,7 @@
         "filament/filament": "^3.3",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "maatwebsite/excel": "^3.1",
         "mpdf/mpdf": "^8.2"
     },
     "require-dev": {

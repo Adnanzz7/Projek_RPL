@@ -65,157 +65,110 @@
 @endif
 
 <div id="productGridContainer">
-<!-- Produk Grid -->
-@php
-    $categories = [
-        'makanan' => 'Makanan dan Minuman',
-        'kerajinan' => 'Seni dan Kerajinan',
-    ];
-@endphp
+    @php
+        $categories = [
+            'makanan' => 'Makanan dan Minuman',
+            'kerajinan' => 'Seni dan Kerajinan',
+        ];
+    @endphp
 
-@foreach ($categories as $key => $categoryName)
-        <div class="flex flex-col items-center">
+    @foreach ($categories as $key => $categoryName)
+        <section class="flex flex-col items-center">
             <h2 class="text-2xl font-semibold mt-4 mb-6 px-6 py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg">{{ $categoryName }}</h2>
-        <div id="productGrid" class="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-2 sm:px-4 mt-4 mb-12 justify-center">
-            @foreach ($barangs->where('kategori_barang', $key) as $barang)
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out cursor-pointer">
-                    <div class="relative">
-                        @if ($barang->foto_barang)
-                            <img src="{{ Storage::url('public/' . $barang->foto_barang) }}" class="w-full h-48 object-cover rounded-t-lg" alt="{{ $barang->nama_barang }}"/>
-                            <div class="absolute top-2 left-1 px-2 py-1 rounded-full text-white text-sm">
-                                @if($barang->jumlah_barang > 0)
-                                    <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Tersedia</span>
-                                @else
-                                    <span class="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">Habis</span>
-                                @endif
-                            </div>
-                        @else
-                            <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic rounded-t-lg">Tidak ada gambar</div>
-                        @endif
-                    </div>
-
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $barang->nama_barang }}</h3>
-                        <p class="text-pink-600 font-semibold text-lg mb-1">Rp {{ number_format($barang->harga_barang, 2, ',', '.') }}</p>
-                        <p class="text-gray-600 text-sm mb-1">Sisa: {{ $barang->jumlah_barang }}</p>
-                        <p class="text-gray-500 text-sm italic">Pengirim: <a href="{{ route('profile.show', $barang->user->id) }}" class="text-gray-500 hover:underline">{{ $barang->user->name }}</a></p>
-
-                        @auth
-                            @if (Auth::user()->role === 'user')
-                                <div class="absolute right-2 top-[210px]">
-                                    <form action="{{ route('wishlist.add', $barang->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" 
-                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-110 shadow-none rounded px-3 py-1">
-                                            <i class="bi bi-heart"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                            
-                            @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'supplier' && Auth::id() === $barang->user_id))
-                                <div class="flex justify-between items-center mt-4">
-                                    <a href="{{ route('barangs.edit', $barang->id) }}" 
-                                        class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-105">
-                                        <i class="bi bi-pencil-square"></i>⠀Edit
-                                    </a>
-                                    
-                                    @if (Auth::user()->role === 'admin')
-                                        <a href="{{ route('barangs.show', $barang->id) }}" 
-                                            class="btn flex items-center justify-center px-4 py-2 text-base rounded-full cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-[#138496] text-[#17a2b8]">
-                                            <i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail
-                                        </a>
-                                    @endif
-                                    
-                                    <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                            class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-105">
-                                            <i class="bi bi-trash"></i>⠀Delete
-                                        </button>
-                                    </form>                                
-                                </div>
-                            @endif
-                        @endauth            
-
-                    @auth
-                        @if (Auth::user()->role === 'user')
-                            @php
-                                $currentTime = \Carbon\Carbon::now('Asia/Jakarta');
-                                $isTimeAllowed = ($currentTime->between(
-                                    \Carbon\Carbon::createFromTime(9, 30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta')
-                                ) || $currentTime->between(
-                                    \Carbon\Carbon::createFromTime(11,30, 0, 'Asia/Jakarta'),
-                                    \Carbon\Carbon::createFromTime(22, 0, 0, 'Asia/Jakarta')
-                                ));
-                            @endphp
-                            
-                            @if ($isTimeAllowed)
-                                <form action="{{ route('cart.add.form', $barang->id) }}" method="GET">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $barang->id }}">
-                                    <input type="hidden" name="name" value="{{ $barang->nama_barang }}">
-                                    <input type="hidden" name="price" value="{{ $barang->harga_barang }}">
-                                    <input type="hidden" name="jumlah_barang" value="{{ $barang->jumlah_barang }}">
-
-                                    <div class="flex justify-center mt-4">
-                                        <button type="submit" 
-                                            class="btn bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-transform duration-300 transform hover:scale-105">
-                                            Tambah
-                                        </button>
-                                    </div>                        
-                                </form>                        
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-4 gap-8 px-2 sm:px-4 mt-4 mb-12 items-center mx-auto max-w-5xl">
+                @foreach ($barangs->where('kategori_barang', $key) as $barang)
+                    <div class="relative bg-white border bg-opacity-80 rounded-2xl shadow-md overflow-hidden hover:shadow-lg hover:scale-105 transition-all duration-300 flex flex-col transform ease-in-out cursor-pointer">
+                        {{-- Image --}}
+                        <div class="relative">
+                            @if ($barang->foto_barang)
+                                <img src="{{ Storage::url($barang->foto_barang) }}" class="w-full h-48 object-cover" alt="{{ $barang->nama_barang }}">
                             @else
-                                <button type="button" class="btn flex items-center justify-center px-4 py-2 text-base rounded-lg cursor-pointer transition-transform duration-300 relative hover:scale-105 hover:text-white btn-disable" disabled>
-                                    <p class="text-red-500 text-sm font-bold text-center mt-2 bg-red-100 border border-red-500 rounded-md px-4 py-2">Hanya tersedia pada pukul 09:40-10:00 dan 12:30-13:00 WIB.</p>
-                                </button>
+                                <div class="w-full h-48 flex items-center justify-center bg-gray-200 text-gray-500 italic">Tidak ada gambar</div>
                             @endif
-                        @endif
-                    @endauth
-                </div>
-    </div>
-@endforeach
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const productGrid = document.getElementById('productGrid');
-        const items = productGrid.children;
-        const maxItemsPerRow = 5;
+                            <div class="absolute top-2 left-2">
+                                <span class="text-xs font-medium px-3 py-1 rounded-full 
+                                    {{ $barang->jumlah_barang > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                    {{ $barang->jumlah_barang > 0 ? 'Tersedia' : 'Habis' }}
+                                </span>
+                            </div>
+                        </div>
 
-        function updateGridAlignment() {
-            // Reset justify-content
-            productGrid.style.justifyContent = 'center';
+                        {{-- Details --}}
+                        <div class="p-4 flex flex-col justify-between flex-1">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2 truncate" title="{{ $barang->nama_barang ?? 'Produk tidak ditemukan' }}">
+                                {{ $barang->nama_barang ?? 'Produk tidak ditemukan' }}
+                            </h3>
+                            <p class="text-pink-600 font-semibold text-xl mb-1">Rp {{ number_format($barang->harga_barang ?? 0, 0, ',', '.') }}</p>
+                            <p class="text-gray-600 text-sm mb-1">Stok: {{ $barang->jumlah_barang ?? 0 }}</p>
+                            <p class="text-gray-500 text-sm mb-4">Pengirim: 
+                                <a href="{{ route('profile.show', $barang->user->id) }}" class="text-gray-500 hover:underline">
+                                    {{ $barang->user->name ?? '-' }}
+                                </a>
+                            </p>
 
-            // Count items in the first row
-            let firstRowCount = 0;
-            let firstRowTop = null;
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-                const rect = item.getBoundingClientRect();
-                if (firstRowTop === null) {
-                    firstRowTop = rect.top;
-                }
-                if (Math.abs(rect.top - firstRowTop) < 5) {
-                    firstRowCount++;
-                } else {
-                    break;
-                }
-            }
+                            @auth
+                                <div class="mt-4 flex justify-between text-sm">
+                                    @if (Auth::user()->role === 'admin' || Auth::id() === $barang->user_id)
+                                        <a href="{{ route('barangs.edit', $barang->id) }}" class="text-yellow-500 hover:text-yellow-600 transition-transform duration-300 relative hover:scale-105 cursor-pointer">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('barangs.show', $barang->id) }}" class="hover:text-[#138496] text-[#17a2b8] transition-transform duration-300 relative hover:scale-105 cursor-pointer">
+                                            <i class="bi bi-info-circle"></i> Detail
+                                        </a>
+                                        @endif
+                                        <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-600 transition-transform duration-300 relative hover:scale-105 cursor-pointer">
+                                                <i class="bi bi-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
 
-            if (firstRowCount >= maxItemsPerRow) {
-                // Align first row to left
-                productGrid.style.justifyContent = 'flex-start';
-            }
-        }
+                                @if (Auth::user()->role === 'user')
+                                    <div class="mt-4 flex justify-between items-center">
+                                        {{-- Wishlist --}}
+                                        <form action="{{ route('wishlist.toggle', $barang->id) }}" method="POST">
+                                            @csrf
+                                            @php
+                                                $inWishlist = Auth::user()->wishlist->contains($barang->id);
+                                            @endphp
+                                            <button type="submit" class="text-red-500 hover:scale-110 transition">
+                                                <i class="{{ $inWishlist ? 'bi bi-heart-fill' : 'bi bi-heart' }}"></i>
+                                            </button>
+                                        </form>
 
-        updateGridAlignment();
+                                        {{-- Add to Cart --}}
+                                        @php
+                                            $now = \Carbon\Carbon::now('Asia/Jakarta');
+                                            $open1 = \Carbon\Carbon::createFromTime(9, 30, 0, 'Asia/Jakarta');
+                                            $close1 = \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta');
+                                            $open2 = \Carbon\Carbon::createFromTime(11, 30, 0, 'Asia/Jakarta');
+                                            $close2 = \Carbon\Carbon::createFromTime(22, 0, 0, 'Asia/Jakarta');
+                                            $isTimeAllowed = $now->between($open1, $close1) || $now->between($open2, $close2);
+                                        @endphp
 
-        window.addEventListener('resize', updateGridAlignment);
-    });
-</script>
-@endforeach
+                                        @if ($isTimeAllowed)
+                                            <form action="{{ route('cart.add.form', $barang->id) }}" method="GET">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $barang->id }}">
+                                                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-md font-medium">
+                                                    <i class="bi bi-cart-plus"></i> Tambah
+                                                </button>
+                                            </form>
+                                        @else
+                                            <span class="text-red-500 text-xs font-semibold">Buka pukul 09:40-10:00 & 12:30-13:00</span>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endauth
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endforeach
 </div>
 
 <!-- Tutorial Button -->
@@ -243,7 +196,7 @@
 
                     @if(Auth::check())
                         @if(Auth::user()->role === 'admin')
-                            <li><strong>Detail:</strong> Cari barang yang ingin Anda lihat, lalu klik tombol <b><i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail</b>.</li>
+                            <li><strong>Detail Barang:</strong> Cari barang yang ingin Anda lihat, lalu klik tombol <b><i class="icon-class transition-transform duration-300 bi bi-info-circle"></i>⠀Detail</b>.</li>
                             <li><strong>Tambah Barang:</strong> Klik tombol <b><i class="fas fa-plus-circle"></i></b> di atas untuk menambahkan barang yang Anda inginkan.</li>
                             <li><strong>Edit Barang:</strong> Cari barang yang ingin Anda ubah, lalu klik tombol <b><i class="bi bi-pencil-square"></i>⠀Edit</b>.</li>
                             <li><strong>Hapus Barang:</strong> Cari barang yang ingin Anda hapus, klik tombol <b><i class="bi bi-trash"></i>⠀Delete</b>, lalu konfirmasi penghapusan.</li>
@@ -256,6 +209,8 @@
                             <li><strong>Keranjang:</strong> Klik tombol <b><i class="fas fa-shopping-cart"></i></b> di posisi atas untuk melihat barang yang telah Anda pilih.</li>
                             <li><strong>Checkout:</strong> Setelah memeriksa barang di keranjang, lanjutkan ke proses <b>Checkout</b>.</li>
                             <li><strong>Pembayaran:</strong> Pilih metode <b>QRIS</b> atau <b>Cash</b> untuk menyelesaikan pembayaran.</li>
+                            <li><strong>Riwayat:</strong> Klik tombol <b><i class="fas fa-history"></i></b> di posisi atas untuk melihat riwat pembelian.</li>
+                            <li><strong>Wishlist:</strong> Klik tombol <b><i class="bi bi-heart"></i></b> di masing -masing produk untuk menambah ke wishlist.</li>
                         @endif
                     @endif
                 </ol>
@@ -308,23 +263,20 @@
     const closeModal = document.getElementById('closeModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
-    // Function to show modal
     trigger.addEventListener('click', () => {
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modal.classList.add('opacity-100', 'pointer-events-auto');
         setTimeout(() => {
             modal.querySelector('.modal-dialog').classList.add('opacity-100', 'scale-100');
-        }, 50); // Slight delay to trigger smooth transition
+        }, 50);
     });
 
-    // Close the modal when close button is clicked
     closeModal.addEventListener('click', () => {
         modal.classList.remove('opacity-100', 'pointer-events-auto');
         modal.classList.add('opacity-0', 'pointer-events-none');
         modal.querySelector('.modal-dialog').classList.remove('opacity-100', 'scale-100');
     });
 
-    // Close the modal when clicking outside of it
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             modal.classList.remove('opacity-100', 'pointer-events-auto');
@@ -333,7 +285,6 @@
         }
     });
 
-    // Ensure close button is clickable
     closeModalBtn.addEventListener('click', () => {
         modal.classList.remove('opacity-100', 'pointer-events-auto');
         modal.classList.add('opacity-0', 'pointer-events-none');
@@ -345,27 +296,56 @@
         const showcase = document.getElementById('showcase');
         const target = document.getElementById('daftar-produk');
 
-        // Tambahkan kelas no-scroll saat showcase muncul
         document.body.classList.add('no-scroll');
 
         if (button && showcase && target) {
             button.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                // Fade out showcase
                 showcase.classList.add('fade-out');
-
-                // Setelah efek selesai, hilangkan elemen showcase dan izinkan scroll
                 setTimeout(() => {
-                    showcase.style.display = 'none'; // sembunyikan sepenuhnya
+                    showcase.style.display = 'none';
                     document.body.classList.remove('no-scroll');
                     target.scrollIntoView({ behavior: 'smooth' });
-                }, 1000); // sesuai durasi animasi CSS
+                }, 1000);
             });
         }
     });
-</script>
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const productGrid = document.getElementById('productGrid');
+        const items = productGrid.children;
+        const maxItemsPerRow = 5;
+
+        function updateGridAlignment() {
+            // Reset justify-content
+            productGrid.style.justifyContent = 'center';
+
+            // Count items in the first row
+            let firstRowCount = 0;
+            let firstRowTop = null;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const rect = item.getBoundingClientRect();
+                if (firstRowTop === null) {
+                    firstRowTop = rect.top;
+                }
+                if (Math.abs(rect.top - firstRowTop) < 5) {
+                    firstRowCount++;
+                } else {
+                    break;
+                }
+            }
+
+            if (firstRowCount >= maxItemsPerRow) {
+                productGrid.style.justifyContent = 'flex-start';
+            }
+        }
+
+        updateGridAlignment();
+
+        window.addEventListener('resize', updateGridAlignment);
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 @endsection

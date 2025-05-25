@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,10 @@
     <link href="/src/styles.css" rel="stylesheet">
     <link rel="public/favicon.ico" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body class="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('storage/bg.jpg') }}');">
-    <nav class="bg-gray-800 py-4">
+    <nav class="bg-indigo-700 py-4">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
             <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
                 <div class="flex items-center space-x-3">
@@ -23,7 +24,7 @@
             </button>
             </div>
 
-            <form id="searchForm" method="GET" action="{{ route('barangs.index') }}" class="mb-4 md:mb-0 flex w-full md:w-auto">
+            {{-- <form id="searchForm" method="GET" action="{{ route('barangs.index') }}" class="mb-4 md:mb-0 flex w-full md:w-auto">
                 <input type="text" id="searchInput" name="search" value="{{ request('search') }}"
                     placeholder="Cari nama barang..."
                     class="border px-4 py-2 rounded-l-md w-full md:w-64 focus:outline-none focus:ring focus:ring-indigo-500">
@@ -31,7 +32,7 @@
                     class="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 transition">
                     <i class="fas fa-search"></i>
                 </button>
-            </form>
+            </form> --}}
 
             <!-- Navbar Content -->
             <div id="navContent" class="hidden md:flex flex-col md:flex-row items-center space-x-0 md:space-x-8 w-full md:w-auto mt-4 md:mt-0">
@@ -39,26 +40,26 @@
                 <ul class="flex flex-col md:flex-row items-center space-x-0 md:space-x-8 list-none w-full md:w-auto">
                     <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                         <a href="{{ route('suggestion.create') }}" class="nav-link flex items-center justify-center md:justify-start">
-                            <i class="fas fa-comment-dots text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                            <i class="fas fa-comment-dots text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                         </a>
                     </li>
                     <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                         <a href="{{ route('history.index') }}" class="nav-link flex items-center justify-center md:justify-start">
-                            <i class="fas fa-history text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                            <i class="fas fa-history text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                         </a>
                     </li>
                     @auth
                     @if (Auth::user()->role === 'admin')
                         <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                             <a href="{{ route('admin.purchases.management') }}" class="nav-link flex items-center justify-center md:justify-start">
-                                <i class="fas fa-tasks text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                                <i class="fas fa-tasks text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                             </a>
                         </li>
                     @endif
                     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supplier')
                             <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                                 <a href="{{ route('barangs.create') }}" class="nav-link flex items-center justify-center md:justify-start">
-                                    <i class="fas fa-plus-circle text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                                    <i class="fas fa-plus-circle text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                                 </a>
                             </li>
                         @endif
@@ -66,7 +67,7 @@
                     @if (Auth::user()->role === 'user')
                     <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                         <a href="{{ route('cart.index') }}" class="nav-link flex items-center relative justify-center md:justify-start">
-                            <i class="fas fa-shopping-cart text-gray-500 text-2xl transition-all duration-300 transform hover:text-blue-500 hover:scale-110"></i>
+                            <i class="fas fa-shopping-cart text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                             @php
                                 $cartCount = session('cart.count', 0);
                                 $displayCount = $cartCount > 99 ? '99+' : ($cartCount > 0 ? $cartCount : null);
@@ -86,28 +87,28 @@
                         <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Photo"
                             class="w-12 h-12 rounded-full object-cover">
                         @else
-                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=4f46e5&color=fff" alt="{{ Auth::user()->name }}" class="w-12 h-12 rounded-full">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&size=128" alt="{{ Auth::user()->name }}" class="w-12 h-12 rounded-full">
                         @endif
                     </button>
-                    <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-gray-800 text-white rounded shadow-lg z-30">
-                        <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
+                    <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-indigo-700 text-white rounded shadow-lg z-30">
+                        <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
                             <i class="fas fa-user-circle"></i>⠀
-                            <span>{{ Auth::user()->name }}: {{ auth()->user()->role }}</span>
+                            <span>{{ Auth::user()->name }} • {{ auth()->user()->role }}</span>
                         </li>
-                        <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
+                        <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
                             <i class="fas fa-user"></i>
                             <a href="{{ route('profile.index') }}">⠀Profile</a>
                         </li>
                         @if (Auth::user()->role === 'user')
-                            <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
+                            <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
                                 <i class="fas fa-heart"></i>
                                 <a href="{{ route('wishlist.index') }}">⠀Lihat Wishlist</a>
                             </li>
                         @endif
                         <li>
-                            <hr class="border-gray-600">
+                            <hr class="border-indigo-600">
                         </li>
-                        <li class="px-4 py-2 hover:bg-gray-600 flex items-center space-x-2">
+                        <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
                             <i class="fas fa-sign-out-alt"></i>
                             <a href="{{ route('logout') }}" 
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">⠀Logout</a>
@@ -131,7 +132,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 mt-auto">
+    <footer class="bg-indigo-700 text-white py-6 mt-auto">
         <div class="container mx-auto text-center">
             <p class="text-sm">&copy; {{ date('Y') }} PKK Market. All rights reserved.</p>
             <div class="mt-4 flex justify-center space-x-4">

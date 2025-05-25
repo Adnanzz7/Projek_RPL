@@ -179,7 +179,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        if (in_array($user->role, ['admin', 'seller'])) {
+        if (in_array($user->role, ['admin', 'supplier'])) {
             // For admin or seller, show list of barangs (items)
             $barangs = \App\Models\Barang::where('user_id', $user->id)->get();
             return view('profile.index', compact('user', 'barangs'));

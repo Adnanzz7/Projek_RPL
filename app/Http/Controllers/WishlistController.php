@@ -97,6 +97,27 @@ class WishlistController extends Controller
         return redirect()->route('barangs.index')->with('success', "Item berhasil dipindahkan ke keranjang. Jumlah: $quantity");
     }
 
+    public function toggle($barangId)
+    {
+        $userId = auth()->id();
+
+        // Cek apakah sudah ada di wishlist
+        $existing = Wishlist::where('user_id', $userId)
+                            ->where('barang_id', $barangId)
+                            ->first();
+
+        if ($existing) {
+            $existing->delete();
+            return back()->with('success', 'Barang dihapus dari wishlist.');
+        } else {
+            Wishlist::create([
+                'user_id' => $userId,
+                'barang_id' => $barangId
+            ]);
+            return back()->with('success', 'Barang ditambahkan ke wishlist.');
+        }
+    }
+
     public function destroy($id)
     {
         $wishlist = Wishlist::where('id', $id)->where('user_id', Auth::id())->firstOrFail();

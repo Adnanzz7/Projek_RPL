@@ -40,26 +40,26 @@
                     <input type="number" name="harga_barang" id="harga_barang" 
                            class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
                            value="{{ old('harga_barang', $barang->harga_pokok + 1500) }}" required oninput="updateHarga(); updateHargaWeb();">
-                    <small class="text-sm text-gray-500">Harga sebelum retribusi</small>
+                    {{-- <small class="text-sm text-gray-500">Harga sebelum retribusi</small> --}}
                 </div>
 
                 <!-- Harga Setelah Retribusi -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="harga_dengan_retribusi" class="block text-lg font-semibold text-gray-700">Harga Setelah Retribusi</label>
                     <input type="text" id="harga_dengan_retribusi" 
                            class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm bg-gray-100 text-gray-600" 
                            readonly value="{{ old('harga_dengan_retribusi', $barang->harga_pokok + 2000) }}">
                     <small class="text-sm text-gray-500">Harga setelah retribusi (Rp. 1000)</small>
-                </div>
+                </div> --}}
 
                 <!-- Harga Setelah Jasa Web -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="harga_dengan_web" class="block text-lg font-semibold text-gray-700">Harga Setelah Jasa Web</label>
                     <input type="text" id="harga_dengan_web" 
                            class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm bg-gray-100 text-gray-600" 
                            readonly value="{{ old('harga_dengan_web', $barang->harga_pokok + 2500) }}">
-                    <small class="text-sm text-gray-500">Harga setelah jasa web (Rp. 2500)</small>
-                </div>
+                    <small class="text-sm text-gray-500">Harga setelah jasa web (Rp. 1500)</small>
+                </div> --}}
 
                 <!-- Jumlah Barang -->
                 <div class="mb-4">
@@ -123,19 +123,19 @@
 </div>
 
 <script>
-    function updateHarga() {
-        var hargaBarang = parseFloat(document.getElementById('harga_barang').value);
-        var retribusi = 1000;
-        var hargaDenganRetribusi = hargaBarang + retribusi;
-        document.getElementById('harga_dengan_retribusi').value = hargaDenganRetribusi.toFixed(0);
-    }
+    // function updateHarga() {
+    //     var hargaBarang = parseFloat(document.getElementById('harga_barang').value);
+    //     var retribusi = 1000;
+    //     var hargaDenganRetribusi = hargaBarang + retribusi;
+    //     document.getElementById('harga_dengan_retribusi').value = hargaDenganRetribusi.toFixed(0);
+    // }
 
-    function updateHargaWeb() {
-        var hargaDenganRetribusi = parseFloat(document.getElementById('harga_dengan_retribusi').value);
-        var jasaWeb = 500;
-        var hargaDenganJasaWeb = hargaDenganRetribusi + jasaWeb;
-        document.getElementById('harga_dengan_web').value = hargaDenganJasaWeb.toFixed(0);
-    }
+    // function updateHargaWeb() {
+    //     var hargaDenganRetribusi = parseFloat(document.getElementById('harga_dengan_retribusi').value);
+    //     var jasaWeb = 500;
+    //     var hargaDenganJasaWeb = hargaDenganRetribusi + jasaWeb;
+    //     document.getElementById('harga_dengan_web').value = hargaDenganJasaWeb.toFixed(0);
+    // }
 
     function validateForm() {
         var hargaBarang = parseFloat(document.getElementById('harga_barang').value);

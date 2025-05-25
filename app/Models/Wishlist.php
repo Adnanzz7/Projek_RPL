@@ -14,7 +14,6 @@ class Wishlist extends Model
         'barang_id',
     ];
 
-    // Relasi ke User
     public function user()
     {
         return $this->belongsTo(User::class);

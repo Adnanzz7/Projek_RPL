@@ -22,18 +22,14 @@ class Barang extends Model
         'user_id'
     ];
     
-    // Pastikan harga pokok dan jumlah barang terjual didefinisikan
-    // Di mana harga_pokok adalah biaya produksi atau pembelian barang
-    public function getHargaBarangAttribute($value)
-    {
-        // Menambahkan pajak Rp. 1000 jika ingin dihitung
-        $hargaDenganRetribusi = $value + 1000; // Harga barang + pajak
+    // public function getHargaBarangAttribute($value)
+    // {
+    //     $hargaDenganRetribusi = $value + 1000;
     
-        // Anda bisa menambahkan logika lain jika ada kebutuhan untuk menghitung biaya lain, seperti jasa web
-        $hargaDenganJasaWeb = $hargaDenganRetribusi + 500; // Harga setelah jasa web
+    //     $hargaDenganJasaWeb = $hargaDenganRetribusi + 500;
     
-        return $hargaDenganJasaWeb; // Mengembalikan harga akhir setelah pajak dan jasa web
-    }
+    //     return $hargaDenganJasaWeb;
+    // }
     
     public function user()
     {

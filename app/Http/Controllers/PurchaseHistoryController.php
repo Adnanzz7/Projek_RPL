@@ -37,7 +37,6 @@ class PurchaseHistoryController extends Controller
                 ->get();
             return view('history.index', compact('supplierPurchases'));
         } else {
-            // Normal user sees their own purchases
             $purchases = $user->purchases;
             return view('history.index', compact('purchases'));
         }
@@ -78,10 +77,10 @@ class PurchaseHistoryController extends Controller
         $purchase->product_name = $request->product_name;
         $purchase->price = $request->price;
         $purchase->total_amount = $request->price;
-        $purchase->status = 'completed';
+        $purchase->status = 'pending';
         $purchase->save();
     
-        return redirect()->route('history.index');
+        return redirect()->route('barangs.index');
     }
     
 
@@ -92,10 +91,10 @@ class PurchaseHistoryController extends Controller
         $purchase->product_name = $request->input('product_name');
         $purchase->price = $request->input('price');
         $purchase->total_amount = $request->input('total_amount');
-        $purchase->status = 'completed';
+        $purchase->status = 'pending';
         $purchase->save();
 
-        return redirect()->route('history.index');
+        return redirect()->route('barangs.index');
     }
 
     public function showSuccessPage()

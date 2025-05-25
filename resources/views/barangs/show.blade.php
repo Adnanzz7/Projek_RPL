@@ -51,18 +51,18 @@
                     <th class="text-left p-4 font-semibold text-gray-700"><i class="bi bi-graph-up mr-2 text-blue-500"></i> Total Harga Terjual</th>
                     <td class="p-4 text-gray-700">Rp.{{ number_format($totalHargaTerjual, 2, ',', '.') }}</td>
                 </tr>
-                <tr class="border-b border-gray-200">
+                {{-- <tr class="border-b border-gray-200">
                     <th class="text-left p-4 font-semibold text-gray-700"><i class="bi bi-wallet2 mr-2 text-blue-500"></i> Hasil Untuk Pengirim</th>
                     <td class="p-4 text-green-600 font-semibold">Rp.{{ number_format($totalHasilPengiriman, 2, ',', '.') }}</td>
-                </tr>
-                <tr class="border-b border-gray-200">
+                </tr> --}}
+                {{-- <tr class="border-b border-gray-200">
                     <th class="text-left p-4 font-semibold text-gray-700"><i class="bi bi-trophy mr-2 text-blue-500"></i> Keuntungan PKK</th>
                     <td class="p-4 text-green-600 font-semibold">Rp.{{ number_format($keuntunganPKK, 2, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <th class="text-left p-4 font-semibold text-gray-700"><i class="bi bi-plus-circle mr-2 text-blue-500"></i> Keuntungan RPL (500 per Barang)</th>
                     <td class="p-4 text-green-600 font-semibold">Rp.{{ number_format($jumlahBarangTerjual * 500, 2, ',', '.') }}</td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
         <div class="text-center mt-8">

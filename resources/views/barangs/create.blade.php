@@ -32,20 +32,20 @@
                 <div class="mb-4">
                     <label for="harga_barang" class="block text-lg font-semibold text-gray-700">Harga Barang</label>
                     <input type="number" name="harga_barang" id="harga_barang" class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('harga_barang') }}" required oninput="updateHarga()">
-                    <small class="text-sm text-gray-500">Belum termasuk retribusi sebesar Rp. 1000</small>
+                    {{-- <small class="text-sm text-gray-500">Belum termasuk retribusi sebesar Rp. 1000</small> --}}
                 </div>
 
                 <!-- Harga Setelah Retribusi -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="harga_dengan_retribusi" class="block text-lg font-semibold text-gray-700">Harga Setelah Retribusi</label>
                     <input type="text" id="harga_dengan_retribusi" class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm bg-gray-100 text-gray-600" readonly value="{{ old('harga_barang') }}">
-                </div>
+                </div> --}}
 
                 <!-- Harga Setelah Jasa Web -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="harga_dengan_web" class="block text-lg font-semibold text-gray-700">Harga Setelah Jasa Web</label>
                     <input type="text" id="harga_dengan_web" class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm bg-gray-100 text-gray-600" readonly value="{{ old('harga_barang') }}">
-                </div>
+                </div> --}}
 
                 <!-- Jumlah Barang -->
                 <div class="mb-4">
@@ -95,17 +95,17 @@
 </div>
 
 <script>
-    function updateHarga() {
-        var hargaBarang = document.getElementById('harga_barang').value;
-        var retribusi = 1000;  
-        var jasaWeb = 500;  
+    // function updateHarga() {
+    //     var hargaBarang = document.getElementById('harga_barang').value;
+    //     var retribusi = 1000;  
+    //     var jasaWeb = 500;  
         
-        var hargaDenganRetribusi = parseFloat(hargaBarang) + retribusi;
-        document.getElementById('harga_dengan_retribusi').value = hargaDenganRetribusi;
+    //     var hargaDenganRetribusi = parseFloat(hargaBarang) + retribusi;
+    //     document.getElementById('harga_dengan_retribusi').value = hargaDenganRetribusi;
 
-        var hargaDenganJasaWeb = hargaDenganRetribusi + jasaWeb;
-        document.getElementById('harga_dengan_web').value = hargaDenganJasaWeb;
-    }
+    //     var hargaDenganJasaWeb = hargaDenganRetribusi + jasaWeb;
+    //     document.getElementById('harga_dengan_web').value = hargaDenganJasaWeb;
+    // }
 
     function validateForm() {
         var hargaBarang = parseFloat(document.getElementById('harga_barang').value);

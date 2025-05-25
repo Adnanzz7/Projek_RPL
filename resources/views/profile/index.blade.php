@@ -1,76 +1,96 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
-@section('title', 'Profile')
-
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
-@endpush
+@section('title', 'Profil Pengguna')
 
 @section('content')
-<div class="py-12 min-h-screen">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10 space-y-8">
 
-        <div class="bg-white p-10 rounded-2xl shadow-lg border border-gray-200">
-            <header class="text-center mb-10">
-                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ __('Profile Information') }}</h2>
-                <p class="mt-4 text-lg text-gray-600">
-                    {{ __("Here is your profile information.") }}
-                </p>
-            </header>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
 
-            @if (session('success'))
-                <div class="mb-8 text-green-800 bg-green-100 border border-green-300 rounded-lg p-5 text-center font-semibold shadow-sm">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
-                <div class="flex justify-center">
-                    <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}" 
-                        alt="{{ $user->name }}" class="w-36 h-36 rounded-full object-cover shadow-xl border-4 border-indigo-500">
-                </div>
-
-                <div class="sm:col-span-2 space-y-6">
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Role') }}</h3>
-                        <p class="mt-1 text-xl font-semibold text-gray-900">{{ $user->role }}</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Display Name') }}</h3>
-                        <p class="mt-1 text-xl font-semibold text-gray-900">{{ $user->name }}</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Username') }}</h3>
-                        <p class="mt-1 text-xl font-semibold text-gray-900">{{ $user->username }}</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Email') }}</h3>
-                        <p class="mt-1 text-xl font-semibold text-gray-900">{{ $user->email }}</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Birth Date') }}</h3>
-                        <p class="mt-1 text-xl font-semibold text-gray-900">{{ $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->format('F j, Y') : '-' }}</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('About') }}</h3>
-                        <p class="mt-1 text-gray-700 whitespace-pre-line text-lg">{{ $user->about ?? '-' }}</p>
-                    </div>
-                </div>
+<div class="py-12 max-w-7xl mx-auto px-6 space-y-12">
+    {{-- Profile Header --}}
+    <section class="bg-white p-6 rounded-2xl shadow-md space-y-6">
+        <div class="flex flex-col lg:flex-row items-center gap-8">
+            <!-- Foto Profil -->
+            <div class="relative">
+                <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}"
+                    alt="{{ $user->name }}"
+                    class="w-40 h-40 rounded-full object-cover ring-4 ring-indigo-500 shadow-md">
             </div>
 
-            <div class="mt-12 text-center">
-                <a href="{{ route('profile.edit') }}" 
-                   class="inline-block px-10 py-4 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out">
-                    {{ __('Edit Profile') }}
-                </a>
+            <!-- Informasi User -->
+            <div class="flex-1 text-gray-800 w-full space-y-6">
+                <!-- Header Nama & Edit -->
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <!-- Tombol Edit -->
+                    @if (Auth::id() === $user->user_id)
+                    <div class="mt-2 md:mt-0">
+                        <a href="{{ route('profile.edit') }}"
+                            class="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white font-semibold rounded-full shadow hover:bg-indigo-700 transition">
+                            <i class="bi bi-pencil-square text-base"></i> Edit Profil
+                        </a>
+                    </div>
+                    @endif
+                </div>
+
+                <!-- Grid Informasi Detail -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm text-gray-700">
+                    <!-- Kolom Kiri -->
+                    <div class="space-y-3">
+                        <h2 class="text-4xl font-bold text-indigo-600">{{ $user->name }}</h2>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-shield-check text-indigo-500"></i>
+                            <span>{{ ucfirst($user->role) ?? '-' }}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600 gap-2">
+                            <i class="bi bi-person-circle text-indigo-500"></i>
+                            <span>{{ '@' . $user->username }}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600 gap-2">
+                            <i class="bi bi-envelope-fill text-indigo-500"></i>
+                            <span>{{ $user->email }}</span>
+                        </div>                        
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-cake2-fill text-indigo-500"></i>
+                            <span>{{ $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->translatedFormat('d F Y') : '-' }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan -->
+                    <div class="space-y-3 self-end">
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-telephone-fill text-indigo-500"></i>
+                            <span>{{ $user->phone ?? '-' }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-geo-alt-fill text-indigo-500"></i>
+                            <span>{{ $user->alamat ?? '-' }}</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="bi bi-info-circle-fill text-indigo-500 mt-0.5"></i>
+                            <span>{{ $user->about ?? '-' }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-calendar-check text-indigo-500"></i>
+                            <span>Bergabung sejak {{ $user->created_at->translatedFormat('d F Y') }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    {{-- Dashboard Section --}}
+    @if($user->role === 'user')
+        @include('profile.partials.user-dashboard')
+    @elseif($user->role === 'supplier')
+        @include('profile.partials.supplier-dashboard', ['barangs' => $user->barangs])
+    @elseif($user->role === 'admin')
+        @include('profile.partials.admin-dashboard')
+    @endif
+
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

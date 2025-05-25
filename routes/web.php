@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/user/password', [UserController::class, 'updatePassword'])->name('password.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -118,6 +119,7 @@ Route::get('/suggestion-list', [FeedbackController::class, 'showSuggestions'])->
 
 Route::resource('wishlist', WishlistController::class)->middleware('auth');
 Route::post('wishlist/add/{barangId}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('/wishlist/toggle/{barang}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 Route::post('wishlist/store', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::post('/wishlist/move-to-cart/{id}', [WishlistController::class, 'moveToCart'])->name('wishlist.moveToCart');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('cart.success');

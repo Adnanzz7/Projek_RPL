@@ -1,325 +1,288 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
-@section('title', 'Profile')
+@section('title', 'Edit Profil')
 
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
-@endpush
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
 
 @section('content')
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <!-- Profile Information Section -->
-        <div class="bg-white bg-opacity-80 p-6 rounded-xl shadow-md">
-            <header class="text-center mb-6">
-                <h2 class="text-xl font-semibold text-gray-800">{{ __('Profile Information') }}</h2>
-                <h5 class="mt-2 text-sm text-gray-600">{{ __("Update your account's profile information, email address, and profile picture.") }}</h5>
-            </header>
+<div class="max-w-4xl mx-auto mt-10">
+    <!-- Profile Card Header -->
+    <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
+        <div class="relative w-32 h-32 mb-4">
+            <!-- Foto Profil -->
+            <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}" 
+                alt="{{ $user->name }}"
+                class="w-full h-full object-cover rounded-full border-4 border-indigo-500">
 
-            <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-                @csrf
-            </form>
+            <!-- Tombol Kecil untuk Upload -->
+            <label for="foto"
+                class="absolute bottom-1 right-1 w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow cursor-pointer hover:bg-gray-100">
+                <i class="fas fa-camera text-indigo-600 text-sm"></i>
+            </label>
 
-            <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-6">
-                @csrf
-                @method('PATCH')
-                <input type="hidden" name="action" value="update_profile">
-
-                <!-- Role -->
-                <div>
-                    <label for="role" class="block font-medium text-gray-700">{{ __('Role') }}</label>
-                    <input id="role" name="role" type="text" 
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" 
-                        value="{{ $user->role }}" readonly />
-                    <input type="hidden" name="role" value="{{ $user->role }}">
-                    @error('role')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>        
-
-                <!-- Name -->
-                <div>
-                    <label for="name" class="block font-medium text-gray-700">{{ __('Display Name') }}</label>
-                    <input id="name" name="name" type="text" value="{{ old('name', $user->name) }}" required 
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    @error('name')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                    
-                <!-- Username -->
-                <div>
-                    <label for="username" class="block font-medium text-gray-700">{{ __('Username') }}</label>
-                    <input id="username" name="username" type="text" value="{{ old('username', $user->username) }}" required 
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    @error('username')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                    
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block font-medium text-gray-700">{{ __('Email') }}</label>
-                    <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required autocomplete="username" 
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    @error('email') 
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-
-                    @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                        <div class="mt-4 text-sm text-gray-600">
-                            <p>{{ __('Your email address is unverified.') }}</p>
-                            <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-                                @csrf
-                                <button type="submit" class="underline text-indigo-600 hover:text-indigo-900">
-                                    {{ __('Click here to re-send the verification email.') }}
-                                </button>
-                            </form>
-                            @if (session('status') === 'verification-link-sent')
-                                <p class="mt-2 text-sm text-green-600">{{ __('A new verification link has been sent to your email address.') }}</p>
-                            @endif
-                        </div>
-                    @endif
-                </div>
-
-                <!-- Birth Date -->
-                <div>
-                    <label for="birth_date" class="block font-medium text-gray-700">{{ __('Birth Date') }}</label>
-                    <input type="date" id="birth_date" name="birth_date" value="{{ old('birth_date', $user->birth_date) }}" 
-                        class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    @error('birth_date')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- About -->
-                <div>
-                    <label for="about" class="block font-medium text-gray-700">{{ __('About') }}</label>
-                    <textarea id="about" name="about" class="block w-full mt-1 pl-2.5 pt-1.5 border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-none" rows="4">{{ old('about', $user->about) }}</textarea>
-                    @error('about')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>    
-            
-                <!-- Photo -->
-                <div class="relative group">
-                    <label class="block font-medium text-gray-700">{{ __('Profile Photo') }}</label>
-                    
-                    <label for="foto" class="block mt-2 relative cursor-pointer w-24 h-24 overflow-hidden">
-                       <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}"
-                            class="rounded-full w-full h-full object-cover transition-all duration-300 ease-in-out group-hover:brightness-75" 
-                            alt="{{ $user->name }}">
-                        
-                        <div class="absolute inset-0 flex items-center justify-center rounded-full bg-gray-900 bg-opacity-50 opacity-0 pointer-events-none group-hover:opacity-90 transition-opacity duration-200 ease-in-out">
-                            <span class="text-white text-sm font-semibold opacity-60 group-hover:opacity-100 transition-opacity duration-100 ease-in-out">Ubah</span>
-                        </div>
-                    </label>
-                    
-                    <input type="file" name="foto" id="foto" accept="image/*" class="w-full hidden" />
-                    
-                    @error('foto')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-            
-                <!-- Save Button -->
-                <div class="flex justify-center mt-6">
-                    <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
-                        {{ __('Save') }}
-                    </button>
-                </div>
-
-                @if (session('status') === 'profile-updated')
-                    <p x-data="{ show: true }"
-                        x-show="show"
-                        x-transition
-                        x-init="setTimeout(() => show = false, 2000)"
-                        class="text-sm text-green-600 text-center mt-4">
-                        {{ __('Saved.') }}
-                    </p>
-                @endif
-            </form>
+            <!-- Input File Hidden -->
+            <input type="file" name="foto" id="foto" class="hidden" onchange="this.form.submit()" />
         </div>
 
-        <!-- Update Password Section -->
-        <div class="bg-white bg-opacity-80 p-6 rounded-xl shadow-md">
-            <header class="mb-6 text-center">
-                <h2 class="text-xl font-semibold text-gray-800">
-                    {{ __('Update Password') }}
-                </h2>
-                <p class="mt-2 text-sm text-gray-600">
-                    {{ __('Ensure your account is using a long, random password to stay secure.') }}
-                </p>
-            </header>
+        <h2 class="text-xl font-semibold text-gray-800">{{ $user->name }}</h2>
+        <p class="text-sm text-gray-500">{{ '@' . $user->username }} • {{ ucfirst($user->role) }}</p>
+    </div>
 
-            <form method="post" action="{{ route('password.update') }}" class="space-y-6">
-                @csrf
-                @method('PUT')
-
-                <!-- Current Password -->
-                <div class="relative">
-                    <label for="update_password_current_password" class="block font-medium text-gray-700">{{ __('Current Password') }}</label>
-                    <div class="relative mt-1">
-                        <input id="update_password_current_password" name="current_password" type="password" 
-                            class="w-full py-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" 
-                            autocomplete="current-password" />
-                        <button type="button" class="absolute right-3 top-3 text-gray-500 focus:outline-none" onclick="togglePassword('update_password_current_password')">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                    </div>
-                    @error('current_password', 'updatePassword')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- New Password -->
-                <div class="relative">
-                    <label for="update_password_password" class="block font-medium text-gray-700">{{ __('New Password') }}</label>
-                    <div class="relative mt-1">
-                        <input id="update_password_password" name="password" type="password" 
-                            class="w-full py-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" 
-                            autocomplete="new-password" />
-                        <button type="button" class="absolute right-3 top-3 text-gray-500 focus:outline-none" onclick="togglePassword('update_password_password')">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                    </div>
-                    @error('password', 'updatePassword')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="relative">
-                    <label for="update_password_password_confirmation" class="block font-medium text-gray-700">{{ __('Confirm Password') }}</label>
-                    <div class="relative mt-1">
-                        <input id="update_password_password_confirmation" name="password_confirmation" type="password" 
-                            class="w-full py-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" 
-                            autocomplete="new-password" />
-                        <button type="button" class="absolute right-3 top-3 text-gray-500 focus:outline-none" onclick="togglePassword('update_password_password_confirmation')">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                    </div>
-                    @error('password_confirmation', 'updatePassword')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Save Button -->
-                <div class="flex justify-center mt-6">
-                    <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
-                        {{ __('Save') }}
-                    </button>
-                </div>
-
-                @if (session('status') === 'password-updated')
-                    <p x-data="{ show: true }" x-show="show" x-transition
-                        x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600 text-center mt-4">
-                        {{ __('Saved.') }}
-                    </p>
-                @endif
-            </form>
+    <!-- Tab Navigation -->
+    <div class="mt-8 bg-white shadow rounded-xl">
+        <div class="border-b border-gray-200 px-6 py-4">
+            <nav class="flex space-x-4">
+                <button data-tab-button="profile"class="text-gray-600 hover:text-indigo-600 font-semibold">Informasi Profil</button>
+                <button data-tab-button="password" class="text-gray-600 hover:text-indigo-600 font-semibold">Ubah Password</button>
+                <button data-tab-button="delete" class="text-gray-600 hover:text-red-600 font-semibold">Hapus Akun</button>
+            </nav>
         </div>
 
-        <!-- Delete Account Section -->
-        <div class="bg-white bg-opacity-80 p-6 rounded-xl shadow-md">
-            <header class="mb-6 text-center">
-                <h2 class="text-xl font-semibold text-gray-800">
-                    {{ __('Delete Account') }}
-                </h2>
-                <p class="mt-2 text-sm text-gray-600">
-                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-                </p>
-            </header>
+        <div class="p-6 relative z-10">
+            <!-- Profile Form -->
+            <div data-tab-content="profile">
+                <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    @method('PATCH')
+                    <input type="hidden" name="action" value="update_profile">
 
-            <div class="text-center mt-6">
-                <button x-data="{}"
-                    class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
-                    x-on:click="$dispatch('open-modal', 'confirm-user-deletion')">
-                    {{ __('Delete Account') }}
-                </button>
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                        <input id="name" name="name" type="text" value="{{ old('name', $user->name) }}" required
+                               class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                        <input id="username" name="username" type="text" value="{{ old('username', $user->username) }}" required
+                               class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+
+                    <div>
+                        <label for="email" class="block font-medium text-gray-700">{{ __('Email') }}</label>
+                        <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required autocomplete="username" 
+                           class="text-black mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+
+                        @error('email') 
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+
+                        @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+                            <div class="mt-4 text-sm text-gray-600">
+                                <p>{{ __('Alamat email Anda belum diverifikasi.') }}</p>
+                                <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+                                    @csrf
+                                    <button type="submit" class="underline text-indigo-600 hover:text-indigo-900">
+                                        {{ __('Klik di sini untuk mengirim ulang email verifikasi.') }}
+                                    </button>
+                                </form>
+                                @if (session('status') === 'verification-link-sent')
+                                    <p class="mt-2 text-sm text-green-600">
+                                        {{ __('Link verifikasi baru telah dikirim ke alamat email Anda.') }}
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+
+                    <div>
+                        <label for="birth_date" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
+                        <input id="birth_date" name="birth_date" type="date" value="{{ old('birth_date', $user->birth_date) }}"
+                               class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+
+                    <div>
+                        <label for="about" class="block text-sm font-medium text-gray-700">Tentang Saya</label>
+                        <textarea id="about" name="about" rows="3"
+                                  class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-none">{{ old('about', $user->about) }}</textarea>
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button type="submit"
+                                class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <div x-data="{ show: false }" 
-                 x-show="show" 
-                 x-on:open-modal.window="show = true"
-                 x-on:close-modal.window="show = false"
-                 x-transition
-                 class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50">
-                <div class="fixed inset-0 transform transition-all" x-on:click="$dispatch('close')">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
+            <!-- Change Password -->
+            <div data-tab-content="password" class="hidden">
+                <form method="post" action="{{ route('password.update') }}" class="space-y-4">
+                    @csrf
+                    @method('PUT')
 
-                <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:max-w-lg sm:mx-auto" 
-                     x-show="show"
-                     x-transition:enter="ease-out duration-300"
-                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                     x-transition:leave="ease-in duration-200"
-                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                    <form method="post" action="{{ route('profile.destroy') }}" class="p-6 space-y-6">
-                        @csrf
-                        @method('delete')
-
-                        <h2 class="text-lg font-medium text-gray-900 text-center">
-                            {{ __('Are you sure you want to delete your account?') }}
-                        </h2>
-
-                        <p class="mt-2 text-sm text-gray-600 text-center">
-                            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-                        </p>
-
-                        <div class="mt-6">
-                            <label for="password" class="sr-only">{{ __('Password') }}</label>
-
-                            <input id="password" name="password" type="password" 
-                                   class="block w-full sm:w-3/4 mx-auto border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                                   placeholder="{{ __('Password') }}">
-
-                            @error('password', 'userDeletion')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="flex justify-center gap-4 mt-6">
-                            <button type="button" x-on:click="$dispatch('close')"
-                                class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
-                                {{ __('Cancel') }}
-                            </button>
-
-                            <button type="submit"
-                                class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
-                                {{ __('Delete Account') }}
+                    <div>
+                        <label for="current_password" class="block text-sm font-medium text-gray-700">Password Saat Ini</label>
+                        <div class="relative">
+                            <input id="current_password" name="current_password" type="password"
+                                class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
+                            <button type="button" 
+                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                                    onclick="togglePasswordVisibility('current_password')">
+                                <i class="bi bi-eye" id="icon-current_password"></i>
                             </button>
                         </div>
-                    </form>
-                </div>
+                        @error('current_password') 
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password Baru</label>
+                        <div class="relative">
+                            <input id="password" name="password" type="password"
+                                class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
+                            <button type="button" 
+                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                                    onclick="togglePasswordVisibility('password')">
+                                <i class="bi bi-eye" id="icon-password"></i>
+                            </button>
+                        </div>
+                        @error('password')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+                        <div class="relative">
+                            <input id="password_confirmation" name="password_confirmation" type="password"
+                                class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
+                            <button type="button" 
+                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                                    onclick="togglePasswordVisibility('password_confirmation')">
+                                <i class="bi bi-eye" id="icon-password_confirmation"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button type="submit"
+                                class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300">
+                            Ubah Password
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Delete Account -->
+            <div data-tab-content="delete" class="hidden">
+                <form method="post" action="{{ route('profile.destroy') }}" class="space-y-4">
+                    @csrf
+                    @method('DELETE')
+
+                    <h4 class="text-base text-gray-600">
+                        Setelah akun Anda dihapus, semua data akan dihapus secara permanen. Harap masukkan password Anda untuk melanjutkan.
+                    </h4>
+
+                    <div>
+                        <label for="delete_password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="delete_password" name="password" type="password"
+                            class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-red-500 focus:border-red-500" />
+                        
+                        @error('password', 'userDeletion')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button type="submit"
+                                class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:ring focus:ring-red-300">
+                            Hapus Akun
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Back to Home -->
+    <div class="text-center mt-6">
+        <a href="{{ route('barangs.index') }}"
+           class="inline-flex items-center px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700">
+            <i class="bi bi-house-door mr-2"></i> Kembali ke Beranda
+        </a>
+    </div>
 </div>
 
-<!-- Back to Home Button -->
-<div class="text-center mt-1 mb-6">
-    <a href="{{ route('barangs.index') }}" 
-       class="inline-flex items-center px-8 py-3 text-white text-sm font-medium bg-blue-700 hover:bg-blue-800 rounded-full shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1">
-        <i class="bi bi-house-door mr-2"></i> Back to Home
-    </a>
-</div>
-
+@push('scripts')
 <script>
-    function togglePassword(id) {
-        const input = document.getElementById(id);
-        const icon = input.nextElementSibling.querySelector('i');
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll("[data-tab-button]");
+        const tabContents = document.querySelectorAll("[data-tab-content]");
 
+        tabButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const target = button.getAttribute("data-tab-button");
+
+                tabButtons.forEach(btn => btn.classList.remove("text-indigo-600", "font-semibold", "text-red-600"));
+                button.classList.add(target === "delete" ? "text-red-600" : "text-indigo-600", "font-semibold");
+
+                tabContents.forEach(content => {
+                    content.classList.add("hidden");
+                });
+
+                document.querySelector(`[data-tab-content="${target}"]`).classList.remove("hidden");
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const defaultTab = document.querySelector('[data-tab-button="profile"]');
+        defaultTab.classList.add('text-indigo-600');
+    });
+
+    function togglePasswordVisibility(inputId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById('icon-' + inputId);
         if (input.type === "password") {
             input.type = "text";
-            icon.classList.replace("bi-eye", "bi-eye-slash");
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
         } else {
             input.type = "password";
-            icon.classList.replace("bi-eye-slash", "bi-eye");
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll("[data-tab-button]");
+        const tabContents = document.querySelectorAll("[data-tab-content]");
+
+        tabButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const target = button.getAttribute("data-tab-button");
+
+                tabButtons.forEach(btn => btn.classList.remove("text-indigo-600", "font-semibold", "text-red-600"));
+                button.classList.add(target === "delete" ? "text-red-600" : "text-indigo-600", "font-semibold");
+
+                tabContents.forEach(content => {
+                    content.classList.add("hidden");
+                });
+
+                document.querySelector(`[data-tab-content="${target}"]`).classList.remove("hidden");
+            });
+        });
+
+        const defaultTab = document.querySelector('[data-tab-button="profile"]');
+        defaultTab.classList.add('text-indigo-600');
+    });
+
+    // Jika ada error di tab password, otomatis switch ke tab password
+    @if ($errors->has('current_password') || $errors->has('password') || $errors->has('password_confirmation'))
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll("[data-tab-button]");
+            tabButtons.forEach(button => {
+                if(button.getAttribute("data-tab-button") === 'password') {
+                    button.click();
+                }
+            });
+        });
+    @endif
 </script>
+@endpush
 @endsection

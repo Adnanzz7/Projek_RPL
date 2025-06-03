@@ -82,13 +82,19 @@
                     @endif
                 </ul>
                 <div class="relative md:relative right-0 md:right-10 z-60 mt-2 md:mt-0 flex justify-center md:justify-start">
-                    <button id="dropdownButton" class="flex items-center space-x-3 text-white hover:text-blue-400 focus:outline-none">
-                        @if (Auth::user()->foto)
-                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Photo"
-                            class="w-12 h-12 rounded-full object-cover">
-                        @else
-                            <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&size=128" alt="{{ Auth::user()->name }}" class="w-12 h-12 rounded-full">
-                        @endif
+                    <button id="dropdownButton"
+                        class="relative flex items-center space-x-3 text-white hover:text-blue-400 focus:outline-none group">
+                        <div class="relative w-12 h-12">
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-200 z-0"></div>
+                            @if (Auth::user()->foto)
+                                <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Photo"
+                                    class="w-12 h-12 rounded-full object-cover relative z-10">
+                            @else
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=random&size=128"
+                                    alt="{{ Auth::user()->name }}"
+                                    class="w-12 h-12 rounded-full relative z-10">
+                            @endif
+                        </div>
                     </button>
                     <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-indigo-700 text-white rounded shadow-lg z-30">
                         <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">

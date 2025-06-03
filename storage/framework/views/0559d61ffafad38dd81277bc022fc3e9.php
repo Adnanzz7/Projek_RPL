@@ -81,9 +81,6 @@
                             <h3 class="text-xl font-semibold text-gray-800 truncate"><?php echo e($barang->nama_barang ?? 'Produk tidak ditemukan'); ?></h3>
                             <p class="text-pink-600 font-semibold mt-1">Rp <?php echo e(number_format($barang->harga_barang ?? 0, 0, ',', '.')); ?></p>
                             <p class="text-sm text-gray-500 mt-1">Stok: <?php echo e($barang->jumlah_barang); ?></p>
-                            <p class="text-sm text-gray-400">Pengirim: 
-                                <a href="<?php echo e(route('profile.show', $barang->user->id)); ?>" class="hover:underline"><?php echo e($barang->user->name ?? '-'); ?></a>
-                            </p>
 
                             <?php if(auth()->guard()->check()): ?>
                                 <div class="mt-4 flex justify-between text-sm">

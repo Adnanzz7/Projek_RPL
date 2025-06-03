@@ -1,136 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register | PKK Market</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('{{ asset('storage/bg.jpg') }}')">
-    <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg max-w-lg w-full text-center">
-        <div class="w-36 h-36 mx-auto mb-6">
-            <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
+    <div class="bg-white shadow-xl rounded-2xl max-w-5xl w-full p-10 md:flex md:items-start">
+        <!-- Left Side -->
+        <div class="hidden md:block md:w-1/2 pr-8">
+            <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="w-12 mb-6">
+            <h1 class="text-3xl font-medium mb-2">Selamat Datang</h1>
+            <p class="text-sm text-gray-600">Buat akun untuk mulai berbelanja.</p>
         </div>
-        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Create an Account</h2>
-        <p class="text-sm text-gray-600 mb-6">Please register to create a new account</p>
 
-        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-4">
-            @csrf
+        <!-- Right Side -->
+        <div class="md:w-1/2 w-full">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-4">
+                @csrf
 
-            <!-- Display Name -->
-            <div>
-                <label for="name" class="block text-left font-medium text-gray-700">Display Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" value="{{ old('name') }}" required
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="text" name="name" placeholder="Full Name" value="{{ old('name') }}" required
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
                 @error('name')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Username -->
-            <div>
-                <label for="username" class="block text-left font-medium text-gray-700">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" value="{{ old('username') }}" required
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
                 @error('username')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Email -->
-            <div>
-                <label for="email" class="block text-left font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" required
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
                 @error('email')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Password -->
-            <div class="relative mb-6">
-                <label for="password" class="block text-left font-medium text-gray-700 mb-1">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10">
-                <button type="button" id="togglePassword" class="absolute bottom-3 right-0 pr-3 flex items-center text-gray-500">
-                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                </button>
+                <div class="relative">
+                    <input type="password" name="password" id="password" placeholder="Password" required
+                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
+                    <button type="button"
+                            class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+                            onclick="togglePasswordVisibility('password')">
+                        <i class="bi bi-eye" id="icon-password"></i>
+                    </button>
+                </div>
                 @error('password')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Confirm Password -->
-            <div class="relative mb-6">
-                <label for="password_confirmation" class="block text-left font-medium text-gray-700 mb-1">Confirm Password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm your password" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10">
-                <button type="button" id="togglePasswordConfirm" class="absolute bottom-3 right-0 pr-3 flex items-center text-gray-500">
-                    <svg id="eyeIconConfirm" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                </button>
+                <div class="relative">
+                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required
+                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
+                    <button type="button"
+                            class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+                            onclick="togglePasswordVisibility('password_confirmation')">
+                        <i class="bi bi-eye" id="icon-password_confirmation"></i>
+                    </button>
+                </div>
                 @error('password_confirmation')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Role -->
-            <div>
-                <label for="role" class="block text-left font-medium text-gray-700">Role</label>
-                <select id="role" name="role" required
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none bg-white bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27 fill=%27currentColor%27%3e%3cpath fill-rule=%27evenodd%27 d=%27M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z%27 clip-rule=%27evenodd%27 /%3e%3c/svg%3e')] bg-no-repeat bg-right bg-[length:1.5em_1.5em]">
+                <select name="role" required
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900">
                     <option value="" disabled {{ old('role') ? '' : 'selected' }}>Select Role</option>
                     <option value="user" {{ old('role') === 'user' ? 'selected' : '' }}>User</option>
                     <option value="supplier" {{ old('role') === 'supplier' ? 'selected' : '' }}>Supplier</option>
                     <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                 </select>
                 @error('role')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
 
-            <!-- Registration Code -->
-            <div>
-                <label for="kode_pendaftaran" class="block text-left font-medium text-gray-700">Registration Code</label>
-                <input type="text" id="kode_pendaftaran" name="kode_pendaftaran" placeholder="Enter registration code" required
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="text" name="kode_pendaftaran" placeholder="Registration Code" required
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
                 @error('kode_pendaftaran')<span class="text-red-600 text-sm">{{ $message }}</span>@enderror
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">Register</button>
-        </form>
-
-        <div class="mt-4">
-            <p class="text-sm text-gray-600">Already have an account? 
-                <a href="{{ route('login') }}" class="text-indigo-600 font-medium">Log in</a>
-            </p>
+                
+                <div class="flex justify-end items-center mt-6">
+                    <button type="button"
+                        onclick="window.location.href='{{ route('login') }}'"
+                        class="text-blue-600 text-sm font-medium px-6 py-2 hover:bg-blue-50 bg-opacity-0 rounded-full border-none border-blue-600">
+                        Log in
+                    </button>
+                    <button type="submit"
+                        class="ml-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-6 py-2 rounded-full">
+                        Register
+                    </button>
+                </div>                 
+            </form>
         </div>
     </div>
 
+    <!-- Toggle Password Script -->
     <script>
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        const eyeIcon = document.querySelector('#eyeIcon');
+        function togglePasswordVisibility(id) {
+            const input = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
 
-        const togglePasswordConfirm = document.querySelector('#togglePasswordConfirm');
-        const passwordConfirm = document.querySelector('#password_confirmation');
-        const eyeIconConfirm = document.querySelector('#eyeIconConfirm');
-
-        togglePassword.addEventListener('click', function () {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-
-            if (type === 'password') {
-                eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
             } else {
-                eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.223-3.434m1.766-1.766A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a10.05 10.05 0 01-4.457 5.072M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />';
+                input.type = "password";
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
             }
-        });
-
-        togglePasswordConfirm.addEventListener('click', function () {
-            const type = passwordConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordConfirm.setAttribute('type', type);
-
-            if (type === 'password') {
-                eyeIconConfirm.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
-            } else {
-                eyeIconConfirm.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.223-3.434m1.766-1.766A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a10.05 10.05 0 01-4.457 5.072M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />';
-            }
-        });
+        }
     </script>
 </body>
 </html>

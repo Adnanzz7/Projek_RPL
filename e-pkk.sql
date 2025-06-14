@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 11, 2025 at 10:13 AM
+-- Generation Time: Jun 14, 2025 at 07:52 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.13
 
@@ -53,12 +53,12 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`id`, `user_id`, `nama_barang`, `kategori_barang`, `harga_barang`, `jumlah_barang`, `foto_barang`, `total`, `keterangan_barang`, `created_at`, `updated_at`, `harga_pokok`, `keuntungan_per_unit`, `jumlah_barang_awal`, `jumlah_terjual`, `total_harga_terjual`, `keuntungan`, `stok_tersisa`) VALUES
-(5, 2, 'Toples Rajut', 'kerajinan', 34500, 14, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-04 00:43:59', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
-(8, 4, 'Rajut Bunga Tulip', 'kerajinan', 26500, 2, 'images/Ow20D0M4OFBU04ZywGzPghxIlficKmkSMWLtlBCs.jpg', NULL, 'Tersedia dalam berbagai warna', '2024-12-07 05:58:01', '2025-05-01 18:07:01', 25000.00, 0.00, 2, 0, 0.00, 0.00, 0),
-(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9855, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-04 00:12:28', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
-(13, 2, 'Dimsum', 'makanan', 9000, 20, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2025-05-11 02:41:22', 8000.00, 0.00, 20, 0, 0.00, 0.00, 0),
-(18, 15, 'Mie Ayam', 'makanan', 9000, 189, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-05-11 02:44:10', 8000.00, 0.00, 200, 0, 0.00, 0.00, 0),
-(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-05-11 00:50:16', 7500.00, 0.00, 20, 0, 0.00, 0.00, 0);
+(5, 2, 'Toples Rajut', 'kerajinan', 34500, 12, 'images/pCsRmNvGaaNUqhnZsQNYzZmMDxYICFXY8h4Y4x3e.jpg', NULL, NULL, '2024-12-07 05:54:44', '2025-05-26 06:16:11', 33000.00, 0.00, 16, 0, 0.00, 0.00, 0),
+(8, 4, 'Rajut Bunga Tulip', 'kerajinan', 26500, 20, 'images/Ow20D0M4OFBU04ZywGzPghxIlficKmkSMWLtlBCs.jpg', NULL, 'Tersedia dalam berbagai warna', '2024-12-07 05:58:01', '2025-06-14 00:52:24', 25000.00, 0.00, 20, 0, 0.00, 0.00, 0),
+(11, 2, 'Bunga Lavender', 'kerajinan', 29500, 9853, 'images/dAHAVAjI9AxE26TsRnBcd5X4h5KDcfjjp6gd9VWN.jpg', NULL, NULL, '2024-12-09 18:39:28', '2025-05-14 19:40:33', 28000.00, 0.00, 9867, 0, 0.00, 0.00, 0),
+(13, 2, 'Dimsum', 'makanan', 9000, 30, 'images/vmKT4CrsYemSKSt0MNpg5LTm8tGTyW4MKpsXl7eA.jpg', NULL, NULL, '2024-12-09 20:03:38', '2025-06-02 23:43:21', 7500.00, 0.00, 30, 0, 0.00, 0.00, 0),
+(18, 15, 'Mie Ayam', 'makanan', 9500, 183, 'images/O6ooC1lugGoABylaSP4wIz5c4665jnA33Pq9g1Vv.jpg', NULL, NULL, '2024-12-12 21:19:06', '2025-06-02 23:36:46', 8000.00, 0.00, 185, 0, 0.00, 0.00, 0),
+(20, 3, 'Daging Ayam', 'makanan', 9000, 20, 'images/lqp0zHODKBol7DJGFmEOl7Aft2rImdwOpBeGSjhj.jpg', NULL, 'Daging', '2024-12-18 18:04:55', '2025-06-14 00:51:33', 7500.00, 0.00, 20, 3, 0.00, 0.00, 0);
 
 -- --------------------------------------------------------
 
@@ -71,14 +71,6 @@ CREATE TABLE `cache` (
   `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('laravel_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1746843369),
-('laravel_cache_livewire-rate-limiter:a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1746843369;', 1746843369);
 
 -- --------------------------------------------------------
 
@@ -245,7 +237,7 @@ CREATE TABLE `purchases` (
   `jumlah` int NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `total_amount` decimal(15,2) NOT NULL,
-  `status` enum('pending','completed','cancelled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `status` enum('pending','completed','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,7 +252,16 @@ INSERT INTO `purchases` (`id`, `user_id`, `barang_id`, `jumlah`, `price`, `total
 (3, 1, 18, 2, 10500.00, 21000.00, 'completed', '2025-05-03 12:14:17', '2025-05-10 16:34:59'),
 (4, 8, 11, 1, 31000.00, 31000.00, 'pending', '2025-05-04 00:12:28', '2025-05-04 00:12:28'),
 (5, 16, 5, 1, 36000.00, 36000.00, 'pending', '2025-05-04 00:43:59', '2025-05-04 00:43:59'),
-(6, 6, 18, 3, 10500.00, 31500.00, 'completed', '2025-05-04 21:53:54', '2025-05-10 16:28:39');
+(6, 6, 18, 3, 10500.00, 31500.00, 'completed', '2025-05-04 21:53:54', '2025-05-10 16:28:39'),
+(7, 8, 18, 1, 10500.00, 10500.00, 'completed', '2025-05-14 19:33:11', '2025-05-14 19:33:11'),
+(8, 8, 18, 1, 10500.00, 10500.00, 'completed', '2025-05-14 19:40:33', '2025-05-14 19:40:33'),
+(9, 8, 20, 1, 10500.00, 10500.00, 'completed', '2025-05-14 19:40:33', '2025-05-14 19:40:33'),
+(10, 8, 11, 1, 31000.00, 31000.00, 'completed', '2025-05-14 19:40:33', '2025-05-14 19:40:33'),
+(11, 8, 20, 2, 10500.00, 21000.00, 'completed', '2025-05-14 19:45:38', '2025-05-14 19:45:38'),
+(12, 8, 20, 1, 10500.00, 10500.00, 'completed', '2025-05-14 19:46:23', '2025-05-14 19:46:23'),
+(13, 8, 20, 1, 10500.00, 10500.00, 'completed', '2025-05-14 19:50:04', '2025-05-14 19:50:04'),
+(14, 16, 5, 1, 34500.00, 34500.00, 'completed', '2025-05-26 06:16:12', '2025-06-02 23:29:57'),
+(15, 16, 18, 1, 9500.00, 9500.00, 'pending', '2025-06-02 23:36:46', '2025-06-02 23:36:46');
 
 -- --------------------------------------------------------
 
@@ -270,9 +271,9 @@ INSERT INTO `purchases` (`id`, `user_id`, `barang_id`, `jumlah`, `price`, `total
 
 CREATE TABLE `sarans` (
   `id` bigint UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pesan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pesan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL
@@ -306,7 +307,11 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('EKAdn5FBHMCcbiCmVGOqM6P4RaM2weZWMDBmlLu5', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUGVRZEJmODlqT2M1MVNFc3hmS3hZdTBSc0RQalk3ZDdSOGc1TFc2biI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXJ0Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODtzOjQ6ImNhcnQiO2E6MDp7fX0=', 1746956651);
+('59pPiXAc2e3jNSkKzAVe2pxY2lCPQrBPtFQ69BIP', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiU3ZCbkJaNHlONUFURUUwVm1ZVFE2cEVuUlN2VTNTWGRrTjl1b3p4biI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iYXJhbmdzIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1749234435),
+('kHD36VccXf9iFW405F3DVqpVbfRw2xrSq0uHpLnx', 15, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYmdWQnNRZXFXa2ZaOGk2ajlLYjZvZWRoaHNRWlZuQkYyWGd1bWk1VSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9maWxlLzE1Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTU7fQ==', 1749224655),
+('lzFv0TU4MRiY9gtukPRGe8FKavJIHHMs3ScJuRVJ', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUHM5WDVOOVVJQzVBT2hheFY1YXVvSXpEMENPRExQdnlONzEzSmtFQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjg7fQ==', 1749267244),
+('sdwcmvehOyRnOPFm0BXzU6cZHmFgrgkTBXKnV1Jw', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMmo1NmlST2dVOWw2azVHbTNjNTVmQlphSlY0SGpiSEJvTDVzdlpYSCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo4O30=', 1749264358),
+('uB7rLrC1q5J8lp146FNp4Z5xn9DvDvx6BrSpcgCr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieVFXV0F0RmxKeTYyWTRuUzFyS2RDTHRDM2VkVVBnNlRLVTJxdDZBRiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1749887559);
 
 -- --------------------------------------------------------
 
@@ -361,14 +366,14 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `pa
 (5, 'Zey', 'zey', 'zey@gmail.com', NULL, '$2y$12$qttzNqwyzq4R01nEFKrn9eyZvQfUpc3kAVqdtN5D4oRWeKtb8.aSC', NULL, '2024-12-07 00:58:08', '2024-12-07 00:58:08', 'supplier', NULL, NULL, 'photos/1733558288_21.jpg', NULL),
 (6, 'Zaki', 'zaki', 'user@gmail.com', NULL, '$2y$12$SE5R6TUPd96Qb3nVUBpHM.SF3rx2puDiMKoFAdrTUO.DrHfs6Ae66', NULL, '2024-12-07 05:00:52', '2024-12-10 17:18:38', 'user', NULL, NULL, 'photos/1733573610_35.JPG', NULL),
 (7, 'Hiqma 3H', 'hiqma', 'higma@gmail.com', NULL, '$2y$12$td556iOdgx2206yY2HlDS.frnBWOhJptUa9FVrIuT6X2zcSfmVWzu', NULL, '2024-12-08 04:01:59', '2024-12-08 04:03:51', 'supplier', NULL, NULL, 'photos/1733655719_17.jpg', NULL),
-(8, 'Gagah', 'gagah', 'gagah@gmail.com', NULL, '$2y$12$ba1WmZeZKHCtDucSLP0Yo.S4tQuf7zE4E0CAP.LZMreTWXlpVtJq.', NULL, '2024-12-08 04:06:26', '2024-12-13 06:10:08', 'user', NULL, NULL, 'photos/1733655985_33.jpg', NULL),
+(8, 'Gagah', 'gagah', 'gagah@gmail.com', NULL, '$2y$12$ba1WmZeZKHCtDucSLP0Yo.S4tQuf7zE4E0CAP.LZMreTWXlpVtJq.', NULL, '2024-12-08 04:06:26', '2025-05-14 07:15:04', 'user', NULL, NULL, 'photos/1733655985_33.jpg', NULL),
 (9, 'Zei', 'zei', 'user7@gmail.com', NULL, '$2y$12$uZUit5n0pVJWEJF.0VcGCeeoZ0jdPEPNj10Aar8TbjqYh70QuMrd2', NULL, '2024-12-08 23:06:23', '2024-12-08 23:06:23', 'user', NULL, NULL, 'photos/1733724383_DSC08363.JPG', NULL),
 (10, 'Omar Kampang', 'omar', 'oieee@gmail.com', NULL, '$2y$12$OgCM8jutkF1sglUMddkX2OVF.3JE5ItfkGi0EhMaBkmXqBMwxZ5aO', NULL, '2024-12-09 19:58:08', '2024-12-12 04:59:43', 'supplier', NULL, NULL, 'photos/1733799487_19.jpg', NULL),
 (11, 'Gagah', 'gagahgolbie', 'wisanggagah@gmail.com', NULL, '$2y$12$frVcQthFfRVoTlZ0ou80iuXqpsG3dA5qfgWQQ.DJlUnMGtfhC1CjK', NULL, '2024-12-10 18:40:38', '2024-12-15 09:17:44', 'user', 'Hello World', '2007-10-03', 'photos/1733881431_akademi wigga.jpg', NULL),
 (12, 'Admiin', 'admin2', 'adminganss28@gmail.com', NULL, '', NULL, '2024-12-11 23:14:23', '2024-12-11 23:14:23', 'admin', NULL, NULL, NULL, NULL),
 (13, 'Gagah Baik', 'gagah2', 'admin69@gmail.com', NULL, '$2y$12$rEYzBAvVDBdVYjENRMVG3egFB46d4QglZrlbnBseP16Wpg5cIn37i', NULL, '2024-12-11 23:24:38', '2024-12-11 23:44:42', 'admin', NULL, NULL, 'photos/1733985882_BSOD but.jpg', NULL),
 (14, 'Sigma Boy', 'sigma', 'sigma@gmail.com', NULL, '$2y$12$cM.xjJ2mGRZkQEWS9v22nOfWkFWcE/b3FYSZWXfT5BT7ssFlNxrUu', NULL, '2024-12-11 23:33:52', '2024-12-11 23:35:56', 'supplier', NULL, NULL, 'photos/1733985356_download (1).jpg', NULL),
-(15, 'Fariz', 'farizz', 'farizz@gmail.com', NULL, '$2y$12$1J2/dDEne5cvlrtVJnV6kOZa9lB4lFfWK0rMNvFS3pF9wgwA5bd6W', NULL, '2024-12-12 21:04:40', '2024-12-12 21:04:40', 'supplier', NULL, NULL, NULL, NULL),
+(15, 'Fariz', 'farizz', 'farizz@gmail.com', NULL, '$2y$12$iOEaDGAmUWoHv.R3vgz1eu4ESZGO2yaE0L0dsfkCfIOduCPlY88Ye', NULL, '2024-12-12 21:04:40', '2025-05-25 09:36:15', 'supplier', NULL, NULL, NULL, NULL),
 (16, 'userzey', 'userzey', 'userzey@gmail.com', NULL, '$2y$12$9AJJCpPgjUvD.IX3OW333OxgslrakH65pchXVBICiWZTlymxFXPtq', NULL, '2024-12-12 21:41:01', '2024-12-12 21:41:01', 'user', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -384,6 +389,14 @@ CREATE TABLE `wishlists` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wishlists`
+--
+
+INSERT INTO `wishlists` (`id`, `user_id`, `barang_id`, `created_at`, `updated_at`) VALUES
+(9, 8, 20, '2025-05-23 22:46:38', '2025-05-23 22:46:38'),
+(12, 8, 18, '2025-05-24 19:05:18', '2025-05-24 19:05:18');
 
 --
 -- Indexes for dumped tables
@@ -509,7 +522,7 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `barangs`
 --
 ALTER TABLE `barangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -545,7 +558,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sarans`
@@ -569,7 +582,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

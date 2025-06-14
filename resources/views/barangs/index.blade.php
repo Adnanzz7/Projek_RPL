@@ -78,7 +78,6 @@
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-4 gap-8 px-2 sm:px-4 mt-4 mb-12 items-center mx-auto max-w-5xl">
                 @foreach ($barangs->where('kategori_barang', $key) as $barang)
                     <div class="relative bg-white border bg-opacity-80 rounded-2xl shadow-md overflow-hidden hover:shadow-lg hover:scale-105 transition-all duration-300 flex flex-col transform ease-in-out cursor-pointer">
-                        {{-- Image --}}
                         <div class="relative">
                             @if ($barang->foto_barang)
                                 <img src="{{ Storage::url($barang->foto_barang) }}" class="w-full h-48 object-cover" alt="{{ $barang->nama_barang }}">
@@ -142,10 +141,10 @@
                                         {{-- Add to Cart --}}
                                         @php
                                             $now = \Carbon\Carbon::now('Asia/Jakarta');
-                                            $open1 = \Carbon\Carbon::createFromTime(9, 30, 0, 'Asia/Jakarta');
+                                            $open1 = \Carbon\Carbon::createFromTime(9, 40, 0, 'Asia/Jakarta');
                                             $close1 = \Carbon\Carbon::createFromTime(10, 0, 0, 'Asia/Jakarta');
-                                            $open2 = \Carbon\Carbon::createFromTime(11, 30, 0, 'Asia/Jakarta');
-                                            $close2 = \Carbon\Carbon::createFromTime(22, 0, 0, 'Asia/Jakarta');
+                                            $open2 = \Carbon\Carbon::createFromTime(12, 30, 0, 'Asia/Jakarta');
+                                            $close2 = \Carbon\Carbon::createFromTime(15, 0, 0, 'Asia/Jakarta');
                                             $isTimeAllowed = $now->between($open1, $close1) || $now->between($open2, $close2);
                                         @endphp
 
@@ -154,7 +153,7 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $barang->id }}">
                                                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-md font-medium">
-                                                    <i class="bi bi-cart-plus"></i> Tambah
+                                                    <i class="bi bi-cart-plus-fill"></i> Tambah
                                                 </button>
                                             </form>
                                         @else
@@ -210,7 +209,7 @@
                             <li><strong>Checkout:</strong> Setelah memeriksa barang di keranjang, lanjutkan ke proses <b>Checkout</b>.</li>
                             <li><strong>Pembayaran:</strong> Pilih metode <b>QRIS</b> atau <b>Cash</b> untuk menyelesaikan pembayaran.</li>
                             <li><strong>Riwayat:</strong> Klik tombol <b><i class="fas fa-history"></i></b> di posisi atas untuk melihat riwat pembelian.</li>
-                            <li><strong>Wishlist:</strong> Klik tombol <b><i class="bi bi-heart"></i></b> di masing -masing produk untuk menambah ke wishlist.</li>
+                            <li><strong>Wishlist:</strong> Klik tombol <b><i class="bi bi-heart-fill"></i></b> di masing -masing produk untuk menambah ke wishlist.</li>
                         @endif
                     @endif
                 </ol>

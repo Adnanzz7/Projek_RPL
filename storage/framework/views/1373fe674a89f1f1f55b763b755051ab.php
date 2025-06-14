@@ -56,11 +56,12 @@ unset($__errorArgs, $__bag); ?>
 
                 <div class="relative">
                     <input type="password" name="password" id="password" placeholder="Password" required
-                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
-                    <button type="button"
-                            class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800"
-                            onclick="togglePasswordVisibility('password')">
-                        <i class="bi bi-eye" id="icon-password"></i>
+                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900"
+                        oninput="toggleIconVisibility('password')">
+                    <button type="button" id="toggle-btn-password"
+                        class="absolute inset-y-0 right-0 px-3 items-center text-gray-500 hover:text-gray-700 focus:outline-none hidden"
+                        onclick="togglePasswordVisibility('password')">
+                        <i class="bi bi-eye-fill" id="icon-password"></i>
                     </button>
                 </div>
                 <?php $__errorArgs = ['password'];
@@ -74,11 +75,12 @@ unset($__errorArgs, $__bag); ?>
 
                 <div class="relative">
                     <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required
-                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
-                    <button type="button"
-                            class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800"
-                            onclick="togglePasswordVisibility('password_confirmation')">
-                        <i class="bi bi-eye" id="icon-password_confirmation"></i>
+                        class="w-full px-4 py-3 pr-10 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900"
+                        oninput="toggleIconVisibility('password_confirmation')">
+                    <button type="button" id="toggle-btn-password_confirmation"
+                        class="absolute inset-y-0 right-0 px-3 items-center text-gray-500 hover:text-gray-700 focus:outline-none hidden"
+                        onclick="togglePasswordVisibility('password_confirmation')">
+                        <i class="bi bi-eye-fill" id="icon-password_confirmation"></i>
                     </button>
                 </div>
                 <?php $__errorArgs = ['password_confirmation'];
@@ -90,24 +92,25 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-                <select name="role" required
-                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900">
-                    <option value="" disabled <?php echo e(old('role') ? '' : 'selected'); ?>>Select Role</option>
-                    <option value="user" <?php echo e(old('role') === 'user' ? 'selected' : ''); ?>>User</option>
-                    <option value="supplier" <?php echo e(old('role') === 'supplier' ? 'selected' : ''); ?>>Supplier</option>
-                    <option value="admin" <?php echo e(old('role') === 'admin' ? 'selected' : ''); ?>>Admin</option>
-                </select>
-                <?php $__errorArgs = ['role'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><span class="text-red-600 text-sm"><?php echo e($message); ?></span><?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                <div class="relative">
+                    <select name="role" required
+                        class="appearance-none w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900">
+                        <option value="" disabled <?php echo e(old('role') ? '' : 'selected'); ?>>Select Role</option>
+                        <option value="user" <?php echo e(old('role') === 'user' ? 'selected' : ''); ?>>User</option>
+                        <option value="supplier" <?php echo e(old('role') === 'supplier' ? 'selected' : ''); ?>>Supplier</option>
+                        <option value="admin" <?php echo e(old('role') === 'admin' ? 'selected' : ''); ?>>Admin</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
 
-                <input type="text" name="kode_pendaftaran" placeholder="Registration Code" required
-                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-400 text-gray-900">
+                <input type="text" name="kode_pendaftaran" placeholder="Kode Pendaftaran"
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900"
+                    value="<?php echo e(old('kode_pendaftaran')); ?>">
                 <?php $__errorArgs = ['kode_pendaftaran'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -132,22 +135,38 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 
-    <!-- Toggle Password Script -->
     <script>
         function togglePasswordVisibility(id) {
             const input = document.getElementById(id);
-            const icon = document.getElementById(`icon-${id}`);
-
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.remove('bi-eye');
-                icon.classList.add('bi-eye-slash');
+            const icon = document.getElementById('icon-' + id);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
             } else {
-                input.type = "password";
-                icon.classList.remove('bi-eye-slash');
-                icon.classList.add('bi-eye');
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
             }
         }
+
+        function toggleIconVisibility(id) {
+            const input = document.getElementById(id);
+            const button = document.getElementById('toggle-btn-' + id);
+            if (input.value.length > 0) {
+                button.classList.remove('hidden');
+            } else {
+                button.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleIconVisibility('password');
+            toggleIconVisibility('password_confirmation');
+        });
+
+        document.getElementById('toggle-btn').classList.remove('hidden');
+        document.getElementById('toggle-btn').classList.add('flex');
     </script>
 </body>
 </html><?php /**PATH C:\Users\HP\Laravel\Projek_RPL\resources\views/auth/register.blade.php ENDPATH**/ ?>

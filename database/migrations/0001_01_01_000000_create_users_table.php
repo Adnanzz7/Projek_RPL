@@ -12,19 +12,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Primary key
+            $table->id();
             $table->string('name');
-            $table->string('username')->unique(); // Username harus unik
-            $table->string('email')->unique(); // Email harus unik
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->enum('role', ['user', 'supplier', 'admin'])->default('user'); // Role dengan default 'user'
-            $table->text('about')->nullable(); // Kolom about, nullable
-            $table->date('birth_date')->nullable(); // Tanggal lahir, nullable
-            $table->string('foto', 255)->nullable(); // Foto profil, nullable
-            $table->string('kode_pendaftaran', 255)->nullable(); // Kode pendaftaran, nullable
+            $table->enum('role', ['user', 'supplier', 'admin'])->default('user');
+            $table->text('about')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('foto', 255)->nullable();
+            $table->string('kode_pendaftaran', 255)->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

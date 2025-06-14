@@ -29,16 +29,14 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Validasi input tanpa foto
+        // Step 1: Validate inputs
         $request->validate([
             'name' => [
-                'required', 
-                'string', 
+                'required',
+                'string',
                 'max:255',
                 function ($attribute, $value, $fail) {
-                    $forbiddenWords = ['admin', 'root', 'fuck', 'bitch', 'shit', 'god', 'owner'];
-
-                    // Cek apakah nama mengandung kata terlarang
+                    $forbiddenWords = ['root', 'fuck', 'bitch', 'shit', 'god', 'owner'];
                     foreach ($forbiddenWords as $word) {
                         if (stripos($value, $word) !== false) {
                             $fail("The $attribute contains forbidden words like \"$word\".");
@@ -48,12 +46,11 @@ class RegisteredUserController extends Controller
                 }
             ],
             'username' => [
-                'required', 
-                'string', 
-                'max:255', 
-                'unique:users,username', 
+                'required',
+                'string',
+                'max:255',
+                'unique:users,username',
                 function ($attribute, $value, $fail) {
-                    // Cek karakter yang diizinkan
                     if (!preg_match('/^[a-zA-Z0-9-_]+$/', $value)) {
                         $fail("The $attribute can only contain letters, numbers, dashes, and underscores.");
                     }
@@ -65,7 +62,7 @@ class RegisteredUserController extends Controller
             'kode_pendaftaran' => ['required', 'string'],
         ]);
 
-        // Validasi kode pendaftaran berdasarkan role
+        // Step 2: Validate registration code
         $kodeValid = match ($request->role) {
             'user' => env('KODE_PENDAFTARAN_USER'),
             'supplier' => env('KODE_PENDAFTARAN_SUPPLIER'),
@@ -74,10 +71,12 @@ class RegisteredUserController extends Controller
         };
 
         if ($request->kode_pendaftaran !== $kodeValid) {
-            return back()->withErrors(['kode_pendaftaran' => 'Kode pendaftaran salah untuk role yang dipilih!']);
+            return back()->withErrors([
+                'kode_pendaftaran' => 'Kode pendaftaran salah untuk role yang dipilih!'
+            ])->withInput();
         }
 
-        // Buat pengguna baru tanpa foto
+        // Step 3: Create the user
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
@@ -86,10 +85,7 @@ class RegisteredUserController extends Controller
             'role' => $request->role,
         ]);
 
-        // Trigger event pendaftaran jika diperlukan
         event(new Registered($user));
-
-        // Login otomatis setelah registrasi
         Auth::login($user);
 
         return redirect()->route('barangs.index')->with('success', "Berhasil mendaftar sebagai {$user->role}!");

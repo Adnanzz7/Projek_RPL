@@ -15,14 +15,12 @@ class CreateTransaksisTable extends Migration
             $table->integer('jumlah');
             $table->decimal('total', 10, 2);
             $table->decimal('keuntungan', 10, 2);
-            $table->string('status')->default('pending'); // Tambahan untuk status transaksi
+            $table->string('status')->default('pending');
             $table->timestamps();
         
-            // Foreign keys
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
         
-            // Indeks
             $table->index('user_id');
             $table->index('barang_id');
         });        
@@ -30,6 +28,6 @@ class CreateTransaksisTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('transaksis'); // Drop tabel jika migrasi dibatalkan
+        Schema::dropIfExists('transaksis');
     }
 }

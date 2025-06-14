@@ -23,11 +23,23 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'birth_date',
+        'role',
         'about',
-        'role',  // Pastikan role ada di sini
+        'birth_date',
+        'foto',
         'kode_pendaftaran',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            if ($user->foto && \Storage::disk('public')->exists($user->foto)) {
+                \Storage::disk('public')->delete($user->foto);
+            }
+        });
+    }
 
     /**
      * The attributes that should be hidden for serialization.

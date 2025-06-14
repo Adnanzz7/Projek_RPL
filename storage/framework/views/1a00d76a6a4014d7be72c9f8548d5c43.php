@@ -53,29 +53,11 @@
                 </div>
                 <p id="cashMessage" class="mt-2 text-red-600 font-semibold hidden">Silahkan melakukan pembayaran di kasir</p>
 
-                <!-- QRIS Opsi -->
+                <!-- QRIS QRCode -->
                 <div id="paymentDetails" class="hidden mt-6">
-                    <h6 class="text-lg font-semibold text-gray-700">Pilih Opsi QRIS</h6>
-                    <div class="flex gap-4 mt-4">
-                        <button id="qrisOpsi1" type="button" class="btn-option bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none">Gopay</button>
-                        <button id="qrisOpsi2" type="button" class="btn-option bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none">ShopeePay</button>
-                        <button id="qrisOpsi3" type="button" class="btn-option bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none">Dana</button>
-                    </div>
-
-                    <!-- QR Codes -->
-                    <div id="qrisOpsi1Details" class="qr-container hidden mt-6">
-                        <h6 class="text-lg font-bold text-gray-700">QR Code Gopay</h6>
-                        <img src="<?php echo e(asset('storage/QR2.jpeg')); ?>" alt="QR Gopay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
-                    </div>
-
-                    <div id="qrisOpsi2Details" class="qr-container hidden mt-6">
-                        <h6 class="text-lg font-bold text-gray-700">QR Code ShopeePay</h6>
-                        <img src="<?php echo e(asset('storage/QR3.jpg')); ?>" alt="QR ShopeePay" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
-                    </div>
-
-                    <div id="qrisOpsi3Details" class="qr-container hidden mt-6">
-                        <h6 class="text-lg font-bold text-gray-700">QR Code Dana</h6>
-                        <img src="<?php echo e(asset('storage/QR4.jpg')); ?>" alt="QR Dana" class="qr-image w-56 h-auto mx-auto my-5 block border-4 border-green-500 rounded-md shadow-md animate-pulse">
+                    <h6 class="text-lg font-semibold text-gray-700">QRIS Pembayaran</h6>
+                    <div class="flex justify-center">
+                        <img src="<?php echo e(asset('storage/QRIS.jpg')); ?>" alt="QRIS" class="qr-image w-56 h-auto border-4 border-green-500 rounded-md shadow-md animate-pulse">
                     </div>
                 </div>
             </div>
@@ -152,23 +134,9 @@
         }
     }
 
-    // Fungsi untuk memilih opsi QRIS
-    function selectQrisOpsi(opsi) {
-        ['qrisOpsi1', 'qrisOpsi2', 'qrisOpsi3'].forEach(id => {
-            document.getElementById(id).classList.remove('active');
-            document.getElementById(`${id}Details`).classList.add('hidden');
-        });
-        document.getElementById(opsi).classList.add('active');
-        document.getElementById(`${opsi}Details`).classList.remove('hidden');
-    }
-
     // Tambahkan event listener untuk tombol
     document.getElementById('qrisBtn').addEventListener('click', () => selectPaymentMethod('qris'));
     document.getElementById('cashBtn').addEventListener('click', () => selectPaymentMethod('cash'));
-
-    document.getElementById('qrisOpsi1').addEventListener('click', () => selectQrisOpsi('qrisOpsi1'));
-    document.getElementById('qrisOpsi2').addEventListener('click', () => selectQrisOpsi('qrisOpsi2'));
-    document.getElementById('qrisOpsi3').addEventListener('click', () => selectQrisOpsi('qrisOpsi3'));
 
     function validatePaymentForm(event) {
         if (!document.querySelector('.btn-payment.active')) {

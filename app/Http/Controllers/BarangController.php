@@ -89,11 +89,19 @@ class BarangController extends Controller
     public function destroy($id)
     {
         $barang = Barang::findOrFail($id);
+
         if (Auth::user()->role !== 'admin' && Auth::user()->id !== $barang->user_id) {
             return redirect()->route('barangs.index')->with('error', 'Anda tidak memiliki izin untuk menghapus barang ini.');
         }
+
+        // Hapus foto dari storage jika ada
+        if ($barang->foto_barang && \Storage::disk('public')->exists($barang->foto_barang)) {
+            \Storage::disk('public')->delete($barang->foto_barang);
+        }
+
         $barang->delete();
-        return redirect()->route('barangs.index')->with('status', 'Barang berhasil dihapus.');
+
+        return redirect()->route('barangs.index')->with('success', 'Barang berhasil dihapus.');
     }
 
     public function update(Request $request, Barang $barang)

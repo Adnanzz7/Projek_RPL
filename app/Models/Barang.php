@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Barang extends Model
 {
@@ -30,7 +31,18 @@ class Barang extends Model
     
     //     return $hargaDenganJasaWeb;
     // }
-    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($barang) {
+            if ($barang->foto_barang && \Storage::disk('public')->exists($barang->foto_barang)) {
+                \Storage::disk('public')->delete($barang->foto_barang);
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $__env->yieldContent('title', 'PKK Market'); ?></title>
     <?php echo app('Illuminate\Foundation\Vite')(['resources/ts/app.ts', 'resources/css/app.css']); ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="/src/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles.css">
     <link rel="public/favicon.ico" href="<?php echo e(asset('favicon.ico')); ?>" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 </head>
+
 <body class="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('<?php echo e(asset('storage/bg.jpg')); ?>');">
     <nav class="bg-indigo-700 py-4">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
@@ -32,7 +33,7 @@
                 <ul class="flex flex-col md:flex-row items-center space-x-0 md:space-x-8 list-none w-full md:w-auto">
                     <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
                         <a href="<?php echo e(route('suggestion.create')); ?>" class="nav-link flex items-center justify-center md:justify-start">
-                            <i class="fas fa-comment-dots text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
+                            <i class="fas fas fa-comments text-gray-300 text-2xl transition-all duration-300 transform hover:text-amber-400 hover:scale-110"></i>
                         </a>
                     </li>
                     <li class="nav-item relative md:relative right-0 md:right-10 mb-2 md:mb-0 w-full md:w-auto">
@@ -78,7 +79,8 @@
                     <button id="dropdownButton"
                         class="relative flex items-center space-x-3 text-white hover:text-blue-400 focus:outline-none group">
                         <div class="relative w-12 h-12">
-                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-200 z-0"></div>
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-200 z-0 cursor-pointer"></div>
+
                             <?php if(Auth::user()->foto): ?>
                                 <img src="<?php echo e(asset('storage/' . Auth::user()->foto)); ?>" alt="Profile Photo"
                                     class="w-12 h-12 rounded-full object-cover relative z-10">
@@ -91,8 +93,8 @@
                     </button>
                     <ul id="dropdownMenu" class="hidden absolute right-0 mt-12 w-56 bg-indigo-700 text-white rounded shadow-lg z-30">
                         <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
-                            <i class="fas fa-user-circle"></i>⠀
-                            <span><?php echo e(Auth::user()->name); ?> • <?php echo e(auth()->user()->role); ?></span>
+                            <i class="fas fa-circle-user"></i>⠀
+                            <a><?php echo e(Auth::user()->name); ?> • <?php echo e(auth()->user()->role); ?></a>
                         </li>
                         <li class="px-4 py-2 hover:bg-indigo-600 flex items-center space-x-2">
                             <i class="fas fa-user"></i>
@@ -125,7 +127,6 @@
         </div>
     </nav>
 
-    <!-- Kontainer Utama -->
     <main class="flex-grow container mx-auto mt-6 px-6">
         <?php echo $__env->yieldContent('content'); ?>
     </main>
@@ -157,12 +158,10 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
-
+        
         dropdownButton.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdownMenu.classList.toggle('hidden');
@@ -209,27 +208,27 @@
                                     <h3 class="text-lg font-bold text-gray-800">${barang.nama_barang}</h3>
                                     <p class="text-pink-600 font-semibold">Rp ${Number(barang.harga_barang).toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                                     <p class="text-gray-500 text-sm">Sisa: ${barang.jumlah_barang}</p>
-                                </div>
+                                    </div>
                             </div>`;
-                    });
-                    html += `</div></div>`;
-                }
+                        });
+                        html += `</div></div>`;
+                    }
                 container.innerHTML = html;
             })
             .catch(error => {
                 console.error('Error fetching search results:', error);
             });
         });
-    </script>
-    <script>
-        // Mobile menu toggle
+        
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const navContent = document.getElementById('navContent');
-
+        
         mobileMenuButton.addEventListener('click', () => {
             navContent.classList.toggle('hidden');
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>
 <?php /**PATH C:\Users\HP\Laravel\Projek_RPL\resources\views/layouts/app.blade.php ENDPATH**/ ?>

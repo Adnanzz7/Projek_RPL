@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
-            $table->foreignId('order_id')->nullable()->after('user_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('cascade');
             $table->integer('jumlah');
             $table->decimal('price', 10, 2);
             $table->decimal('total_amount', 15, 2);

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Profil Pengguna'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -9,7 +7,6 @@
 </head>
 
 <div class="py-12 max-w-7xl mx-auto px-6 space-y-12">
-    
     <section class="bg-white p-6 rounded-2xl shadow-md space-y-6">
         <div class="flex flex-col lg:flex-row items-center gap-8">
             <!-- Foto Profil -->
@@ -19,11 +16,8 @@
                     class="w-40 h-40 rounded-full object-cover ring-4 ring-indigo-500 shadow-md">
             </div>
 
-            <!-- Informasi User -->
             <div class="flex-1 text-gray-800 w-full space-y-6">
-                <!-- Header Nama & Edit -->
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <!-- Tombol Edit -->
                     <?php if(Auth::id() === $user->user_id): ?>
                     <div class="mt-2 md:mt-0">
                         <a href="<?php echo e(route('profile.edit')); ?>"
@@ -34,45 +28,42 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Grid Informasi Detail -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm text-gray-700">
-                    <!-- Kolom Kiri -->
-                    <div class="space-y-3">
+                    <div class="space-y-3 self-end">
                         <h2 class="text-4xl font-bold text-indigo-600"><?php echo e($user->name); ?></h2>
-                        <div class="flex items-center gap-2">
-                            <i class="bi bi-shield-check text-indigo-500"></i>
+                        <div class="flex items-center text-gray-600 gap-2">
+                            <i class="bi bi-person-circle text-indigo-500"></i>
                             <span><?php echo e(ucfirst($user->role) ?? '-'); ?></span>
                         </div>
-                        <div class="flex items-center text-sm text-gray-600 gap-2">
-                            <i class="bi bi-person-circle text-indigo-500"></i>
+                        <div class="flex items-center text-gray-600 gap-2">
+                            <i class="bi bi-person-fill-check text-indigo-500"></i>
                             <span><?php echo e('@' . $user->username); ?></span>
                         </div>
-                        <div class="flex items-center text-sm text-gray-600 gap-2">
+                        <div class="flex items-center text-gray-600 gap-2">
                             <i class="bi bi-envelope-fill text-indigo-500"></i>
                             <span><?php echo e($user->email); ?></span>
                         </div>                        
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center text-gray-600 gap-2">
                             <i class="bi bi-cake2-fill text-indigo-500"></i>
                             <span><?php echo e($user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->translatedFormat('d F Y') : '-'); ?></span>
                         </div>
                     </div>
 
-                    <!-- Kolom Kanan -->
                     <div class="space-y-3 self-end">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center text-gray-600 gap-2">
                             <i class="bi bi-telephone-fill text-indigo-500"></i>
                             <span><?php echo e($user->phone ?? '-'); ?></span>
                         </div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center text-gray-600 gap-2">
                             <i class="bi bi-geo-alt-fill text-indigo-500"></i>
                             <span><?php echo e($user->alamat ?? '-'); ?></span>
                         </div>
-                        <div class="flex items-start gap-2">
+                        <div class="flex items-center text-gray-600 gap-2">
                             <i class="bi bi-info-circle-fill text-indigo-500 mt-0.5"></i>
                             <span><?php echo e($user->about ?? '-'); ?></span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="bi bi-calendar-check text-indigo-500"></i>
+                        <div class="flex items-center text-gray-600 gap-2">
+                            <i class="bi bi-calendar-check-fill text-indigo-500"></i>
                             <span>Bergabung sejak <?php echo e($user->created_at->translatedFormat('d F Y')); ?></span>
                         </div>
                     </div>

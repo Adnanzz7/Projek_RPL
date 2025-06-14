@@ -11,19 +11,13 @@
     <!-- Profile Card Header -->
     <div class="bg-white rounded-xl shadow p-6 flex flex-col items-center text-center">
         <div class="relative w-32 h-32 mb-4">
-            <!-- Foto Profil -->
-            <img src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}" 
-                alt="{{ $user->name }}"
-                class="w-full h-full object-cover rounded-full border-4 border-indigo-500">
-
-            <!-- Tombol Kecil untuk Upload -->
-            <label for="foto"
-                class="absolute bottom-1 right-1 w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow cursor-pointer hover:bg-gray-100">
-                <i class="fas fa-camera text-indigo-600 text-sm"></i>
+            <img id="previewFoto" src="{{ $user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128' }}" 
+                alt="{{ $user->name }}" class="w-full h-full object-cover rounded-full border-4 border-indigo-500">
+            
+            <label for="foto" class="absolute bottom-1 right-1 w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow cursor-pointer hover:bg-gray-100">
+                <i class="bi bi-camera-fill text-indigo-600 text-sm"></i>
             </label>
-
-            <!-- Input File Hidden -->
-            <input type="file" name="foto" id="foto" class="hidden" onchange="this.form.submit()" />
+            <input type="file" name="foto" id="foto" class="hidden" />
         </div>
 
         <h2 class="text-xl font-semibold text-gray-800">{{ $user->name }}</h2>
@@ -99,9 +93,12 @@
                                   class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-none">{{ old('about', $user->about) }}</textarea>
                     </div>
 
-                    <div class="pt-4 text-right">
-                        <button type="submit"
-                                class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300">
+                    <div class="pt-4 flex justify-end text-right mt-6">
+                        <button type="button" onclick="window.location.href='{{ route('barangs.index') }}'" class="text-blue-600 font-medium px-6 py-2 hover:bg-blue-50 bg-opacity-0 rounded-md border-none border-blue-600">
+                            Kembali ke Beranda
+                        </button>
+                                      
+                        <button type="submit" class="ml-4 font-medium inline-flex items-center px-6 py-2 bg-indigo-600 text-white rounded-md shadow focus:ring focus:ring-indigo-300 hover:bg-indigo-700">
                             Simpan Perubahan
                         </button>
                     </div>
@@ -118,11 +115,12 @@
                         <label for="current_password" class="block text-sm font-medium text-gray-700">Password Saat Ini</label>
                         <div class="relative">
                             <input id="current_password" name="current_password" type="password"
+                                oninput="toggleIconVisibility('current_password')"
                                 class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
-                            <button type="button" 
-                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                            <button type="button" id="toggle-btn-current_password"
+                                    class="absolute inset-y-0 right-0 px-3 items-center text-gray-500 hover:text-gray-700 focus:outline-none hidden"
                                     onclick="togglePasswordVisibility('current_password')">
-                                <i class="bi bi-eye" id="icon-current_password"></i>
+                                <i class="bi bi-eye-fill" id="icon-current_password"></i>
                             </button>
                         </div>
                         @error('current_password') 
@@ -134,11 +132,12 @@
                         <label for="password" class="block text-sm font-medium text-gray-700">Password Baru</label>
                         <div class="relative">
                             <input id="password" name="password" type="password"
+                                oninput="toggleIconVisibility('password')"
                                 class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
-                            <button type="button" 
-                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                            <button type="button" id="toggle-btn-password"
+                                    class="absolute inset-y-0 right-0 px-3 items-center text-gray-500 hover:text-gray-700 focus:outline-none hidden"
                                     onclick="togglePasswordVisibility('password')">
-                                <i class="bi bi-eye" id="icon-password"></i>
+                                <i class="bi bi-eye-fill" id="icon-password"></i>
                             </button>
                         </div>
                         @error('password')
@@ -150,18 +149,23 @@
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                         <div class="relative">
                             <input id="password_confirmation" name="password_confirmation" type="password"
+                                oninput="toggleIconVisibility('password_confirmation')"
                                 class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 pr-10" />
-                            <button type="button" 
-                                    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none" 
+                            <button type="button" id="toggle-btn-password_confirmation"
+                                    class="absolute inset-y-0 right-0 px-3 items-center text-gray-500 hover:text-gray-700 focus:outline-none hidden"
                                     onclick="togglePasswordVisibility('password_confirmation')">
-                                <i class="bi bi-eye" id="icon-password_confirmation"></i>
+                                <i class="bi bi-eye-fill" id="icon-password_confirmation"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="pt-4 text-right">
+                    <div class="pt-4 flex justify-end text-right mt-6">
+                        <button type="button" onclick="window.location.href='{{ route('barangs.index') }}'"
+                            class="text-blue-600 font-medium px-6 py-2 hover:bg-blue-50 bg-opacity-0 rounded-md border-none border-blue-600">
+                            Kembali ke Beranda
+                        </button>
                         <button type="submit"
-                                class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300">
+                            class="ml-4 font-medium inline-flex items-center px-6 py-2 bg-indigo-600 text-white rounded-md shadow focus:ring focus:ring-indigo-300 hover:bg-indigo-700">
                             Ubah Password
                         </button>
                     </div>
@@ -181,30 +185,25 @@
                     <div>
                         <label for="delete_password" class="block text-sm font-medium text-gray-700">Password</label>
                         <input id="delete_password" name="password" type="password"
-                            class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-red-500 focus:border-red-500" />
+                            class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-rose-500 focus:border-rose-500" />
                         
                         @error('password', 'userDeletion')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="pt-4 text-right">
-                        <button type="submit"
-                                class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:ring focus:ring-red-300">
-                            Hapus Akun
+                    <div class="pt-4 flex justify-end text-right mt-6">
+                        <button type="button" onclick="window.location.href='{{ route('barangs.index') }}'" class="text-red-600 font-medium px-6 py-2 hover:bg-red-50 bg-opacity-0 rounded-md border-none border-red-600">
+                            Kembali ke Beranda
+                        </button>
+                                      
+                        <button type="submit" class="ml-4 font-medium inline-flex items-center px-6 py-2 bg-rose-600 text-white rounded-md shadow focus:ring focus:ring-rose-300 hover:bg-rose-700">
+                            Simpan Perubahan
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-
-    <!-- Back to Home -->
-    <div class="text-center mt-6">
-        <a href="{{ route('barangs.index') }}"
-           class="inline-flex items-center px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700">
-            <i class="bi bi-house-door mr-2"></i> Kembali ke Beranda
-        </a>
     </div>
 </div>
 
@@ -235,19 +234,42 @@
         defaultTab.classList.add('text-indigo-600');
     });
 
-    function togglePasswordVisibility(inputId) {
-        const input = document.getElementById(inputId);
-        const icon = document.getElementById('icon-' + inputId);
-        if (input.type === "password") {
-            input.type = "text";
-            icon.classList.remove("bi-eye");
-            icon.classList.add("bi-eye-slash");
+    function togglePasswordVisibility(id) {
+        const input = document.getElementById(id);
+        const icon = document.getElementById('icon-' + id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('bi-eye-fill');
+            icon.classList.add('bi-eye-slash-fill');
         } else {
-            input.type = "password";
-            icon.classList.remove("bi-eye-slash");
-            icon.classList.add("bi-eye");
+            input.type = 'password';
+            icon.classList.remove('bi-eye-slash-fill');
+            icon.classList.add('bi-eye-fill');
         }
     }
+
+    function toggleIconVisibility(id) {
+        const input = document.getElementById(id);
+        const button = document.getElementById('toggle-btn-' + id);
+        if (input.value.trim() !== '') {
+            button.classList.remove('hidden');
+        } else {
+            button.classList.add('hidden');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        ['current_password', 'password', 'password_confirmation'].forEach(id => {
+            toggleIconVisibility(id);
+        });
+    });
+
+    @if ($errors->has('current_password') || $errors->has('password') || $errors->has('password_confirmation'))
+    document.addEventListener('DOMContentLoaded', () => {
+        const passwordTab = document.querySelector('[data-tab-button="password"]');
+        if (passwordTab) passwordTab.click();
+    });
+    @endif
 
     document.addEventListener("DOMContentLoaded", function () {
         const tabButtons = document.querySelectorAll("[data-tab-button]");
@@ -272,7 +294,6 @@
         defaultTab.classList.add('text-indigo-600');
     });
 
-    // Jika ada error di tab password, otomatis switch ke tab password
     @if ($errors->has('current_password') || $errors->has('password') || $errors->has('password_confirmation'))
         document.addEventListener('DOMContentLoaded', () => {
             const tabButtons = document.querySelectorAll("[data-tab-button]");
@@ -283,6 +304,34 @@
             });
         });
     @endif
+
+    document.getElementById('foto').addEventListener('change', async function () {
+    const file = this.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('foto', file);
+
+        try {
+            const response = await fetch("{{ route('profile.uploadFoto') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.status === 'success') {
+                document.getElementById('previewFoto').src = data.foto_url;
+            } else {
+                alert('Gagal upload foto.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Terjadi kesalahan saat upload.');
+        }
+    });
 </script>
 @endpush
 @endsection

@@ -30,23 +30,21 @@ class ProfileController extends Controller
         $user = $request->user();
     
         if ($request->action === 'update_profile') {
-            // Simpan username lama untuk digunakan jika ingin kembali
-            $previousUsername = $user->username;
-    
-            // Validasi untuk profil
+            // Ganti spasi di username sebelum validasi
+            $request->merge([
+                'username' => str_replace(' ', '_', $request->input('username'))
+            ]);
+
             $validatedData = $request->validate([
                 'name' => [
                     'required', 
                     'string', 
                     'max:255',
                     function ($attribute, $value, $fail) {
-                        // Daftar kata yang dilarang
-                        $forbiddenWords = ['admin', 'root', 'fuck', 'bitch', 'shit', 'god', 'owner'];
-
-                        // Memeriksa apakah nama mengandung kata yang dilarang
+                        $forbiddenWords = ['root', 'fuck', 'bitch', 'shit', 'god', 'owner'];
                         foreach ($forbiddenWords as $word) {
-                            if (stripos($value, $word) !== false) { // stripos untuk case-insensitive
-                                $fail('The ' . $attribute . ' contains forbidden words like "' . $word . '".');
+                            if (stripos($value, $word) !== false) {
+                                $fail("The $attribute contains forbidden words like \"$word\".");
                                 return;
                             }
                         }
@@ -55,29 +53,17 @@ class ProfileController extends Controller
                 'username' => [
                     'required', 
                     'string', 
-                    'max:255', 
-                    'unique:users,username,' . $user->id, // Memastikan validasi username unik kecuali untuk user yang sedang diperbarui
-                    function ($attribute, $value, $fail) use ($user) {
-                        // Memastikan hanya karakter yang diizinkan (huruf, angka, -, dan _)
-                        if (!preg_match('/^[a-zA-Z0-9-_]+$/', $value)) {
-                            $fail('Ensure your ' . $attribute . ' only contains letters, numbers, dashes, and underscores, with no spaces.');
-                        }
-
-                        // Ganti spasi menjadi underscore dan update nilai username
-                        $user->username = str_replace(' ', '_', $value);
-
-                        // Opsional: Memperbarui database jika diperlukan
-                        // $user->save();
-                    }
-                ],            
+                    'max:255',
+                    'regex:/^[a-zA-Z0-9-_]+$/',
+                    'unique:users,username,' . $user->id
+                ],
                 'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
-                'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-                'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:4096', function ($attribute, $value, $fail) {
-                    // Cek jika ukuran file lebih dari 4 MB (4096 KB)
-                    if ($value && $value->getSize() > 4096 * 1024) {
-                        $fail('The ' . $attribute . ' must be less than 4 MB.');
-                    }
-                }],
+                'foto' => [
+                    'nullable',
+                    'image',
+                    'mimes:jpeg,png,jpg,gif',
+                    'max:4096',
+                ],
                 'birth_date' => ['nullable', 'date'],
                 'about' => ['nullable', 'string', 'max:500'],
             ], [
@@ -106,25 +92,6 @@ class ProfileController extends Controller
             if ($user->isDirty('email')) {
                 $user->email_verified_at = null;
             }
-    
-            // Update foto
-            if ($request->hasFile('foto')) {
-                // Hapus foto lama
-                if ($user->foto) {
-                    Storage::disk('public')->delete($user->foto);
-                }
-    
-                // Simpan foto baru
-                $file = $request->file('foto');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $fotoPath = $file->storeAs('photos', $filename, 'public');
-                $user->foto = $fotoPath;
-            }
-    
-            // Simpan perubahan
-            $user->save();
-    
-            return redirect()->route('profile.edit')->with('success', 'Profil berhasil diperbarui!');
         }
     
         if ($request->action === 'update_password') {
@@ -149,7 +116,32 @@ class ProfileController extends Controller
         }
     
         return Redirect::route('profile.edit')->withErrors(['action' => 'Aksi tidak valid.']);
-    }    
+    } 
+    
+    public function uploadFoto(Request $request)
+    {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user = auth()->user();
+
+        if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+            Storage::disk('public')->delete($user->foto);
+        }
+
+        $file = $request->file('foto');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('photos', $filename, 'public');
+
+        $user->foto = $path;
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'foto_url' => Storage::url($user->foto),
+        ]);
+    }
 
     /**
      * Delete the user's account.
@@ -161,6 +153,10 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+            Storage::disk('public')->delete($user->foto);
+        }
 
         Auth::logout();
 

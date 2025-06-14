@@ -17,18 +17,18 @@ class CartController extends Controller
             'id' => 'required|exists:barangs,id',
             'quantity' => 'required|integer|min:1',
         ]);
-    
+
         $cart = session()->get('cart', []);
-    
         $id = $request->id;
         $quantity = $request->quantity;
-    
+
         $barang = Barang::findOrFail($id);
-    
+
+        // Cek apakah stok mencukupi berdasarkan data real-time dari DB
         if ($barang->jumlah_barang < $quantity) {
             return redirect()->back()->with('error', 'Jumlah barang yang Anda pilih melebihi stok yang tersedia!');
         }
-    
+
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += $quantity;
         } else {
@@ -40,15 +40,10 @@ class CartController extends Controller
                 'initial_stock' => $barang->jumlah_barang,
             ];
         }
-    
-        $barang->jumlah_barang -= $quantity;
-        $barang->save();
-    
+
         session()->put('cart', $cart);
-    
-        $totalQuantity = array_sum(array_column($cart, 'quantity'));
-        session()->put('cart.count', $totalQuantity);
-    
+        session()->put('cart.count', array_sum(array_column($cart, 'quantity')));
+
         return redirect()->back()->with('success', 'Barang berhasil ditambahkan ke keranjang!');
     }
     
@@ -209,9 +204,6 @@ class CartController extends Controller
                 'initial_stock' => $barang->jumlah_barang,
             ];
         }
-
-        $barang->jumlah_barang -= $request->quantity;
-        $barang->save();
 
         session()->put('cart', $cart);
         session()->put('cart.count', array_sum(array_column($cart, 'quantity')));
@@ -381,9 +373,6 @@ class CartController extends Controller
             if ($barang->jumlah_barang < $item['quantity']) {
                 return redirect()->route('cart.index')->with('error', 'Stok barang ' . $item['name'] . ' tidak mencukupi.');
             }
-
-            $barang->jumlah_barang -= $item['quantity'];
-            $barang->save();
         }
 
         session()->forget('cart');

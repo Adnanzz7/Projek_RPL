@@ -10,33 +10,34 @@
     
     <section class="bg-white p-6 rounded-2xl shadow-md space-y-6 relative">
         <div class="flex flex-col lg:flex-row items-center gap-8">
-            <!-- Foto Profil -->
             <div class="relative">
                 <img src="<?php echo e($user->foto ? Storage::url($user->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random&size=128'); ?>"
                     alt="<?php echo e($user->name); ?>"
                     class="w-40 h-40 rounded-full object-cover ring-4 ring-indigo-500 shadow-md">
             </div>
 
-            <!-- Informasi User -->
             <div class="flex-1 text-gray-800 w-full space-y-6 flex flex-col justify-between">
-                <!-- Grid Informasi Detail -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm text-gray-700">
                     <div class="space-y-3">
                         <h2 class="text-4xl font-bold text-indigo-600"><?php echo e($user->name); ?></h2>
+
                         <div class="flex items-center text-sm text-gray-600 gap-2">
-                            <i class="bi bi-person-circle text-indigo-500"></i>
+                            <i class="bi bi-person-fill-check text-indigo-500 text-base leading-none"></i>
                             <span><?php echo e('@' . $user->username); ?></span>
                         </div>
+
                         <div class="flex items-center text-sm text-gray-600 gap-2">
-                            <i class="bi bi-envelope-fill text-indigo-500"></i>
+                            <i class="bi bi-envelope-at-fill text-indigo-500 text-base leading-none"></i>
                             <span><?php echo e($user->email); ?></span>
                         </div>
+
                         <div class="flex items-start gap-2">
-                            <i class="bi bi-info-circle-fill text-indigo-500 mt-0.5"></i>
+                            <i class="bi bi-info-circle-fill text-indigo-500 text-base leading-none mt-0.5"></i>
                             <span><?php echo e($user->about ?? '-'); ?></span>
                         </div>
+
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-calendar-check text-indigo-500"></i>
+                            <i class="bi bi-calendar-check-fill text-indigo-500 text-base leading-none"></i>
                             <span>Bergabung sejak <?php echo e($user->created_at->translatedFormat('d F Y')); ?></span>
                         </div>
                     </div>
@@ -47,7 +48,7 @@
         <?php if(Auth::id() === $user->id): ?>
             <a href="<?php echo e(route('profile.edit')); ?>"
                 class="absolute right-6 bottom-6 inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white font-semibold rounded-full shadow hover:bg-indigo-700 transition">
-                <i class="bi bi-pencil-square text-base"></i> Edit Profil
+                <i class="bi bi-person-fill-gear text-base"></i> Edit Profil
             </a>
         <?php endif; ?>
     </section>
